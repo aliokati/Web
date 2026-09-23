@@ -1,0 +1,49 @@
+name: Build deployable site
+
+on:
+  push:
+    branches:
+      - new_web
+    paths-ignore:
+      - "website/dist/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci
+
+      - name: Build the static site
+        working-directory: website
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"
+        run: npm run build
+
+      - name: Commit deployable output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f website/dist
+          if git diff --cached --quiet; then
+            echo "Build output is already current."
+            exit 0
+          fi
+          git commit -m "build: refresh deployable site [skip ci]"
+          git push
+

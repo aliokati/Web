@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/krismsir/public_html
+    - /bin/cp -R website/dist/. $DEPLOYPATH/
+
