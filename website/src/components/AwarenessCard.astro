@@ -1,0 +1,36 @@
+---
+import type { AwarenessArticle } from "../data/awareness";
+
+interface Props {
+  article: AwarenessArticle;
+}
+
+const { article } = Astro.props;
+---
+
+<a
+  href={`/awareness/${article.slug}`}
+  class="group block rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+>
+  <div class="flex items-start justify-between gap-4">
+    <span class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
+      {article.category}
+    </span>
+
+    <span class="text-sm text-krism-muted transition group-hover:text-krism-600">
+      →
+    </span>
+  </div>
+
+  <h2 class="mt-6 text-xl font-semibold tracking-tight text-krism-950">
+    {article.title}
+  </h2>
+
+  <p class="mt-4 text-sm leading-7 text-krism-muted">
+    {article.excerpt}
+  </p>
+
+  <div class="mt-7 text-sm font-semibold text-krism-600">
+    Read article →
+  </div>
+</a>

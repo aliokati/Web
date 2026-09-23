@@ -1,0 +1,182 @@
+---
+const currentPath = Astro.url.pathname;
+
+const isPersian =
+  currentPath === "/fa" ||
+  currentPath.startsWith("/fa/");
+
+const englishPath = isPersian
+  ? currentPath.replace(/^\/fa/, "") || "/"
+  : currentPath;
+
+const persianPath =
+  currentPath === "/"
+    ? "/fa"
+    : `/fa${currentPath}`;
+---
+
+<header class="border-b border-krism-border bg-white">
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+
+    <!-- Brand -->
+    <a
+      href={isPersian ? "/fa" : "/"}
+      class="flex items-center gap-3"
+      aria-label={isPersian ? "صفحه اصلی KRISM" : "KRISM home"}
+    >
+      <img
+        src="/images/krism-logo.png"
+        alt="KRISM"
+        class="h-12 w-auto"
+      />
+
+      <div class="hidden border-l border-krism-border pl-3 sm:block">
+        <div class="text-sm font-semibold text-krism-900">
+          KRISM
+        </div>
+
+        <div class="text-xs text-krism-muted">
+          Khorasan Sleep Medicine
+        </div>
+      </div>
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav
+      class="hidden items-center gap-6 md:flex"
+      aria-label={isPersian ? "ناوبری اصلی" : "Main navigation"}
+    >
+      <a
+        href={isPersian ? "/fa/about" : "/about"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "درباره ما" : "About"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/research" : "/research"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "پژوهش" : "Research"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/events" : "/events"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "رویدادها" : "Events"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/network" : "/network"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "شبکه" : "Network"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/resources" : "/resources"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "منابع" : "Resources"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/awareness" : "/awareness"}
+        class="text-sm text-krism-text transition hover:text-krism-600"
+      >
+        {isPersian ? "آگاهی‌رسانی" : "Awareness"}
+      </a>
+
+      <a
+        href={isPersian ? "/fa/contact" : "/contact"}
+        class="rounded-full bg-krism-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-krism-800"
+      >
+        {isPersian ? "تماس با ما" : "Contact"}
+      </a>
+
+      <a
+        href={isPersian ? englishPath : persianPath}
+        class="text-sm font-medium text-krism-600 transition hover:text-krism-900"
+        lang={isPersian ? "en" : "fa"}
+      >
+        {isPersian ? "English" : "فارسی"}
+      </a>
+    </nav>
+
+    <!-- Mobile menu -->
+    <details class="relative md:hidden">
+      <summary
+        class="cursor-pointer list-none rounded-lg border border-krism-border px-4 py-2 text-sm font-medium text-krism-900 transition hover:border-krism-500"
+      >
+        {isPersian ? "منو" : "Menu"}
+      </summary>
+
+      <div class="absolute right-0 top-12 z-50 w-64 rounded-xl border border-krism-border bg-white p-3 shadow-xl">
+        <nav
+          class="flex flex-col"
+          aria-label={isPersian ? "ناوبری موبایل" : "Mobile navigation"}
+        >
+          <a
+            href={isPersian ? "/fa/about" : "/about"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "درباره ما" : "About"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/research" : "/research"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "پژوهش" : "Research"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/events" : "/events"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "رویدادها" : "Events"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/network" : "/network"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "شبکه" : "Network"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/resources" : "/resources"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "منابع" : "Resources"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/awareness" : "/awareness"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "آگاهی‌رسانی" : "Awareness"}
+          </a>
+
+          <a
+            href={isPersian ? "/fa/contact" : "/contact"}
+            class="rounded-lg px-3 py-3 text-sm text-krism-text transition hover:bg-krism-surface hover:text-krism-600"
+          >
+            {isPersian ? "تماس با ما" : "Contact"}
+          </a>
+
+          <div class="my-2 border-t border-krism-border"></div>
+
+          <a
+            href={isPersian ? englishPath : persianPath}
+            class="rounded-lg px-3 py-3 text-sm font-medium text-krism-600 transition hover:bg-krism-surface hover:text-krism-900"
+            lang={isPersian ? "en" : "fa"}
+          >
+            {isPersian ? "English" : "فارسی"}
+          </a>
+        </nav>
+      </div>
+    </details>
+  </div>
+</header>

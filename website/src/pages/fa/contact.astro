@@ -1,0 +1,187 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  lang="fa"
+  title="تماس با KRISM"
+  description="تماس با نمایندگی خراسان انجمن‌های طب خواب ایران"
+>
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+      <p class="text-sm font-semibold text-krism-600">
+        تماس
+      </p>
+
+      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
+        ارتباط با KRISM
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-9 text-krism-muted">
+        برای همکاری‌های پژوهشی، آموزشی، حرفه‌ای و سازمانی می‌توانید با
+        KRISM در ارتباط باشید.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="grid gap-12 lg:grid-cols-2">
+
+        <div>
+          <p class="text-sm font-semibold text-krism-600">
+            ارتباط با ما
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950">
+            درخواست‌های حرفه‌ای و سازمانی
+          </h2>
+
+          <p class="mt-5 text-base leading-8 text-krism-muted">
+            از ارتباط متخصصان، پژوهشگران، مؤسسات پزشکی، انجمن‌ها و سازمان‌های
+            علاقه‌مند به حوزه پزشکی خواب استقبال می‌کنیم.
+          </p>
+
+          <div class="mt-10 space-y-5">
+
+            <div class="rounded-2xl border border-krism-border bg-white p-6">
+              <p class="text-xs font-semibold text-krism-600">
+                منطقه
+              </p>
+
+              <p class="mt-3 text-base font-medium text-krism-950">
+                منطقه خراسان، ایران
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-krism-border bg-white p-6">
+              <p class="text-xs font-semibold text-krism-600">
+                پژوهش
+              </p>
+
+              <p class="mt-3 text-sm leading-8 text-krism-muted">
+                برای همکاری‌های پژوهشی و فعالیت‌های علمی.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-krism-border bg-white p-6">
+              <p class="text-xs font-semibold text-krism-600">
+                آموزش و رویدادها
+              </p>
+
+              <p class="mt-3 text-sm leading-8 text-krism-muted">
+                برای نشست‌های علمی، کارگاه‌ها و همکاری‌های آموزشی.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="rounded-2xl border border-krism-border bg-white p-8 lg:p-10">
+
+            <h2 class="text-2xl font-semibold text-krism-950">
+              ارسال درخواست
+            </h2>
+
+            <p class="mt-3 text-sm leading-8 text-krism-muted">
+              این فرم در حال حاضر رابط کاربری آماده برای اتصال به سامانه
+              پردازش فرم است.
+            </p>
+
+            <form class="mt-8 space-y-6">
+
+              <div>
+                <label
+                  for="fa-name"
+                  class="text-sm font-medium text-krism-950"
+                >
+                  نام
+                </label>
+
+                <input
+                  id="fa-name"
+                  name="name"
+                  type="text"
+                  class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
+                  placeholder="نام شما"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="fa-email"
+                  class="text-sm font-medium text-krism-950"
+                >
+                  ایمیل
+                </label>
+
+                <input
+                  id="fa-email"
+                  name="email"
+                  type="email"
+                  dir="ltr"
+                  class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="fa-subject"
+                  class="text-sm font-medium text-krism-950"
+                >
+                  نوع درخواست
+                </label>
+
+                <select
+                  id="fa-subject"
+                  name="subject"
+                  class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
+                >
+                  <option>همکاری پژوهشی</option>
+                  <option>برنامه آموزشی</option>
+                  <option>شبکه حرفه‌ای</option>
+                  <option>همکاری سازمانی</option>
+                  <option>درخواست عمومی</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  for="fa-message"
+                  class="text-sm font-medium text-krism-950"
+                >
+                  پیام
+                </label>
+
+                <textarea
+                  id="fa-message"
+                  name="message"
+                  rows="6"
+                  class="mt-2 w-full resize-y rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
+                  placeholder="پیام خود را وارد کنید"
+                ></textarea>
+              </div>
+
+              <button
+                type="button"
+                class="w-full rounded-full bg-krism-950 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-krism-800"
+              >
+                ارسال درخواست
+              </button>
+
+              <p class="text-xs leading-6 text-krism-muted">
+                این فرم در مرحله فعلی صرفاً رابط کاربری است و در مرحله
+                بعدی به زیرساخت واقعی متصل خواهد شد.
+              </p>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</MainLayout>

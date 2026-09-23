@@ -1,0 +1,124 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { events } from "../../data/events";
+
+export function getStaticPaths() {
+  return events.map((event) => ({
+    params: {
+      slug: event.slug,
+    },
+    props: {
+      event,
+    },
+  }));
+}
+
+const { event } = Astro.props;
+
+const date = new Date(event.date);
+
+const formattedDate = date.toLocaleDateString("en-US", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<MainLayout
+  title={`${event.title} — KRISM`}
+  description={event.description}
+>
+
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-24">
+
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
+        {event.type}
+      </p>
+
+      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+        {event.title}
+      </h1>
+
+      <div class="mt-8 grid gap-4 text-sm text-krism-muted sm:grid-cols-2">
+
+        <div>
+          <span class="font-semibold text-krism-950">
+            Date
+          </span>
+          <div class="mt-1">{formattedDate}</div>
+        </div>
+
+        <div>
+          <span class="font-semibold text-krism-950">
+            Location
+          </span>
+          <div class="mt-1">{event.location}</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+
+    <div class="grid gap-12 lg:grid-cols-[1fr_300px]">
+
+      <div>
+        <h2 class="text-2xl font-semibold text-krism-950">
+          About this event
+        </h2>
+
+        <p class="mt-5 text-base leading-8 text-krism-muted">
+          {event.description}
+        </p>
+
+        <p class="mt-6 text-base leading-8 text-krism-muted">
+          Additional event information, scientific program,
+          speakers and registration details can be added here
+          when the official event is published.
+        </p>
+      </div>
+
+
+      <aside class="h-fit rounded-2xl border border-krism-border bg-white p-6">
+
+        <p class="text-sm font-semibold text-krism-950">
+          Event information
+        </p>
+
+        <div class="mt-5 space-y-4 text-sm text-krism-muted">
+
+          <div>
+            <div class="font-medium text-krism-950">Date</div>
+            <div class="mt-1">{formattedDate}</div>
+          </div>
+
+          <div>
+            <div class="font-medium text-krism-950">Location</div>
+            <div class="mt-1">{event.location}</div>
+          </div>
+
+        </div>
+
+        {
+          event.registrationOpen && (
+            <a
+              href={event.registrationUrl ?? "/contact"}
+              class="mt-7 block rounded-full bg-krism-900 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-krism-800"
+            >
+              Registration
+            </a>
+          )
+        }
+
+      </aside>
+
+    </div>
+
+  </section>
+
+</MainLayout>

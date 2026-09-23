@@ -1,0 +1,204 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: "en" | "fa";
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "KRISM — Khorasan Sleep Medicine",
+  description = "Khorasan Representative of Iranian Sleep Medicine Societies",
+  lang = "en",
+  canonical,
+  ogImage = "/images/krism-logo.png",
+} = Astro.props;
+
+const isPersian = lang === "fa";
+
+const canonicalUrl =
+  canonical ?? Astro.url.href;
+
+const currentPath = Astro.url.pathname;
+
+const englishPath =
+  currentPath.startsWith("/fa")
+    ? currentPath.replace(/^\/fa/, "") || "/"
+    : currentPath;
+
+const persianPath =
+  currentPath.startsWith("/fa")
+    ? currentPath
+    : currentPath === "/"
+      ? "/fa"
+      : `/fa${currentPath}`;
+
+const siteOrigin = Astro.url.origin;
+
+const englishUrl =
+  `${siteOrigin}${englishPath}`;
+
+const persianUrl =
+  `${siteOrigin}${persianPath}`;
+---
+
+<!doctype html>
+<html lang={lang} dir={isPersian ? "rtl" : "ltr"}>
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <title>{title}</title>
+
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <meta
+      name="author"
+      content="KRISM"
+    />
+
+    <meta
+      name="theme-color"
+      content="#07111f"
+    />
+
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href={canonicalUrl}
+    />
+
+    <!-- Language alternatives -->
+    <link
+      rel="alternate"
+      hreflang="en"
+      href={englishUrl}
+    />
+
+    <link
+      rel="alternate"
+      hreflang="fa"
+      href={persianUrl}
+    />
+
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={englishUrl}
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:title"
+      content={title}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
+
+    <meta
+      property="og:site_name"
+      content="KRISM"
+    />
+
+    <meta
+      property="og:url"
+      content={canonicalUrl}
+    />
+
+    <meta
+      property="og:locale"
+      content={isPersian ? "fa_IR" : "en_US"}
+    />
+
+    <meta
+      property="og:image"
+      content={`${siteOrigin}${ogImage}`}
+    />
+
+    <!-- Twitter / social sharing -->
+    <meta
+      name="twitter:card"
+      content="summary"
+    />
+
+    <meta
+      name="twitter:title"
+      content={title}
+    />
+
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+
+    <meta
+      name="twitter:image"
+      content={`${siteOrigin}${ogImage}`}
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/krism-logo.png"
+    />
+
+  </head>
+
+  <body class="font-sans">
+
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-krism-900 focus:shadow-lg"
+    >
+      {isPersian
+        ? "پرش به محتوای اصلی"
+        : "Skip to main content"}
+    </a>
+
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+
+  </body>
+</html>

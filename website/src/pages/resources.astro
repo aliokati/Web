@@ -1,0 +1,57 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import ResourceCard from "../components/ResourceCard.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import { resources } from "../data/resources";
+import { publications } from "../data/publications";
+
+const featuredResources = resources.filter((resource) => resource.featured);
+---
+
+<MainLayout
+  title="Resources — KRISM"
+  description="Sleep medicine resources, educational materials and publications."
+>
+  <PageHero
+    eyebrow="Resources"
+    title="Knowledge and resources for sleep medicine."
+    description="A growing collection of educational materials, clinical resources, research references and public sleep health information."
+  />
+
+  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+    <SectionHeader
+      eyebrow="Resources"
+      title="Explore our resources"
+      description="Resources will grow as KRISM develops its educational and scientific activities."
+    />
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {resources.map((resource) => (
+        <ResourceCard resource={resource} />
+      ))}
+    </div>
+
+  </section>
+
+
+  <section class="border-t border-krism-border bg-white">
+    <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8">
+
+      <SectionHeader
+        eyebrow="Publications"
+        title="Selected publications"
+        description="Research publications and scientific contributions associated with the KRISM community."
+      />
+
+      <div class="mt-10">
+        {resources.map((project) => (
+          <PublicationCard resource={project} />
+        ))}
+      </div>
+
+    </div>
+  </section>
+</MainLayout>

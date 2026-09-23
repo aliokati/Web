@@ -1,0 +1,135 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { resources } from "../../data/resources";
+import { publications } from "../../data/publications";
+
+const categoryLabels: Record<string, string> = {
+  Guideline: "راهنما",
+  Educational: "آموزشی",
+  Clinical: "بالینی",
+  Research: "پژوهشی",
+  Public: "عمومی",
+  External: "منبع خارجی",
+};
+---
+
+<MainLayout
+  lang="fa"
+  title="منابع — KRISM"
+  description="منابع آموزشی، بالینی، پژوهشی و عمومی مرتبط با پزشکی خواب"
+>
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+
+      <p class="text-sm font-semibold text-krism-600">
+        منابع
+      </p>
+
+      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
+        منابع پزشکی و آموزشی خواب
+      </h1>
+
+      <p class="mt-6 max-w-3xl text-lg leading-9 text-krism-muted">
+        مجموعه‌ای از منابع آموزشی، بالینی، پژوهشی و عمومی برای متخصصان،
+        پژوهشگران و علاقه‌مندان به سلامت خواب.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        {resources.map((resource) => (
+          <article class="rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg">
+
+            <p class="text-xs font-semibold text-krism-600">
+              {categoryLabels[resource.category] ?? resource.category}
+            </p>
+
+            <h2 class="mt-5 text-xl font-semibold text-krism-950">
+              {resource.title}
+            </h2>
+
+            <p class="mt-3 text-sm leading-8 text-krism-muted">
+              {resource.description}
+            </p>
+
+            {
+              resource.url ? (
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-6 inline-block text-sm font-semibold text-krism-600"
+                >
+                  مشاهده منبع ←
+                </a>
+              ) : (
+                <span class="mt-6 inline-block text-sm text-krism-muted">
+                  به‌زودی
+                </span>
+              )
+            }
+
+          </article>
+        ))}
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8">
+
+      <p class="text-sm font-semibold text-krism-600">
+        انتشارات
+      </p>
+
+      <h2 class="mt-4 text-3xl font-semibold text-krism-950">
+        پژوهش و مقالات
+      </h2>
+
+      <div class="mt-10 divide-y divide-krism-border border-y border-krism-border">
+
+        {publications.map((publication) => (
+          <article class="py-7">
+
+            {publication.category && (
+              <p class="text-xs font-semibold text-krism-600">
+                {publication.category}
+              </p>
+            )}
+
+            <h3 class="mt-3 text-lg font-semibold text-krism-950">
+              {publication.title}
+            </h3>
+
+            <p class="mt-2 text-sm text-krism-muted">
+              {publication.authors}
+            </p>
+
+            <p class="mt-2 text-sm italic text-krism-muted">
+              {publication.journal} · {publication.year}
+            </p>
+
+            {publication.url && (
+              <a
+                href={publication.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-block text-sm font-semibold text-krism-600"
+              >
+                مطالعه مقاله ←
+              </a>
+            )}
+
+          </article>
+        ))}
+
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,116 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import { events } from "../../../data/events";
+
+export function getStaticPaths() {
+  return events.map((event) => ({
+    params: {
+      slug: event.slug,
+    },
+  }));
+}
+
+const event = events.find(
+  (item) => item.slug === Astro.params.slug
+);
+
+const date = event ? new Date(event.date) : null;
+---
+
+<MainLayout
+  lang="fa"
+  title={`${event?.title ?? "رویداد"} — KRISM`}
+  description={event?.description ?? "رویداد KRISM"}
+>
+  {
+    event && date ? (
+      <>
+        <section class="border-b border-krism-border bg-white">
+          <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">
+
+            <p class="text-sm font-semibold text-krism-600">
+              {event.type}
+            </p>
+
+            <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+              {event.title}
+            </h1>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+
+              <div class="rounded-xl bg-krism-surface p-5">
+                <p class="text-xs text-krism-muted">تاریخ</p>
+                <p class="mt-2 text-sm font-semibold text-krism-950">
+                  {date.toLocaleDateString("fa-IR")}
+                </p>
+              </div>
+
+              <div class="rounded-xl bg-krism-surface p-5">
+                <p class="text-xs text-krism-muted">محل</p>
+                <p class="mt-2 text-sm font-semibold text-krism-950">
+                  {event.location}
+                </p>
+              </div>
+
+              <div class="rounded-xl bg-krism-surface p-5">
+                <p class="text-xs text-krism-muted">نوع</p>
+                <p class="mt-2 text-sm font-semibold text-krism-950">
+                  {event.type}
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white">
+          <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
+
+            <p class="text-base leading-9 text-krism-text">
+              {event.description}
+            </p>
+
+            <div class="mt-12 rounded-2xl border border-krism-border bg-krism-surface p-7">
+
+              <h2 class="text-xl font-semibold text-krism-950">
+                ثبت‌نام
+              </h2>
+
+              <p class="mt-3 text-sm leading-8 text-krism-muted">
+                اطلاعات ثبت‌نام و برنامه کامل رویداد در این بخش قرار خواهد
+                گرفت.
+              </p>
+
+              {
+                event.registrationOpen && (
+                  <a
+                    href={event.registrationUrl ?? "/fa/contact"}
+                    class="mt-6 inline-flex rounded-full bg-krism-950 px-6 py-3 text-sm font-semibold text-white"
+                  >
+                    ثبت‌نام / اطلاعات بیشتر ←
+                  </a>
+                )
+              }
+
+            </div>
+
+            <a
+              href="/fa/events"
+              class="mt-10 inline-block text-sm font-semibold text-krism-600"
+            >
+              ← بازگشت به رویدادها
+            </a>
+          </div>
+        </section>
+      </>
+    ) : (
+      <section class="bg-white">
+        <div class="mx-auto max-w-4xl px-6 py-24 text-center">
+          <h1 class="text-3xl font-semibold text-krism-950">
+            رویداد پیدا نشد
+          </h1>
+        </div>
+      </section>
+    )
+  }
+</MainLayout>

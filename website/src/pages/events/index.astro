@@ -1,0 +1,106 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import EventCard from "../../components/EventCard.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { events } from "../../data/events";
+
+const today = new Date();
+
+const upcomingEvents = events
+  .filter((event) => new Date(event.date) >= today)
+  .sort(
+    (a, b) =>
+      new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+const pastEvents = events
+  .filter((event) => new Date(event.date) < today)
+  .sort(
+    (a, b) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+---
+
+<MainLayout
+  title="Events — KRISM"
+  description="Scientific meetings, educational programs and events organized or supported by KRISM."
+>
+  <PageHero
+    eyebrow="Events & Education"
+    title="Scientific and educational activities."
+    description="Discover upcoming scientific meetings, educational workshops and other activities connected to sleep medicine."
+  />
+
+  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+    <SectionHeader
+      eyebrow="Upcoming"
+      title="Upcoming events"
+      description="Scientific and educational programs will be listed here as official KRISM events are announced."
+    />
+
+    {
+      upcomingEvents.length > 0 ? (
+        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          {upcomingEvents.map((event) => (
+            <EventCard event={event} />
+          ))}
+        </div>
+      ) : (
+        <div class="mt-10 rounded-2xl border border-dashed border-krism-border bg-white p-10 text-center">
+          <p class="text-sm text-krism-muted">
+            No upcoming events have been published yet.
+          </p>
+        </div>
+      )
+    }
+
+  </section>
+
+
+  {
+    pastEvents.length > 0 && (
+      <section class="border-t border-krism-border bg-white">
+        <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+          <SectionHeader
+            eyebrow="Archive"
+            title="Past events"
+            description="A record of previous KRISM activities."
+          />
+
+          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+            {pastEvents.map((event) => (
+              <EventCard event={event} />
+            ))}
+          </div>
+
+        </div>
+      </section>
+    )
+  }
+
+
+  <section class="bg-krism-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-500">
+          Education
+        </p>
+
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+          Advancing education in sleep medicine.
+        </h2>
+
+        <p class="mt-5 text-base leading-7 text-slate-300">
+          KRISM supports scientific exchange and continuing education
+          for professionals involved in sleep medicine.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+</MainLayout>

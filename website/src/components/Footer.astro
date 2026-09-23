@@ -1,0 +1,164 @@
+---
+const currentPath = Astro.url.pathname;
+
+const isPersian =
+  currentPath === "/fa" ||
+  currentPath.startsWith("/fa/");
+
+const pathWithoutLanguage =
+  currentPath.replace(/^\/fa/, "") || "/";
+
+const link = (path: string) =>
+  isPersian
+    ? path === "/"
+      ? "/fa"
+      : `/fa${path}`
+    : path;
+---
+
+<footer class="border-t border-krism-border bg-krism-950 text-white">
+  <div class="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+
+    <div class="grid gap-10 md:grid-cols-3">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3">
+          <img
+            src="/images/krism-logo.png"
+            alt="KRISM"
+            class="h-12 w-auto"
+          />
+
+          <div>
+            <div class="text-lg font-semibold">
+              KRISM
+            </div>
+
+            <div class="mt-1 text-xs text-slate-400">
+              {isPersian
+                ? "پزشکی خواب خراسان"
+                : "Khorasan Sleep Medicine"}
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-5 max-w-sm text-sm leading-7 text-slate-300">
+          {isPersian
+            ? "نمایندگی خراسان انجمن‌های طب خواب ایران؛ با تمرکز بر پژوهش، آموزش، آگاهی‌رسانی و توسعه همکاری‌های حرفه‌ای در حوزه پزشکی خواب."
+            : "Khorasan Representative of Iranian Sleep Medicine Societies, connecting research, education, awareness and professional collaboration in sleep medicine."}
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h2 class="text-sm font-semibold">
+          {isPersian ? "دسترسی سریع" : "Explore"}
+        </h2>
+
+        <div class="mt-5 space-y-3 text-sm text-slate-300">
+
+          <a
+            href={link("/about")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "درباره ما" : "About"}
+          </a>
+
+          <a
+            href={link("/research")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "پژوهش" : "Research"}
+          </a>
+
+          <a
+            href={link("/events")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "رویدادها" : "Events"}
+          </a>
+
+          <a
+            href={link("/network")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "شبکه" : "Network"}
+          </a>
+
+          <a
+            href={link("/resources")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "منابع" : "Resources"}
+          </a>
+
+          <a
+            href={link("/awareness")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "آگاهی‌رسانی" : "Awareness"}
+          </a>
+
+          <a
+            href={link("/contact")}
+            class="block transition hover:text-white"
+          >
+            {isPersian ? "تماس با ما" : "Contact"}
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-sm font-semibold">
+          {isPersian ? "تماس" : "Contact"}
+        </h2>
+
+        <p class="mt-5 text-sm leading-7 text-slate-300">
+          {isPersian ? (
+            <>
+              منطقه خراسان
+              <br />
+              ایران
+            </>
+          ) : (
+            <>
+              Khorasan Region
+              <br />
+              Iran
+            </>
+          )}
+        </p>
+
+        <a
+          href={link("/contact")}
+          class="mt-5 inline-flex text-sm font-semibold text-slate-200 transition hover:text-white"
+        >
+          {isPersian
+            ? "اطلاعات تماس ←"
+            : "Contact information →"}
+        </a>
+      </div>
+
+    </div>
+
+    <div class="mt-12 border-t border-white/10 pt-6 text-xs text-slate-400">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+        <span>
+          © 2026 KRISM.
+          {isPersian
+            ? " تمامی حقوق محفوظ است."
+            : " All rights reserved."}
+        </span>
+
+        <span>
+          Khorasan Representative of Iranian Sleep Medicine Societies
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+</footer>

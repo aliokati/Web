@@ -1,0 +1,64 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { awarenessArticles } from "../../data/awareness";
+
+export function getStaticPaths() {
+  return awarenessArticles.map((article) => ({
+    params: {
+      slug: article.slug,
+    },
+    props: {
+      article,
+    },
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<MainLayout
+  title={`${article.title} — KRISM`}
+  description={article.excerpt}
+>
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
+        {article.category}
+      </p>
+
+      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+        {article.title}
+      </h1>
+
+      <p class="mt-6 text-lg leading-8 text-krism-muted">
+        {article.excerpt}
+      </p>
+    </div>
+  </section>
+
+  <article class="bg-white">
+    <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
+      <div class="space-y-7">
+        {article.content.map((paragraph) => (
+          <p class="text-base leading-8 text-krism-text">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+
+      <div class="mt-14 border-t border-krism-border pt-8">
+        <p class="text-sm leading-7 text-krism-muted">
+          This article is provided for general educational purposes and does
+          not constitute individual medical advice.
+        </p>
+
+        <a
+          href="/awareness"
+          class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+        >
+          ← Back to Sleep Awareness
+        </a>
+      </div>
+    </div>
+  </article>
+</MainLayout>

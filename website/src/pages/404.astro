@@ -1,0 +1,73 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Page Not Found — KRISM"
+  description="The requested KRISM page could not be found."
+>
+
+  <section class="flex min-h-[65vh] items-center">
+    <div class="mx-auto max-w-3xl px-6 py-24 text-center lg:px-8">
+
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
+        404
+      </p>
+
+      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+        Page not found
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-xl text-base leading-8 text-krism-muted">
+        The page you are looking for does not exist or may have moved.
+      </p>
+
+      <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+
+        <a
+          href="/"
+          class="rounded-full bg-krism-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-krism-800"
+        >
+          Return home
+        </a>
+
+        <a
+          href="/contact"
+          class="rounded-full border border-krism-border bg-white px-6 py-3 text-sm font-semibold text-krism-900 transition hover:border-krism-500 hover:text-krism-600"
+        >
+          Contact KRISM
+        </a>
+
+      </div>
+
+      <div class="mt-16 border-t border-krism-border pt-10">
+
+        <p
+          class="text-sm font-medium text-krism-900"
+          dir="rtl"
+        >
+          صفحه مورد نظر یافت نشد
+        </p>
+
+        <p
+          class="mt-2 text-sm leading-7 text-krism-muted"
+          dir="rtl"
+        >
+          ممکن است آدرس صفحه تغییر کرده باشد یا صفحه مورد نظر وجود نداشته باشد.
+        </p>
+
+        <div class="mt-6">
+          <a
+            href="/fa"
+            class="text-sm font-semibold text-krism-600 hover:text-krism-900"
+          >
+            بازگشت به صفحه اصلی
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</MainLayout>

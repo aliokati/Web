@@ -1,0 +1,130 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import { researchProjects } from "../../../data/research";
+
+const translations: Record<
+  string,
+  {
+    title: string;
+    category: string;
+    description: string;
+    fullDescription: string;
+    status: string;
+  }
+> = {
+  "sleep-medicine-research-network": {
+    title: "شبکه پژوهش پزشکی خواب",
+    category: "شبکه پژوهشی",
+    description:
+      "چارچوبی برای ایجاد ارتباط میان پژوهشگران و متخصصان حوزه پزشکی خواب.",
+    fullDescription:
+      "این پروژه به عنوان چارچوبی برای توسعه ارتباط میان پژوهشگران و متخصصان حوزه پزشکی خواب در منطقه خراسان طراحی شده است.",
+    status: "در حال انجام",
+  },
+  "sleep-health-research": {
+    title: "پژوهش در سلامت خواب",
+    category: "سلامت خواب",
+    description:
+      "فعالیت‌های پژوهشی مرتبط با سلامت خواب و آگاهی عمومی.",
+    fullDescription:
+      "این حوزه می‌تواند شامل مطالعات مرتبط با سلامت خواب، آگاهی عمومی و مسائل جمعیتی مرتبط با خواب باشد.",
+    status: "همکاری",
+  },
+  "clinical-sleep-medicine": {
+    title: "پژوهش در پزشکی بالینی خواب",
+    category: "پژوهش بالینی",
+    description:
+      "پژوهش‌های بالینی مرتبط با تشخیص و درمان اختلالات خواب.",
+    fullDescription:
+      "این بخش برای معرفی مطالعات بالینی مرتبط با تشخیص، درمان و مدیریت اختلالات خواب در نظر گرفته شده است.",
+    status: "در حال انجام",
+  },
+};
+
+export function getStaticPaths() {
+  return researchProjects.map((project) => ({
+    params: {
+      slug: project.slug,
+    },
+  }));
+}
+
+const project = researchProjects.find(
+  (item) => item.slug === Astro.params.slug
+);
+
+const translation = project
+  ? translations[project.slug]
+  : undefined;
+---
+
+<MainLayout
+  lang="fa"
+  title={`${translation?.title ?? "پژوهش"} — KRISM`}
+  description={translation?.description ?? "پژوهش در پزشکی خواب"}
+>
+  {
+    project && translation ? (
+      <>
+        <section class="border-b border-krism-border bg-white">
+          <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">
+
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="text-sm font-semibold text-krism-600">
+                {translation.category}
+              </span>
+
+              <span class="rounded-full bg-krism-surface px-3 py-1 text-xs text-krism-muted">
+                {translation.status}
+              </span>
+            </div>
+
+            <h1 class="mt-6 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+              {translation.title}
+            </h1>
+
+            <p class="mt-6 text-lg leading-9 text-krism-muted">
+              {translation.description}
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-white">
+          <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
+
+            <p class="text-base leading-9 text-krism-text">
+              {translation.fullDescription}
+            </p>
+
+            <div class="mt-12 border-t border-krism-border pt-8">
+              <p class="text-sm text-krism-muted">
+                سال پروژه: {project.date}
+              </p>
+
+              {project.collaborators && (
+                <p class="mt-3 text-sm text-krism-muted">
+                  مسئول پروژه: {project.collaborators}
+                </p>
+              )}
+            </div>
+
+            <a
+              href="/fa/research"
+              class="mt-10 inline-block text-sm font-semibold text-krism-600"
+            >
+              ← بازگشت به پژوهش
+            </a>
+          </div>
+        </section>
+      </>
+    ) : (
+      <section class="bg-white">
+        <div class="mx-auto max-w-4xl px-6 py-24 text-center">
+          <h1 class="text-3xl font-semibold text-krism-950">
+            پروژه پیدا نشد
+          </h1>
+        </div>
+      </section>
+    )
+  }
+</MainLayout>

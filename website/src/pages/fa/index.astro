@@ -1,0 +1,502 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { events } from "../../data/events";
+import { researchProjects } from "../../data/research";
+import { awarenessArticles } from "../../data/awareness";
+import { networkMembers } from "../../data/network";
+
+const featuredEvents = events
+  .filter((event) => event.featured)
+  .slice(0, 2);
+
+const featuredResearch = researchProjects
+  .filter((project) => project.featured)
+  .slice(0, 3);
+
+const featuredAwareness = awarenessArticles
+  .filter((article) => article.featured)
+  .slice(0, 3);
+
+const featuredNetwork = networkMembers
+  .filter((member) => member.featured)
+  .slice(0, 3);
+
+const typeLabel = (type: string) => {
+  const labels: Record<string, string> = {
+    Professional: "حرفه‌ای",
+    Researcher: "پژوهشگر",
+    Organization: "سازمان",
+    Institution: "مؤسسه",
+  };
+
+  return labels[type] ?? type;
+};
+
+const categoryLabel = (category: string) => {
+  const labels: Record<string, string> = {
+    "Research Network": "شبکه پژوهشی",
+    "Sleep Health": "سلامت خواب",
+    "Clinical Research": "پژوهش بالینی",
+  };
+
+  return labels[category] ?? category;
+};
+
+const statusLabel = (status: string) => {
+  const labels: Record<string, string> = {
+    Ongoing: "در حال انجام",
+    Completed: "تکمیل‌شده",
+    Collaboration: "همکاری",
+  };
+
+  return labels[status] ?? status;
+};
+---
+
+<MainLayout
+  lang="fa"
+  title="KRISM — نمایندگی خراسان انجمن‌های طب خواب ایران"
+  description="نمایندگی خراسان انجمن‌های طب خواب ایران؛ با تمرکز بر پژوهش، آموزش، آگاهی‌رسانی و توسعه همکاری‌های حرفه‌ای در حوزه پزشکی خواب."
+>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-krism-950 text-white">
+    <div class="absolute inset-0">
+      <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full border border-white/10"></div>
+      <div class="absolute -left-16 -top-16 h-64 w-64 rounded-full border border-white/10"></div>
+      <div class="absolute -bottom-40 -right-32 h-96 w-96 rounded-full border border-white/5"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+      <div class="max-w-4xl">
+
+        <div class="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-300">
+          <span class="h-2 w-2 rounded-full bg-krism-500"></span>
+          پزشکی خواب خراسان
+        </div>
+
+        <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+          پیوند میان
+          <span class="text-krism-500">پژوهش</span>،
+          آموزش و پزشکی خواب
+        </h1>
+
+        <p class="mt-7 max-w-3xl text-base leading-9 text-slate-300 sm:text-lg">
+          KRISM نمایندگی خراسان انجمن‌های طب خواب ایران است و با تمرکز بر
+          همکاری علمی، آموزش حرفه‌ای، آگاهی‌رسانی عمومی و توسعه پزشکی خواب
+          در منطقه فعالیت می‌کند.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+
+          <a
+            href="/fa/research"
+            class="rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-krism-950 transition hover:bg-slate-100"
+          >
+            مشاهده پژوهش‌ها
+          </a>
+
+          <a
+            href="/fa/contact"
+            class="rounded-full border border-white/20 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            ارتباط با KRISM
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+            درباره KRISM
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950 sm:text-4xl">
+            بستری منطقه‌ای برای توسعه پزشکی خواب
+          </h2>
+        </div>
+
+        <div class="max-w-3xl">
+          <p class="text-base leading-9 text-krism-muted sm:text-lg">
+            KRISM بستری برای ارتباط میان متخصصان، پژوهشگران، مؤسسات درمانی
+            و سازمان‌های فعال در حوزه پزشکی و سلامت خواب فراهم می‌کند.
+          </p>
+
+          <p class="mt-5 text-base leading-9 text-krism-muted">
+            فعالیت‌های این مجموعه بر تبادل علمی، آموزش، همکاری حرفه‌ای و
+            ارائه اطلاعات مسئولانه درباره خواب متمرکز است.
+          </p>
+
+          <a
+            href="/fa/about"
+            class="mt-7 inline-flex text-sm font-semibold text-krism-600 transition hover:text-krism-900"
+          >
+            درباره KRISM بیشتر بدانید ←
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+          حوزه‌های فعالیت
+        </p>
+
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950 sm:text-4xl">
+          چهار محور اصلی فعالیت
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+
+        <a
+          href="/fa/research"
+          class="group rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+        >
+          <div class="text-sm font-semibold text-krism-600">۰۱</div>
+          <h3 class="mt-10 text-xl font-semibold text-krism-950">
+            پژوهش
+          </h3>
+          <p class="mt-4 text-sm leading-8 text-krism-muted">
+            حمایت از فعالیت‌های پژوهشی، تبادل علمی و همکاری در حوزه پزشکی خواب.
+          </p>
+          <div class="mt-7 text-sm font-semibold text-krism-600">
+            مشاهده پژوهش‌ها ←
+          </div>
+        </a>
+
+        <a
+          href="/fa/events"
+          class="group rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+        >
+          <div class="text-sm font-semibold text-krism-600">۰۲</div>
+          <h3 class="mt-10 text-xl font-semibold text-krism-950">
+            آموزش و رویدادها
+          </h3>
+          <p class="mt-4 text-sm leading-8 text-krism-muted">
+            نشست‌های علمی، برنامه‌های آموزشی و فرصت‌های یادگیری حرفه‌ای.
+          </p>
+          <div class="mt-7 text-sm font-semibold text-krism-600">
+            مشاهده رویدادها ←
+          </div>
+        </a>
+
+        <a
+          href="/fa/awareness"
+          class="group rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+        >
+          <div class="text-sm font-semibold text-krism-600">۰۳</div>
+          <h3 class="mt-10 text-xl font-semibold text-krism-950">
+            آگاهی‌رسانی
+          </h3>
+          <p class="mt-4 text-sm leading-8 text-krism-muted">
+            ارائه اطلاعات روشن و مسئولانه درباره سلامت خواب و مشکلات شایع خواب.
+          </p>
+          <div class="mt-7 text-sm font-semibold text-krism-600">
+            اطلاعات سلامت خواب ←
+          </div>
+        </a>
+
+        <a
+          href="/fa/network"
+          class="group rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+        >
+          <div class="text-sm font-semibold text-krism-600">۰۴</div>
+          <h3 class="mt-10 text-xl font-semibold text-krism-950">
+            شبکه
+          </h3>
+          <p class="mt-4 text-sm leading-8 text-krism-muted">
+            ارتباط میان متخصصان، پژوهشگران، مؤسسات و سازمان‌های فعال در پزشکی خواب.
+          </p>
+          <div class="mt-7 text-sm font-semibold text-krism-600">
+            مشاهده شبکه ←
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+            پژوهش
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950">
+            توسعه همکاری‌های علمی
+          </h2>
+        </div>
+
+        <a
+          href="/fa/research"
+          class="text-sm font-semibold text-krism-600 hover:text-krism-900"
+        >
+          همه پژوهش‌ها ←
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+
+        {
+          featuredResearch.map((project) => (
+            <a
+              href={`/fa/research/${project.slug}`}
+              class="group rounded-2xl border border-krism-border p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+            >
+              <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
+                {categoryLabel(project.type)}
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold text-krism-950 group-hover:text-krism-600">
+                {project.title}
+              </h3>
+
+              <p class="mt-4 text-sm leading-8 text-krism-muted">
+                {project.description}
+              </p>
+
+              <div class="mt-7 flex items-center justify-between text-sm">
+                <span class="text-krism-muted">
+                  statusLabel(project.stat)
+                </span>
+
+                <span class="font-semibold text-krism-600">
+                  مشاهده ←
+                </span>
+              </div>
+            </a>
+          ))
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+            آموزش و رویدادها
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950">
+            تبادل علمی
+          </h2>
+        </div>
+
+        <a
+          href="/fa/events"
+          class="text-sm font-semibold text-krism-600 hover:text-krism-900"
+        >
+          همه رویدادها ←
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+
+        {
+          featuredEvents.map((event) => (
+            <a
+              href={`/fa/events/${event.slug}`}
+              class="group rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+            >
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <span class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
+                  {event.type}
+                </span>
+
+                <span class="text-sm text-krism-muted">
+                  {new Date(event.date).toLocaleDateString("fa-IR")}
+                </span>
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold text-krism-950 group-hover:text-krism-600">
+                {event.title}
+              </h3>
+
+              <p class="mt-3 text-sm leading-8 text-krism-muted">
+                {event.description}
+              </p>
+
+              <div class="mt-7 flex items-center justify-between">
+                <span class="text-sm text-krism-muted">
+                  {event.location}
+                </span>
+
+                <span class="text-sm font-semibold text-krism-600">
+                  جزئیات ←
+                </span>
+              </div>
+            </a>
+          ))
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARENESS -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+            آگاهی‌رسانی
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950">
+            اطلاعات کاربردی درباره خواب
+          </h2>
+        </div>
+
+        <a
+          href="/fa/awareness"
+          class="text-sm font-semibold text-krism-600 hover:text-krism-900"
+        >
+          مشاهده مطالب ←
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+
+        {
+          featuredAwareness.map((article) => (
+            <a
+              href={`/fa/awareness/${article.slug}`}
+              class="group rounded-2xl border border-krism-border p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+            >
+              <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
+                {article.category}
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold text-krism-950 group-hover:text-krism-600">
+                {article.title}
+              </h3>
+
+              <p class="mt-4 text-sm leading-8 text-krism-muted">
+                {article.excerpt}
+              </p>
+
+              <div class="mt-7 text-sm font-semibold text-krism-600">
+                مطالعه مطلب ←
+              </div>
+            </a>
+          ))
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NETWORK -->
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-600">
+            شبکه حرفه‌ای
+          </p>
+
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-krism-950 sm:text-4xl">
+            ارتباط میان افراد و مؤسسات
+          </h2>
+
+          <p class="mt-6 max-w-xl text-base leading-9 text-krism-muted">
+            KRISM چارچوبی برای همکاری میان متخصصان، پژوهشگران، مؤسسات درمانی
+            و سازمان‌های فعال در حوزه پزشکی خواب فراهم می‌کند.
+          </p>
+
+          <a
+            href="/fa/network"
+            class="mt-7 inline-flex rounded-full bg-krism-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-krism-800"
+          >
+            مشاهده شبکه
+          </a>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+
+          {
+            featuredNetwork.map((member) => (
+              <div class="rounded-2xl border border-krism-border bg-white p-6">
+                <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
+                  {typeLabel(member.type)}
+                </div>
+
+                <h3 class="mt-4 font-semibold text-krism-950">
+                  {member.name}
+                </h3>
+
+                <p class="mt-2 text-sm text-krism-muted">
+                  {member.specialty ?? "پزشکی خواب"}
+                </p>
+
+                {member.city && (
+                  <p class="mt-1 text-xs text-krism-muted">
+                    {member.city}
+                  </p>
+                )}
+              </div>
+            ))
+          }
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-krism-950 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-20 text-center lg:px-8">
+
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-krism-500">
+        همکاری
+      </p>
+
+      <h2 class="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+        علاقه‌مند به همکاری با KRISM هستید؟
+      </h2>
+
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-9 text-slate-300">
+        از ارتباط با پژوهشگران، متخصصان، مؤسسات درمانی و سازمان‌های علاقه‌مند
+        به حوزه پزشکی خواب استقبال می‌کنیم.
+      </p>
+
+      <a
+        href="/fa/contact"
+        class="mt-8 inline-flex rounded-full bg-white px-7 py-3 text-sm font-semibold text-krism-950 transition hover:bg-slate-100"
+      >
+        تماس با KRISM
+      </a>
+
+    </div>
+  </section>
+
+</MainLayout>

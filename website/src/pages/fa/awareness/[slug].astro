@@ -1,0 +1,137 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import { awarenessArticles } from "../../../data/awareness";
+
+const translations: Record<
+  string,
+  {
+    title: string;
+    excerpt: string;
+    category: string;
+    content: string[];
+  }
+> = {
+  "why-sleep-matters": {
+    title: "چرا خواب اهمیت دارد؟",
+    excerpt:
+      "خواب بخش اساسی سلامت جسمی، عملکرد شناختی، سلامت روان و کیفیت زندگی است.",
+    category: "سلامت خواب",
+    content: [
+      "خواب یک فرایند زیستی اساسی است که از جنبه‌های مختلف سلامت و عملکرد روزانه حمایت می‌کند.",
+      "خواب کافی و باکیفیت می‌تواند در توجه، حافظه، یادگیری، تنظیم هیجانات و بازسازی جسمی نقش داشته باشد.",
+      "مشکلات مداوم خواب نباید صرفاً به عنوان بخش طبیعی زندگی پذیرفته شوند. اگر مشکلات خواب تکرار شوند یا بر فعالیت‌های روزانه اثر بگذارند، ارزیابی تخصصی می‌تواند مناسب باشد.",
+    ],
+  },
+
+  "healthy-sleep-habits": {
+    title: "عادات خواب سالم",
+    excerpt:
+      "برخی عادات ساده و منظم می‌توانند به داشتن الگوی خواب سالم‌تر کمک کنند.",
+    category: "خواب سالم",
+    content: [
+      "داشتن زمان نسبتاً منظم برای خواب و بیداری می‌تواند به تنظیم الگوی خواب کمک کند.",
+      "محیطی آرام، مناسب و تا حد امکان تاریک می‌تواند شرایط بهتری برای خواب ایجاد کند.",
+      "فعالیت بدنی منظم و توجه به مصرف کافئین، نیکوتین و سایر مواد محرک نیز می‌تواند بر خواب اثر بگذارد.",
+      "نیاز افراد به خواب متفاوت است و مشکلات مداوم یا شدید خواب ممکن است نیازمند ارزیابی توسط متخصص باشد.",
+    ],
+  },
+
+  "when-to-seek-help-for-sleep-problems": {
+    title: "چه زمانی برای مشکلات خواب کمک بگیریم؟",
+    excerpt:
+      "برخی مشکلات خواب موقتی هستند، اما علائم پایدار ممکن است نیازمند ارزیابی تخصصی باشند.",
+    category: "اختلالات خواب",
+    content: [
+      "اختلالات گاه‌به‌گاه خواب می‌توانند به دلایل مختلف ایجاد شوند. مشکلات مداوم نیازمند توجه بیشتری هستند.",
+      "خرخر شدید و مکرر، وقفه‌های قابل مشاهده در تنفس، خواب‌آلودگی بیش از حد در طول روز، بی‌خوابی مداوم یا برخی رفتارهای غیرمعمول هنگام خواب می‌توانند دلایلی برای مطرح کردن موضوع با پزشک باشند.",
+      "متخصص سلامت می‌تواند مشخص کند که آیا ارزیابی بیشتر یا بررسی تخصصی خواب لازم است یا خیر.",
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return awarenessArticles.map((article) => ({
+    params: {
+      slug: article.slug,
+    },
+  }));
+}
+
+const slug = Astro.params.slug ?? "";
+const article = translations[slug];
+---
+
+<MainLayout
+  lang="fa"
+  title={`${article?.title ?? "آگاهی‌رسانی"} — KRISM`}
+  description={article?.excerpt ?? "آگاهی‌رسانی درباره خواب"}
+>
+  {
+    article ? (
+      <>
+        <section class="border-b border-krism-border bg-white">
+          <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">
+
+            <p class="text-sm font-semibold text-krism-600">
+              {article.category}
+            </p>
+
+            <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
+              {article.title}
+            </h1>
+
+            <p class="mt-6 text-lg leading-9 text-krism-muted">
+              {article.excerpt}
+            </p>
+
+          </div>
+        </section>
+
+        <article class="bg-white">
+          <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
+
+            <div class="space-y-7">
+              {article.content.map((paragraph) => (
+                <p class="text-base leading-9 text-krism-text">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <div class="mt-14 border-t border-krism-border pt-8">
+
+              <p class="text-sm leading-8 text-krism-muted">
+                این مطلب صرفاً برای آموزش عمومی ارائه شده و جایگزین ارزیابی
+                یا مشاوره پزشکی فردی نیست.
+              </p>
+
+              <a
+                href="/fa/awareness"
+                class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+              >
+                ← بازگشت به آگاهی‌رسانی درباره خواب
+              </a>
+
+            </div>
+
+          </div>
+        </article>
+      </>
+    ) : (
+      <section class="bg-white">
+        <div class="mx-auto max-w-4xl px-6 py-24 text-center lg:px-8">
+          <h1 class="text-3xl font-semibold text-krism-950">
+            مطلب مورد نظر پیدا نشد
+          </h1>
+
+          <a
+            href="/fa/awareness"
+            class="mt-6 inline-block text-sm font-semibold text-krism-600"
+          >
+            بازگشت
+          </a>
+        </div>
+      </section>
+    )
+  }
+</MainLayout>

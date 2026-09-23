@@ -1,0 +1,58 @@
+---
+import type { NetworkMember } from "../data/network";
+
+interface Props {
+  member: NetworkMember;
+}
+
+const { member } = Astro.props;
+---
+
+<article
+  class="rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+>
+  <div class="flex items-start justify-between gap-4">
+    <span
+      class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600"
+    >
+      {member.type}
+    </span>
+
+    {member.city && (
+      <span class="text-xs text-krism-muted">
+        {member.city}
+      </span>
+    )}
+  </div>
+
+  <h2 class="mt-7 text-xl font-semibold text-krism-950">
+    {member.name}
+  </h2>
+
+  {member.specialty && (
+    <p class="mt-2 text-sm font-medium text-krism-600">
+      {member.specialty}
+    </p>
+  )}
+
+  {member.affiliation && (
+    <p class="mt-2 text-sm text-krism-muted">
+      {member.affiliation}
+    </p>
+  )}
+
+  <p class="mt-5 text-sm leading-7 text-krism-muted">
+    {member.description}
+  </p>
+
+  {member.website && (
+    <a
+      href={member.website}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+    >
+      Visit website →
+    </a>
+  )}
+</article>

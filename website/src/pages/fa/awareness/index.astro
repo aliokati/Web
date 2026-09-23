@@ -1,0 +1,131 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import { awarenessArticles } from "../../../data/awareness";
+
+const translations: Record<
+  string,
+  {
+    title: string;
+    excerpt: string;
+    category: string;
+  }
+> = {
+  "why-sleep-matters": {
+    title: "چرا خواب اهمیت دارد؟",
+    excerpt:
+      "خواب بخش اساسی سلامت جسمی، عملکرد شناختی، سلامت روان و کیفیت زندگی است.",
+    category: "سلامت خواب",
+  },
+  "healthy-sleep-habits": {
+    title: "عادات خواب سالم",
+    excerpt:
+      "برخی عادات ساده و منظم می‌توانند به داشتن الگوی خواب سالم‌تر کمک کنند.",
+    category: "خواب سالم",
+  },
+  "when-to-seek-help-for-sleep-problems": {
+    title: "چه زمانی برای مشکلات خواب کمک بگیریم؟",
+    excerpt:
+      "برخی مشکلات خواب موقتی هستند، اما علائم پایدار ممکن است نیازمند ارزیابی تخصصی باشند.",
+    category: "اختلالات خواب",
+  },
+};
+---
+
+<MainLayout
+  lang="fa"
+  title="آگاهی‌رسانی درباره خواب — KRISM"
+  description="اطلاعات آموزشی عمومی درباره سلامت خواب و اختلالات خواب"
+>
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+
+      <p class="text-sm font-semibold text-krism-600">
+        آگاهی‌رسانی درباره خواب
+      </p>
+
+      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
+        شناخت بهتر خواب و سلامت خواب
+      </h1>
+
+      <p class="mt-6 max-w-3xl text-lg leading-9 text-krism-muted">
+        مطالب آموزشی عمومی درباره خواب سالم، مشکلات شایع خواب و زمان مناسب
+        برای مراجعه به متخصص.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold text-krism-600">
+          آموزش عمومی
+        </p>
+
+        <h2 class="mt-4 text-3xl font-semibold text-krism-950">
+          اطلاعات سلامت خواب
+        </h2>
+
+        <p class="mt-5 text-base leading-8 text-krism-muted">
+          هدف KRISM کمک به افزایش آگاهی عمومی و دسترسی به اطلاعات معتبر
+          درباره اهمیت خواب و سلامت خواب است.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        {awarenessArticles.map((article) => {
+          const translation = translations[article.slug];
+
+          return (
+            <a
+              href={`/fa/awareness/${article.slug}`}
+              class="group block rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+            >
+              <p class="text-xs font-semibold text-krism-600">
+                {translation?.category ?? article.category}
+              </p>
+
+              <h2 class="mt-6 text-xl font-semibold text-krism-950">
+                {translation?.title ?? article.title}
+              </h2>
+
+              <p class="mt-4 text-sm leading-8 text-krism-muted">
+                {translation?.excerpt ?? article.excerpt}
+              </p>
+
+              <div class="mt-7 text-sm font-semibold text-krism-600">
+                مطالعه مطلب ←
+              </div>
+            </a>
+          );
+        })}
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8">
+
+      <div class="rounded-2xl border border-krism-border bg-krism-surface p-8 lg:p-10">
+
+        <p class="text-sm font-semibold text-krism-600">
+          توجه
+        </p>
+
+        <h2 class="mt-4 text-2xl font-semibold text-krism-950">
+          مطالب آموزشی جایگزین ارزیابی پزشکی نیستند
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-krism-muted">
+          اطلاعات این بخش با هدف آموزش عمومی ارائه می‌شوند و جایگزین
+          تشخیص، ارزیابی یا درمان توسط پزشک یا متخصص واجد شرایط نیستند.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+</MainLayout>

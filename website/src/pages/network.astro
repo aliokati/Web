@@ -1,0 +1,63 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import NetworkCard from "../components/NetworkCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { networkMembers } from "../data/network";
+---
+
+<MainLayout
+  title="Network — KRISM"
+  description="The KRISM professional and institutional network."
+>
+  <PageHero
+    eyebrow="KRISM Network"
+    title="Connecting the sleep medicine community."
+    description="A professional and institutional network connecting clinicians, researchers, organizations and institutions working in sleep medicine across Khorasan."
+  />
+
+  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+    <SectionHeader
+      eyebrow="Community"
+      title="Our network"
+      description="The KRISM network is designed to facilitate collaboration, knowledge exchange and professional connections."
+    />
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {networkMembers.map((member) => (
+        <NetworkCard member={member} />
+      ))}
+    </div>
+
+  </section>
+
+
+  <section class="bg-krism-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-500">
+          Collaboration
+        </p>
+
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+          Build connections across sleep medicine.
+        </h2>
+
+        <p class="mt-5 text-base leading-7 text-slate-300">
+          KRISM aims to connect healthcare professionals, researchers,
+          institutions and organizations involved in sleep medicine.
+        </p>
+
+        <a
+          href="/contact"
+          class="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-krism-950 transition hover:bg-slate-100"
+        >
+          Contact KRISM
+        </a>
+      </div>
+
+    </div>
+  </section>
+</MainLayout>

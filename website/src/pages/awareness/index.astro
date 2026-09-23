@@ -1,0 +1,68 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import AwarenessCard from "../../components/AwarenessCard.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { awarenessArticles } from "../../data/awareness";
+
+const featuredArticles = awarenessArticles.filter(
+  (article) => article.featured
+);
+---
+
+<MainLayout
+  title="Sleep Awareness — KRISM"
+  description="Public sleep-health information and educational resources from KRISM."
+>
+  <section class="border-b border-krism-border bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
+        Sleep Awareness
+      </p>
+
+      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
+        Understanding sleep and sleep health
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-krism-muted">
+        Accessible educational information about healthy sleep, common sleep
+        concerns and when professional evaluation may be appropriate.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-krism-surface">
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <SectionHeader
+        eyebrow="Public education"
+        title="Sleep health information"
+        description="KRISM aims to support informed public understanding of sleep and its role in health."
+      />
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {featuredArticles.map((article) => (
+          <AwarenessCard article={article} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8">
+      <div class="rounded-2xl border border-krism-border bg-krism-surface p-8 lg:p-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.15em] text-krism-600">
+          Important
+        </p>
+
+        <h2 class="mt-4 text-2xl font-semibold text-krism-950">
+          Educational information is not individual medical advice
+        </h2>
+
+        <p class="mt-4 text-base leading-7 text-krism-muted">
+          The information provided through this section is intended for
+          general education. It should not be used as a substitute for
+          professional medical assessment, diagnosis or treatment.
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>
