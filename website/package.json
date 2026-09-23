@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
     "git": "^0.1.5",
+    "mime": "^4.1.0",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {

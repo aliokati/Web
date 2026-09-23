@@ -6,6 +6,7 @@ export default defineConfig({
   site: "https://krisms.ir",
 
   vite: {
+    cacheDir: ".cache/vite",
     plugins: [tailwindcss()],
   },
 

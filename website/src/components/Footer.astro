@@ -1,164 +1,63 @@
 ---
 const currentPath = Astro.url.pathname;
-
-const isPersian =
-  currentPath === "/fa" ||
-  currentPath.startsWith("/fa/");
-
-const pathWithoutLanguage =
-  currentPath.replace(/^\/fa/, "") || "/";
-
-const link = (path: string) =>
-  isPersian
-    ? path === "/"
-      ? "/fa"
-      : `/fa${path}`
-    : path;
+const isPersian = currentPath === "/fa" || currentPath.startsWith("/fa/");
+const link = (path: string) => isPersian ? (path === "/" ? "/fa" : `/fa${path}`) : path;
+const groups = [
+  {
+    en: "Explore", fa: "دسترسی سریع",
+    links: [
+      ["/about", "About", "درباره ما"], ["/research", "Research", "پژوهش"],
+      ["/events", "Events", "رویدادها"], ["/network", "Network", "شبکه"],
+    ],
+  },
+  {
+    en: "Learn", fa: "آموزش",
+    links: [
+      ["/resources", "Resources", "منابع"], ["/awareness", "Sleep health", "سلامت خواب"],
+      ["/contact", "Contact", "تماس"], ["/", "Home", "صفحه اصلی"],
+    ],
+  },
+];
 ---
 
-<footer class="border-t border-krism-border bg-krism-950 text-white">
-  <div class="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-
-    <div class="grid gap-10 md:grid-cols-3">
-
-      <!-- Brand -->
-      <div>
-        <div class="flex items-center gap-3">
-          <img
-            src="/images/krism-logo.png"
-            alt="KRISM"
-            class="h-12 w-auto"
-          />
-
+<footer class="overflow-hidden bg-krism-950 text-white">
+  <div class="border-b border-white/10">
+    <div class="mx-auto grid max-w-[1440px] gap-12 px-6 py-16 md:grid-cols-[1.5fr_1fr_1fr] lg:px-10 lg:py-20">
+      <div class="max-w-xl">
+        <a href={link("/")} class="inline-flex items-center gap-4">
+          <img src="/images/krism-logo.png" alt="" class="h-16 w-16 rounded-full" />
           <div>
-            <div class="text-lg font-semibold">
-              KRISM
-            </div>
+            <p class="text-2xl font-semibold tracking-tight">KRISM</p>
+            <p class="mt-1 text-xs uppercase tracking-[.15em] text-white/55">
+              {isPersian ? "پزشکی خواب خراسان" : "Khorasan Sleep Medicine"}
+            </p>
+          </div>
+        </a>
+        <h2 class="mt-8 max-w-lg text-3xl font-medium leading-tight text-white sm:text-4xl">
+          {isPersian ? "خواب بهتر، سلامت بهتر، جامعه‌ای قوی‌تر." : "Better sleep. Better health. A stronger community."}
+        </h2>
+        <p class="mt-5 max-w-lg text-sm leading-7 text-white/65">
+          {isPersian
+            ? "شبکه‌ای برای پژوهش، آموزش و همکاری حرفه‌ای در پزشکی خواب در سراسر خراسان."
+            : "A regional platform connecting research, education, public understanding and professional collaboration in sleep medicine."}
+        </p>
+      </div>
 
-            <div class="mt-1 text-xs text-slate-400">
-              {isPersian
-                ? "پزشکی خواب خراسان"
-                : "Khorasan Sleep Medicine"}
-            </div>
+      {groups.map((group) => (
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[.16em] text-[#f5d86e]">{isPersian ? group.fa : group.en}</p>
+          <div class="mt-6 flex flex-col gap-3.5 text-sm text-white/70">
+            {group.links.map(([path, en, fa]) => (
+              <a href={link(path)} class="w-fit transition hover:translate-x-1 hover:text-white">{isPersian ? fa : en}</a>
+            ))}
           </div>
         </div>
-
-        <p class="mt-5 max-w-sm text-sm leading-7 text-slate-300">
-          {isPersian
-            ? "نمایندگی خراسان انجمن‌های طب خواب ایران؛ با تمرکز بر پژوهش، آموزش، آگاهی‌رسانی و توسعه همکاری‌های حرفه‌ای در حوزه پزشکی خواب."
-            : "Khorasan Representative of Iranian Sleep Medicine Societies, connecting research, education, awareness and professional collaboration in sleep medicine."}
-        </p>
-      </div>
-
-      <!-- Explore -->
-      <div>
-        <h2 class="text-sm font-semibold">
-          {isPersian ? "دسترسی سریع" : "Explore"}
-        </h2>
-
-        <div class="mt-5 space-y-3 text-sm text-slate-300">
-
-          <a
-            href={link("/about")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "درباره ما" : "About"}
-          </a>
-
-          <a
-            href={link("/research")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "پژوهش" : "Research"}
-          </a>
-
-          <a
-            href={link("/events")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "رویدادها" : "Events"}
-          </a>
-
-          <a
-            href={link("/network")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "شبکه" : "Network"}
-          </a>
-
-          <a
-            href={link("/resources")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "منابع" : "Resources"}
-          </a>
-
-          <a
-            href={link("/awareness")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "آگاهی‌رسانی" : "Awareness"}
-          </a>
-
-          <a
-            href={link("/contact")}
-            class="block transition hover:text-white"
-          >
-            {isPersian ? "تماس با ما" : "Contact"}
-          </a>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <h2 class="text-sm font-semibold">
-          {isPersian ? "تماس" : "Contact"}
-        </h2>
-
-        <p class="mt-5 text-sm leading-7 text-slate-300">
-          {isPersian ? (
-            <>
-              منطقه خراسان
-              <br />
-              ایران
-            </>
-          ) : (
-            <>
-              Khorasan Region
-              <br />
-              Iran
-            </>
-          )}
-        </p>
-
-        <a
-          href={link("/contact")}
-          class="mt-5 inline-flex text-sm font-semibold text-slate-200 transition hover:text-white"
-        >
-          {isPersian
-            ? "اطلاعات تماس ←"
-            : "Contact information →"}
-        </a>
-      </div>
-
+      ))}
     </div>
+  </div>
 
-    <div class="mt-12 border-t border-white/10 pt-6 text-xs text-slate-400">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
-        <span>
-          © 2026 KRISM.
-          {isPersian
-            ? " تمامی حقوق محفوظ است."
-            : " All rights reserved."}
-        </span>
-
-        <span>
-          Khorasan Representative of Iranian Sleep Medicine Societies
-        </span>
-
-      </div>
-    </div>
-
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-4 px-6 py-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+    <span>© 2026 KRISM. {isPersian ? "تمامی حقوق محفوظ است." : "All rights reserved."}</span>
+    <span>{isPersian ? "خراسان، ایران" : "Khorasan Region · Iran"}</span>
   </div>
 </footer>

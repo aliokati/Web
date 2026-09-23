@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@storyblok/astro": "^10.3.2",
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3"
   }

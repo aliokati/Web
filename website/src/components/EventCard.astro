@@ -24,13 +24,13 @@ const year = date.toLocaleDateString("en-US", {
 
 <a
   href={`/events/${event.slug}`}
-  class="group block rounded-2xl border border-krism-border bg-white p-6 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+  class="group soft-card block p-6 transition duration-300 hover:-translate-y-1"
 >
 
   <div class="flex gap-6">
 
     <div
-      class="flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-xl bg-krism-950 text-white"
+      class="flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-[1.15rem] bg-krism-950 text-white"
     >
       <span class="text-2xl font-semibold">
         {day}
@@ -48,7 +48,7 @@ const year = date.toLocaleDateString("en-US", {
         {event.type}
       </p>
 
-      <h3 class="mt-2 text-lg font-semibold text-krism-950 group-hover:text-krism-600">
+      <h3 class="mt-2 text-xl font-medium leading-tight text-krism-950 group-hover:text-krism-600">
         {event.title}
       </h3>
 

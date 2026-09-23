@@ -9,13 +9,13 @@ const { resource } = Astro.props;
 ---
 
 <article
-  class="rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+  class="soft-card p-7 transition duration-300 hover:-translate-y-1"
 >
   <p class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
     {resource.category}
   </p>
 
-  <h2 class="mt-5 text-xl font-semibold text-krism-950">
+  <h2 class="mt-5 text-2xl font-medium leading-tight text-krism-950">
     {resource.title}
   </h2>
 

@@ -8,18 +8,20 @@ interface Props {
 const { eyebrow, title, description } = Astro.props;
 ---
 
-<section class="border-b border-krism-border bg-white">
-  <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-      {eyebrow}
-    </p>
-
-    <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
-      {title}
-    </h1>
-
-    <p class="mt-6 max-w-2xl text-lg leading-8 text-krism-muted">
-      {description}
-    </p>
+<section class="overflow-hidden bg-krism-950 text-white">
+  <div class="relative mx-auto max-w-[1440px] px-6 py-24 lg:px-10 lg:py-32">
+    <div class="absolute right-[-8rem] top-[-13rem] h-[32rem] w-[32rem] rounded-full border border-white/10"></div>
+    <div class="absolute right-[4rem] top-[-6rem] h-[20rem] w-[20rem] rounded-full border border-white/10"></div>
+    <div class="relative grid gap-12 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
+      <div>
+        <p class="eyebrow text-[#f5d86e]">{eyebrow}</p>
+        <h1 class="mt-7 max-w-4xl text-5xl font-medium leading-[.98] tracking-[-.04em] text-white sm:text-6xl lg:text-7xl">
+          {title}
+        </h1>
+      </div>
+      <p class="max-w-xl border-l border-white/25 pl-7 text-base leading-8 text-white/70 lg:mb-1 lg:text-lg">
+        {description}
+      </p>
+    </div>
   </div>
 </section>

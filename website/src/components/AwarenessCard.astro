@@ -10,7 +10,7 @@ const { article } = Astro.props;
 
 <a
   href={`/awareness/${article.slug}`}
-  class="group block rounded-2xl border border-krism-border bg-white p-7 transition hover:-translate-y-1 hover:border-krism-500 hover:shadow-lg"
+  class="group soft-card block p-7 transition duration-300 hover:-translate-y-1"
 >
   <div class="flex items-start justify-between gap-4">
     <span class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
@@ -22,7 +22,7 @@ const { article } = Astro.props;
     </span>
   </div>
 
-  <h2 class="mt-6 text-xl font-semibold tracking-tight text-krism-950">
+  <h2 class="mt-8 text-2xl font-medium leading-tight tracking-tight text-krism-950">
     {article.title}
   </h2>
 
