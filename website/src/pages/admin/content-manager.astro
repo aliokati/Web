@@ -1,0 +1,227 @@
+---
+import { getCurrentUser } from "../../admin/auth";
+
+const user = getCurrentUser(Astro.cookies);
+
+if (!user) {
+  return Astro.redirect("/admin/login?error=Please+log+in+first");
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+    <style>
+      :root {
+        --bg: #fbf9f4;
+        --panel: #ffffff;
+        --ink: #0f172a;
+        --muted: #475569;
+        --accent: #123d35;
+        --accent-soft: #dcebd9;
+        --line: rgba(15, 23, 42, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .shell {
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 1rem 1.25rem;
+      }
+
+      .topbar h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .badge {
+        background: var(--accent-soft);
+        border-radius: 999px;
+        color: var(--accent);
+        padding: 0.45rem 0.8rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logout {
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .content {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr) 420px;
+        gap: 1rem;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 1rem;
+      }
+
+      .section-list {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .section-button {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        text-align: left;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .section-button.active {
+        background: var(--accent-soft);
+        border-color: rgba(18, 61, 53, 0.18);
+      }
+
+      .placeholder {
+        display: grid;
+        place-items: center;
+        min-height: 300px;
+        border: 1px dashed var(--line);
+        border-radius: 18px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .form-box {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .field label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        padding: 0.82rem 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        font-size: 0.95rem;
+      }
+
+      .field textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .save-btn {
+        margin-top: 0.5rem;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        padding: 0.8rem 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <div class="badge">Protected</div>
+          <h1>Content manager</h1>
+        </div>
+
+        <div class="actions">
+          <span>Signed in as {user.username}</span>
+          <form method="POST" action="/api/admin/auth/logout">
+            <button class="logout" type="submit">Logout</button>
+          </form>
+        </div>
+      </header>
+
+      <main class="content">
+        <aside class="panel">
+          <h2>Sections</h2>
+          <div class="section-list">
+            <button type="button" class="section-button active">Events</button>
+            <button type="button" class="section-button">Research</button>
+            <button type="button" class="section-button">Awareness</button>
+            <button type="button" class="section-button">Resources</button>
+            <button type="button" class="section-button">Network</button>
+          </div>
+        </aside>
+
+        <section class="panel">
+          <h2>Items</h2>
+          <div class="placeholder">
+            Section list and item table are ready for the next CRUD implementation step.
+          </div>
+        </section>
+
+        <aside class="panel">
+          <h2>Editor</h2>
+          <div class="form-box">
+            <div class="field">
+              <label for="title">Title</label>
+              <input id="title" type="text" placeholder="New item title" />
+            </div>
+
+            <div class="field">
+              <label for="description">Description</label>
+              <textarea id="description" placeholder="Add description"></textarea>
+            </div>
+
+            <button class="save-btn" type="button">Save</button>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>
