@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    # Node deployment is managed by cPanel's Node.js application service.
+    # This no-op prevents the former static deployment from overwriting public_html.
+    - /bin/true
+

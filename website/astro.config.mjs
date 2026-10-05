@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-const site = "https://krisms.ir";
+const site = "https://krism-society.com";
 const contentDirectory = process.env.KRISM_CONTENT_DIR || path.join(process.cwd(), "content");
 const publishedSlugs = (section, locale = "en", include = () => true) => {
   const file = path.join(contentDirectory, `${section}.json`);
