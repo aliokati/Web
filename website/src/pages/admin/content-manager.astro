@@ -1,0 +1,210 @@
+---
+import "../../styles/global.css";
+import "../../styles/admin.css";
+const user = Astro.locals.user!;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager — KRISM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="admin-shell" data-role={user.role}>
+    <header class="admin-topbar">
+      <div class="flex items-center gap-3"><img src="/images/krism-logo.png" alt="" class="h-10 w-10 rounded-full" /><div><p class="text-sm font-bold leading-none">KRISM</p><p class="mt-1 text-[10px] uppercase tracking-[.13em] text-white/50">Content manager</p></div></div>
+      <div class="flex items-center gap-3">
+        {user.role === "admin" && <a href="/admin/submissions" class="hidden text-xs font-semibold text-white/65 hover:text-white sm:block">Submissions</a>}
+        <a href="/" target="_blank" class="hidden text-xs font-semibold text-white/65 hover:text-white sm:block">View website ↗</a>
+        <span class="admin-pill">{user.role}</span>
+        <span class="hidden text-xs text-white/60 md:block">{user.username}</span>
+        <button id="logout" class="rounded-full border border-white/20 px-3 py-2 text-xs font-semibold text-white hover:bg-white/10">Sign out</button>
+      </div>
+    </header>
+
+    <main class="admin-grid">
+      <aside class="admin-sidebar">
+        <p class="mb-3 px-2 text-[10px] font-bold uppercase tracking-[.15em] text-krism-muted">Content sections</p>
+        <nav id="section-nav" aria-label="Content sections"></nav>
+        <div class="mt-8 hidden rounded-xl bg-[#f1ede4] p-4 text-xs leading-5 text-krism-muted md:block">
+          <strong class="text-krism-950">Safe publishing</strong><br />Changes are validated, saved atomically and backed up automatically.
+        </div>
+      </aside>
+
+      <section class="admin-list">
+        <div class="flex items-start justify-between gap-3">
+          <div><p id="section-label" class="text-2xl font-medium text-krism-950">Loading…</p><p id="section-description" class="mt-1 text-xs leading-5 text-krism-muted"></p></div>
+          <button id="add-item" class="admin-button admin-button-primary shrink-0">+ New</button>
+        </div>
+        <label class="mt-6 block"><span class="sr-only">Search items</span><input id="search" type="search" class="admin-input" placeholder="Search this section…" /></label>
+        <p id="item-count" class="mt-4 text-[10px] font-bold uppercase tracking-[.12em] text-krism-muted"></p>
+        <div id="item-list" class="mt-2"></div>
+      </section>
+
+      <section class="admin-editor">
+        <div id="editor-empty" class="admin-empty"><div><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#dcebd9] text-2xl">✦</div><h1 class="mt-6 text-3xl font-medium text-krism-950">Choose an item to edit</h1><p class="mx-auto mt-3 max-w-sm text-sm leading-6">Select existing content from the list, or create a new item.</p></div></div>
+        <form id="editor-form" class="mx-auto hidden max-w-3xl">
+          <div class="flex flex-col justify-between gap-5 border-b border-krism-border pb-6 sm:flex-row sm:items-start">
+            <div><p id="editor-mode" class="text-[10px] font-bold uppercase tracking-[.15em] text-krism-600"></p><h1 id="editor-title" class="mt-2 text-4xl font-medium leading-tight text-krism-950"></h1><p class="mt-2 text-xs text-krism-muted">Required fields are marked with an asterisk.</p></div>
+            <div class="flex shrink-0 flex-wrap gap-2"><a id="preview-link" class="admin-button admin-button-secondary hidden" target="_blank">Preview ↗</a><button id="delete-item" type="button" class="admin-button admin-button-danger">Delete</button><button id="save-item" class="admin-button admin-button-primary">Save changes</button></div>
+          </div>
+          <div class="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-krism-border bg-white p-2">
+            <div class="flex gap-1" role="tablist" aria-label="Content language">
+              <button id="language-en" type="button" class="admin-button admin-button-primary" role="tab" aria-selected="true">English source</button>
+              <button id="language-fa" type="button" class="admin-button admin-button-secondary" role="tab" aria-selected="false">فارسی translation</button>
+            </div>
+            <p id="translation-status" class="px-2 text-xs font-semibold text-krism-muted"></p>
+          </div>
+          <p id="language-help" class="mt-3 text-xs leading-5 text-krism-muted">English is the required source. Shared settings such as dates, URLs and publishing flags are managed here.</p>
+          <div id="form-fields" class="mt-7"></div>
+        </form>
+      </section>
+    </main>
+    <div id="toast" class="admin-toast" role="status"></div>
+
+    <script>
+      type Field = { name: string; label: string; type: string; required?: boolean; placeholder?: string; options?: string[]; default?: unknown; help?: string; localized?: boolean };
+      type Section = { id: string; label: string; description: string; primaryKey: string; titleField: string; fields: Field[] };
+      type Item = Record<string, unknown>;
+      const role = document.body.dataset.role || "viewer";
+      const state: { sections: Section[]; section?: Section; items: Item[]; selected?: Item; selectedId?: string; revision?: string; adding: boolean } = { sections: [], items: [], adding: false };
+      const $ = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
+      const nav = $("#section-nav"), list = $("#item-list"), form = $("#editor-form") as HTMLFormElement, fields = $("#form-fields"), empty = $("#editor-empty"), toast = $("#toast");
+      let editorLanguage: "en" | "fa" = "en";
+
+      function notice(message: string, error = false) { toast.textContent = message; toast.className = `admin-toast show${error ? " error" : ""}`; window.setTimeout(() => toast.classList.remove("show"), 3200); }
+      function slugify(value: string) { return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+      function previewPath(section: string, id: string) { return ({ board: `/board/${id}`, events: `/events/${id}`, research: `/research/${id}`, awareness: `/awareness/${id}`, resources: "/resources", network: "/network", publications: "/research", organizations: "/network" } as Record<string,string>)[section]; }
+
+      async function api(url: string, options?: RequestInit) {
+        const response = await fetch(url, options); const data = await response.json().catch(() => ({}));
+        if (response.status === 401) { location.href = "/admin/login"; throw new Error("Session expired"); }
+        if (!response.ok) { const error = new Error(data.error || "Request failed") as Error & { fields?: Record<string,string>; status?: number }; error.fields = data.fields; error.status = response.status; throw error; }
+        return data;
+      }
+
+      async function initialize() {
+        const data = await api("/api/admin/sections"); state.sections = data.sections; renderSections();
+        const requested = new URLSearchParams(location.search).get("section");
+        await selectSection(state.sections.find((section) => section.id === requested)?.id || state.sections[0]?.id);
+      }
+
+      function renderSections() {
+        nav.replaceChildren(...state.sections.map((section) => {
+          const button = document.createElement("button"); button.className = "admin-section-button"; button.type = "button"; button.dataset.section = section.id;
+          const label = document.createElement("span"); label.textContent = section.label; const arrow = document.createElement("span"); arrow.textContent = "›"; arrow.setAttribute("aria-hidden", "true"); button.append(label, arrow);
+          button.addEventListener("click", () => selectSection(section.id)); return button;
+        }));
+      }
+
+      async function selectSection(sectionId?: string) {
+        if (!sectionId) return; state.section = state.sections.find((section) => section.id === sectionId); if (!state.section) return;
+        history.replaceState({}, "", `?section=${encodeURIComponent(sectionId)}`);
+        nav.querySelectorAll("button").forEach((button) => button.setAttribute("aria-current", String((button as HTMLElement).dataset.section === sectionId)));
+        $("#section-label").textContent = state.section.label; $("#section-description").textContent = state.section.description;
+        const data = await api(`/api/admin/content/${encodeURIComponent(sectionId)}`); state.items = data.items; state.revision = data.revision; state.selected = undefined; state.selectedId = undefined; state.adding = false;
+        $("#search").setAttribute("placeholder", `Search ${state.section.label.toLowerCase()}…`); ($("#search") as HTMLInputElement).value = "";
+        renderItems(); showEmpty();
+      }
+
+      function renderItems() {
+        if (!state.section) return; const query = ($("#search") as HTMLInputElement).value.toLowerCase();
+        const filtered = state.items.filter((item) => JSON.stringify(item).toLowerCase().includes(query));
+        $("#item-count").textContent = `${filtered.length} ${filtered.length === 1 ? "item" : "items"}`;
+        if (!filtered.length) { const message = document.createElement("p"); message.className = "py-10 text-center text-sm text-krism-muted"; message.textContent = query ? "No matching items." : "No items yet."; list.replaceChildren(message); return; }
+        list.replaceChildren(...filtered.map((item) => {
+          const id = String(item[state.section!.primaryKey]); const button = document.createElement("button"); button.type = "button"; button.className = "admin-item"; button.setAttribute("aria-current", String(state.selectedId === id));
+          const title = document.createElement("div"); title.className = "admin-item-title"; title.textContent = String(item[state.section!.titleField] || id);
+          const meta = document.createElement("div"); meta.className = "admin-item-meta"; meta.textContent = `${String(item.date || item.category || item.type || id)} · ${String(item.status || "draft")}`;
+          button.append(title, meta); button.addEventListener("click", () => openItem(item)); return button;
+        }));
+      }
+
+      function showEmpty() { form.classList.add("hidden"); empty.classList.remove("hidden"); }
+      function openItem(item: Item) { state.selected = structuredClone(item); state.selectedId = String(item[state.section!.primaryKey]); state.adding = false; editorLanguage = "en"; renderEditor(); renderItems(); }
+      function blankItem() { const item: Item = {}; state.section!.fields.forEach((field) => item[field.name] = field.default ?? (field.type === "boolean" ? false : field.type === "array" ? [] : "")); item.translations = { fa: {} }; state.selected = item; state.selectedId = undefined; state.adding = true; editorLanguage = "en"; renderEditor(); renderItems(); }
+
+      function renderEditor() {
+        if (!state.section || !state.selected) return; empty.classList.add("hidden"); form.classList.remove("hidden");
+        $("#editor-mode").textContent = state.adding ? `New ${state.section.label}` : `Editing ${state.section.label}`;
+        $("#editor-title").textContent = state.adding ? "Create new item" : String(state.selected[state.section.titleField] || "Untitled");
+        const translations = state.selected.translations && typeof state.selected.translations === "object" ? state.selected.translations as Record<string, Item> : {};
+        const persian = translations.fa || {};
+        const englishPanel = document.createElement("div"); englishPanel.id = "fields-en"; englishPanel.className = "grid gap-6 sm:grid-cols-2";
+        englishPanel.replaceChildren(...state.section.fields.map((field) => buildField(field, state.selected![field.name], "en")));
+        const persianPanel = document.createElement("div"); persianPanel.id = "fields-fa"; persianPanel.className = "grid gap-6 sm:grid-cols-2"; persianPanel.dir = "rtl";
+        persianPanel.replaceChildren(...state.section.fields.filter((field) => field.localized).map((field) => buildField(field, persian[field.name], "fa")));
+        fields.replaceChildren(englishPanel, persianPanel); showEditorLanguage(editorLanguage); updateTranslationStatus();
+        const writeAllowed = role === "admin" || role === "editor"; ($("#save-item") as HTMLButtonElement).disabled = !writeAllowed; ($("#save-item") as HTMLButtonElement).textContent = state.adding ? "Create item" : "Save changes";
+        ($("#delete-item") as HTMLButtonElement).hidden = state.adding || role !== "admin";
+        const preview = $("#preview-link") as HTMLAnchorElement; const id = String(state.selected[state.section.primaryKey] || ""); const path = id && previewPath(state.section.id, id); const isPublished = state.selected.status === "published"; preview.classList.toggle("hidden", !path || state.adding || !isPublished); if (path) preview.href = path;
+        const titleInput = form.querySelector<HTMLInputElement>(`[data-locale="en"][data-field="${state.section.titleField}"]`); const slugInput = form.querySelector<HTMLInputElement>('[data-locale="en"][data-field="slug"]');
+        if (state.adding && titleInput && slugInput) titleInput.addEventListener("input", () => { if (!slugInput.dataset.touched) slugInput.value = slugify(titleInput.value); });
+        slugInput?.addEventListener("input", () => slugInput.dataset.touched = "true");
+      }
+
+      function showEditorLanguage(language: "en" | "fa") {
+        editorLanguage = language;
+        $("#fields-en").classList.toggle("hidden", language !== "en"); $("#fields-fa").classList.toggle("hidden", language !== "fa");
+        for (const code of ["en", "fa"] as const) { const button = $(`#language-${code}`); const active = code === language; button.setAttribute("aria-selected", String(active)); button.className = `admin-button ${active ? "admin-button-primary" : "admin-button-secondary"}`; }
+        $("#language-help").textContent = language === "en" ? "English is the required source. Shared settings such as dates, URLs and publishing flags are managed here." : "Complete every required Persian field before setting Persian translation status to published.";
+      }
+
+      function updateTranslationStatus() {
+        if (!state.section) return; const localized = state.section.fields.filter((field) => field.localized); const complete = localized.filter((field) => { const control = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[data-locale="fa"][data-field="${field.name}"]`); return Boolean(control?.value.trim()); }).length;
+        $("#translation-status").textContent = `${complete} of ${localized.length} Persian fields translated`;
+      }
+
+      function buildField(field: Field, value: unknown, locale: "en" | "fa") {
+        const wrapper = document.createElement("div"); if (field.type === "textarea" || field.type === "array") wrapper.classList.add("sm:col-span-2");
+        if (field.type === "boolean") {
+          wrapper.className = "admin-check sm:col-span-2"; const label = document.createElement("label"); label.htmlFor = `field-${locale}-${field.name}`; label.className = "text-sm font-semibold"; label.textContent = field.label;
+          const input = document.createElement("input"); input.type = "checkbox"; input.id = `field-${locale}-${field.name}`; input.dataset.field = field.name; input.dataset.locale = locale; input.checked = Boolean(value); input.disabled = role === "viewer"; wrapper.append(label, input); return wrapper;
+        }
+        const label = document.createElement("label"); label.className = "admin-label"; label.htmlFor = `field-${locale}-${field.name}`; label.textContent = `${field.label}${locale === "en" && field.required ? " *" : ""}`; wrapper.append(label);
+        let input: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        if (field.type === "textarea" || field.type === "array") { input = document.createElement("textarea"); input.rows = field.type === "array" ? 6 : 5; input.value = Array.isArray(value) ? value.join("\n") : String(value ?? ""); }
+        else if (field.type === "select" && locale === "en") { input = document.createElement("select"); const blank = document.createElement("option"); blank.value = ""; blank.textContent = "Choose…"; input.append(blank, ...(field.options || []).map((option) => { const element = document.createElement("option"); element.value = option; element.textContent = option; element.selected = option === value; return element; })); }
+        else { input = document.createElement("input"); input.type = field.type === "url" ? "url" : field.type === "select" ? "text" : field.type; input.value = String(value ?? ""); }
+        input.className = "admin-input"; input.id = `field-${locale}-${field.name}`; input.dataset.field = field.name; input.dataset.locale = locale; input.required = locale === "en" && Boolean(field.required); input.disabled = role === "viewer"; if (field.placeholder && locale === "en") input.setAttribute("placeholder", field.placeholder); if (locale === "fa") { input.setAttribute("lang", "fa"); input.setAttribute("dir", "rtl"); input.setAttribute("placeholder", "ترجمه فارسی (اختیاری)"); input.addEventListener("input", updateTranslationStatus); } wrapper.append(input);
+        if (field.help) { const help = document.createElement("p"); help.className = "mt-1.5 text-xs leading-5 text-krism-muted"; help.textContent = field.help; wrapper.append(help); }
+        return wrapper;
+      }
+
+      function controlValue(field: Field, locale: "en" | "fa") { const control = form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[data-locale="${locale}"][data-field="${field.name}"]`); if (!control) return undefined; if (field.type === "boolean") return (control as HTMLInputElement).checked; if (field.type === "array") return control.value.split(/\r?\n/).map((value) => value.trim()).filter(Boolean); if (field.type === "number") return control.value ? Number(control.value) : ""; return control.value; }
+      function formItem() { const item: Item = {}; const fa: Item = {}; for (const field of state.section!.fields) { item[field.name] = controlValue(field, "en"); if (field.localized) { const value = controlValue(field, "fa"); if (Array.isArray(value) ? value.length : String(value ?? "").trim()) fa[field.name] = value; } } if (Object.keys(fa).length) item.translations = { fa }; return item; }
+      function clearFieldErrors() { form.querySelectorAll(".admin-error").forEach((node) => node.remove()); form.querySelectorAll("[aria-invalid]").forEach((node) => node.removeAttribute("aria-invalid")); }
+      function showFieldErrors(errors?: Record<string,string>) { if (!errors) return; const hasPersianError = Object.keys(errors).some((name) => name.startsWith("fa.")); showEditorLanguage(hasPersianError ? "fa" : "en"); for (const [name, message] of Object.entries(errors)) { const locale = name.startsWith("fa.") ? "fa" : "en"; const field = name.replace(/^fa\./, ""); const control = form.querySelector<HTMLElement>(`[data-locale="${locale}"][data-field="${field}"]`); if (!control) continue; control.setAttribute("aria-invalid", "true"); const note = document.createElement("p"); note.className = "admin-error"; note.textContent = message; control.parentElement?.append(note); } }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault(); if (!state.section || !state.selected || role === "viewer") return; clearFieldErrors(); const button = $("#save-item") as HTMLButtonElement; button.disabled = true;
+        try {
+          const data = formItem(); const url = state.adding ? `/api/admin/content/${state.section.id}` : `/api/admin/content/${state.section.id}/${encodeURIComponent(state.selectedId!)}`;
+          const result = await api(url, { method: state.adding ? "POST" : "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data, revision: state.revision }) });
+          state.revision = result.revision; const oldId = state.selectedId; const nextId = String(result.item[state.section.primaryKey]);
+          if (state.adding) state.items.push(result.item); else { const index = state.items.findIndex((item) => String(item[state.section!.primaryKey]) === oldId); if (index >= 0) state.items[index] = result.item; }
+          state.selected = result.item; state.selectedId = nextId; state.adding = false; renderItems(); renderEditor(); notice("Content saved successfully.");
+        } catch (error) { const typed = error as Error & { fields?: Record<string,string>; status?: number }; showFieldErrors(typed.fields); notice(typed.status === 409 ? "Someone else changed this content. Reload the section before saving." : typed.message, true); }
+        finally { button.disabled = role === "viewer"; }
+      });
+
+      $("#delete-item").addEventListener("click", async () => {
+        if (!state.section || !state.selectedId || role !== "admin") return;
+        if (!confirm("Delete this item? A backup will be retained, but the item will disappear from the public website.")) return;
+        try { const result = await api(`/api/admin/content/${state.section.id}/${encodeURIComponent(state.selectedId)}`, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ revision: state.revision }) }); state.revision = result.revision; state.items = state.items.filter((item) => String(item[state.section!.primaryKey]) !== state.selectedId); state.selected = undefined; state.selectedId = undefined; renderItems(); showEmpty(); notice("Item deleted."); }
+        catch (error) { notice(error instanceof Error ? error.message : "Delete failed", true); }
+      });
+      $("#add-item").addEventListener("click", () => { if (role === "viewer") return notice("Viewers cannot create content.", true); blankItem(); });
+      $("#language-en").addEventListener("click", () => showEditorLanguage("en"));
+      $("#language-fa").addEventListener("click", () => showEditorLanguage("fa"));
+      $("#search").addEventListener("input", renderItems);
+      $("#logout").addEventListener("click", async () => { try { await api("/api/admin/logout", { method: "POST" }); location.href = "/admin/login"; } catch (error) { notice(error instanceof Error ? error.message : "Sign-out failed", true); } });
+      initialize().catch((error) => notice(error instanceof Error ? error.message : "Could not load the content manager", true));
+    </script>
+  </body>
+</html>

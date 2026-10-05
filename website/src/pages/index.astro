@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import HomePage from "../components/HomePage.astro";
 import { events } from "../data/events";
 import { researchProjects } from "../data/research";
 import { awarenessArticles } from "../data/awareness";
@@ -16,7 +17,8 @@ const pillars = [
 ];
 ---
 
-<MainLayout
+<HomePage lang="en" />
+{false && (<MainLayout
   title="KRISM — Khorasan Representative of Iranian Sleep Medicine Societies"
   description="KRISM connects research, education, public awareness and professional collaboration in sleep medicine across Khorasan."
 >
@@ -29,7 +31,7 @@ const pillars = [
             Evidence-led care for <em class="font-normal text-[#c9e5e7]">better sleep.</em>
           </h1>
           <p class="mt-8 max-w-xl text-base leading-8 text-white/70 sm:text-lg">
-            Bringing researchers, clinicians and communities together to advance sleep medicine across the Khorasan region.
+            Bringing researchers, clinicians and communities together to advance sleep medicine across the Khorasan region
           </p>
           <div class="mt-10 flex flex-col gap-3 sm:flex-row">
             <a href="/research" class="rounded-full bg-[#f5d86e] px-7 py-3.5 text-center text-sm font-bold text-krism-950 transition hover:-translate-y-0.5 hover:bg-white">
@@ -54,8 +56,8 @@ const pillars = [
             Science · Education · Community
           </div>
           <div class="absolute bottom-5 right-5 max-w-[13rem] rounded-2xl bg-krism-950 p-4 text-white shadow-xl">
-            <p class="text-2xl font-medium">Sleep shapes health.</p>
-            <p class="mt-2 text-xs leading-5 text-white/65">We bring the region’s expertise into one connected platform.</p>
+            <p class="text-2xl font-medium">Sleep shapes health</p>
+            <p class="mt-2 text-xs leading-5 text-white/65">We bring the region’s expertise into one connected platform</p>
           </div>
         </div>
       </div>
@@ -80,10 +82,10 @@ const pillars = [
         <p class="eyebrow text-krism-600">What we do</p>
         <div>
           <h2 class="max-w-4xl text-4xl font-medium leading-[1.02] tracking-[-.04em] text-krism-950 sm:text-5xl lg:text-6xl">
-            Sleep medicine designed to be <em class="font-normal text-krism-600">connected</em> and proven.
+            Sleep medicine designed to be <em class="font-normal text-krism-600">connected</em> and proven
           </h2>
           <p class="mt-7 max-w-2xl text-base leading-8 text-krism-muted sm:text-lg">
-            KRISM is a regional home for the people improving how sleep conditions are understood, studied and treated. We turn separate efforts into shared progress.
+            KRISM is a regional home for the people improving how sleep conditions are understood, studied and treated. We turn separate efforts into shared progress
           </p>
         </div>
       </div>
@@ -117,8 +119,8 @@ const pillars = [
       <div class="mt-14 grid gap-4 lg:grid-cols-12">
         <div class="relative min-h-[25rem] overflow-hidden rounded-[2rem] bg-[#c9e5e7] p-8 text-krism-950 lg:col-span-7">
           <p class="text-xs font-bold uppercase tracking-[.15em]">Regional intelligence</p>
-          <h3 class="mt-5 max-w-xl text-4xl font-medium leading-tight">Research that responds to the communities we serve.</h3>
-          <p class="mt-5 max-w-lg text-sm leading-7 text-krism-950/70">A shared space for studies, collaborations and evidence that advances sleep medicine in Khorasan.</p>
+          <h3 class="mt-5 max-w-xl text-4xl font-medium leading-tight">Research that responds to the communities we serve</h3>
+          <p class="mt-5 max-w-lg text-sm leading-7 text-krism-950/70">A shared space for studies, collaborations and evidence that advances sleep medicine in Khorasan</p>
           <div class="absolute -bottom-20 -right-16 h-72 w-72 rounded-full border-[44px] border-krism-950/10"></div>
           <a href="/research" class="absolute bottom-8 left-8 text-sm font-bold">Explore research →</a>
         </div>
@@ -128,14 +130,14 @@ const pillars = [
           <div class="mt-auto">
             <p class="text-6xl font-medium tracking-[-.06em]">4</p>
             <h3 class="mt-2 text-3xl font-medium">paths to impact</h3>
-            <p class="mt-4 text-sm leading-7 text-krism-950/70">Research, education, awareness and a professional network—working together.</p>
+            <p class="mt-4 text-sm leading-7 text-krism-950/70">Research, education, awareness and a professional network—working together</p>
           </div>
         </div>
 
         <div class="rounded-[2rem] bg-[#dcebd9] p-8 text-krism-950 lg:col-span-4">
           <p class="text-5xl font-medium tracking-[-.05em]">24/7</p>
           <h3 class="mt-4 text-2xl font-medium">Sleep affects every hour</h3>
-          <p class="mt-4 text-sm leading-7 text-krism-950/65">Our public resources make better sleep knowledge easier to find and understand.</p>
+          <p class="mt-4 text-sm leading-7 text-krism-950/65">Our public resources make better sleep knowledge easier to find and understand</p>
         </div>
         <div class="rounded-[2rem] border border-white/15 bg-white/5 p-8 lg:col-span-8">
           <p class="text-xs font-bold uppercase tracking-[.15em] text-[#f5d86e]">Built for collaboration</p>
@@ -184,8 +186,8 @@ const pillars = [
     <div class="mx-auto grid max-w-[1440px] gap-14 px-6 py-24 lg:grid-cols-[.78fr_1.22fr] lg:px-10 lg:py-32">
       <div>
         <p class="eyebrow text-krism-600">Education & events</p>
-        <h2 class="mt-6 text-4xl font-medium leading-[1.04] tracking-[-.04em] text-krism-950 sm:text-5xl">Meet. Learn. Move the field forward.</h2>
-        <p class="mt-6 max-w-md text-base leading-8 text-krism-muted">Discover scientific meetings and learning opportunities created for the sleep-medicine community.</p>
+        <h2 class="mt-6 text-4xl font-medium leading-[1.04] tracking-[-.04em] text-krism-950 sm:text-5xl">Meet. Learn. Move the field forward</h2>
+        <p class="mt-6 max-w-md text-base leading-8 text-krism-muted">Discover scientific meetings and learning opportunities created for the sleep-medicine community</p>
         <a href="/events" class="mt-8 inline-flex rounded-full bg-krism-950 px-6 py-3 text-sm font-bold text-white transition hover:bg-krism-700">View all events</a>
       </div>
       <div class="divide-y divide-krism-950/15 border-y border-krism-950/15">
@@ -208,7 +210,7 @@ const pillars = [
       <div class="grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
         <div>
           <p class="eyebrow text-krism-700">Sleep awareness</p>
-          <h2 class="mt-6 text-4xl font-medium leading-[1.04] tracking-[-.04em] text-krism-950 sm:text-5xl">Clear answers for healthier nights.</h2>
+          <h2 class="mt-6 text-4xl font-medium leading-[1.04] tracking-[-.04em] text-krism-950 sm:text-5xl">Clear answers for healthier nights</h2>
         </div>
         <div class="grid gap-4 md:grid-cols-3">
           {featuredAwareness.map((article) => (
@@ -229,12 +231,12 @@ const pillars = [
   <section class="bg-[#edc1a8] text-krism-950">
     <div class="mx-auto max-w-[1440px] px-6 py-24 text-center lg:px-10 lg:py-32">
       <p class="eyebrow justify-center text-krism-700">Collaboration starts here</p>
-      <h2 class="mx-auto mt-7 max-w-4xl text-5xl font-medium leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">Help shape the future of sleep medicine.</h2>
-      <p class="mx-auto mt-7 max-w-2xl text-base leading-8 text-krism-950/70">We welcome clinicians, researchers, institutions and organizations ready to create meaningful regional impact.</p>
+      <h2 class="mx-auto mt-7 max-w-4xl text-5xl font-medium leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">Help shape the future of sleep medicine</h2>
+      <p class="mx-auto mt-7 max-w-2xl text-base leading-8 text-krism-950/70">We welcome clinicians, researchers, institutions and organizations ready to create meaningful regional impact</p>
       <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
         <a href="/contact" class="rounded-full bg-krism-950 px-7 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-krism-700">Contact KRISM</a>
         <a href="/network" class="rounded-full border border-krism-950/25 px-7 py-3.5 text-sm font-bold transition hover:-translate-y-0.5 hover:bg-white/50">Explore the network</a>
       </div>
     </div>
   </section>
-</MainLayout>
+</MainLayout>)}

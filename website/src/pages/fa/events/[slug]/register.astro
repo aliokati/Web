@@ -1,0 +1,14 @@
+---
+import MainLayout from "../../../../layouts/MainLayout.astro";
+import RecordHero from "../../../../components/RecordHero.astro";
+import EventRegistrationForm from "../../../../components/EventRegistrationForm.astro";
+import { eventsFa as events } from "../../../../data/events";
+const event = events.find((item) => item.slug === Astro.params.slug);
+if (!event || !event.registrationOpen || (event.registrationMode ?? "internal") !== "internal") return Astro.rewrite("/404");
+const date = new Date(event.date).toLocaleDateString("fa-IR", { year:"numeric",month:"long",day:"numeric" });
+---
+
+<MainLayout lang="fa" title={`ثبت‌نام — ${event.title} — KRISM`} description={`ثبت‌نام ${event.title}`} robots="noindex, follow">
+  <RecordHero icon="calendar" eyebrow="ثبت‌نام رویداد" title={event.title} description="برای هر شرکت‌کننده یک فرم ارسال کنید. پس از ثبت موفق، کد پیگیری نمایش داده می‌شود." meta={[{label:"تاریخ",value:date},{label:"محل",value:event.location},{label:"حریم خصوصی",value:"ثبت خصوصی"}]} />
+  <section class="surface-mineral"><div class="page-wrap grid gap-10 py-20 lg:grid-cols-[.72fr_1.28fr]"><aside><p class="tech-label text-krism-600">ثبت‌نام / اطلاعات</p><h2 class="mt-5 text-3xl font-medium text-krism-950">پیش از ثبت‌نام</h2><ul class="mt-7 space-y-4 text-sm leading-8 text-krism-muted"><li class="border-s-2 border-krism-500/25 ps-4">اطلاعات شما فقط برای مدیریت این رویداد استفاده می‌شود.</li><li class="border-s-2 border-krism-500/25 ps-4">مدارک پزشکی یا اطلاعات محرمانه بیمار وارد نکنید.</li><li class="border-s-2 border-krism-500/25 ps-4">کد پیگیری پس از ارسال را نگه دارید.</li>{event.registrationDeadline && <li class="border-s-2 border-krism-500/25 ps-4">مهلت ثبت‌نام: {event.registrationDeadline}</li>}{event.capacity && <li class="border-s-2 border-krism-500/25 ps-4">ظرفیت برنامه‌ریزی‌شده: {event.capacity} نفر.</li>}</ul></aside><div class="rounded-[1.8rem] border border-krism-border bg-white/80 p-6 shadow-[0_28px_80px_rgba(5,31,41,.12)] sm:p-9"><h2 class="text-3xl font-medium text-krism-950">اطلاعات شرکت‌کننده</h2><p class="mt-3 text-sm leading-8 text-krism-muted">فیلدهای الزامی باید تکمیل شوند.</p><div class="mt-8"><EventRegistrationForm eventSlug={event.slug} lang="fa" /></div></div></div></section>
+</MainLayout>

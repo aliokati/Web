@@ -1,5 +1,8 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ContactExperience from "../../components/ContactExperience.astro";
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || "";
 ---
 
 <MainLayout
@@ -7,24 +10,11 @@ import MainLayout from "../../layouts/MainLayout.astro";
   title="تماس با KRISM"
   description="تماس با نمایندگی خراسان انجمن‌های طب خواب ایران"
 >
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-      <p class="text-sm font-semibold text-krism-600">
-        تماس
-      </p>
+  <ContactExperience lang="fa" />
+  {false && <>
+  <PageHero eyebrow="تماس" icon="globe" title="ارتباط با KRISM" description="برای همکاری‌های پژوهشی، آموزشی، حرفه‌ای و سازمانی می‌توانید با تیم KRISM در ارتباط باشید." />
 
-      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
-        ارتباط با KRISM
-      </h1>
-
-      <p class="mt-6 max-w-2xl text-lg leading-9 text-krism-muted">
-        برای همکاری‌های پژوهشی، آموزشی، حرفه‌ای و سازمانی می‌توانید با
-        KRISM در ارتباط باشید.
-      </p>
-    </div>
-  </section>
-
-  <section class="bg-krism-surface">
+  <section class="surface-mineral">
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
 
       <div class="grid gap-12 lg:grid-cols-2">
@@ -86,11 +76,10 @@ import MainLayout from "../../layouts/MainLayout.astro";
             </h2>
 
             <p class="mt-3 text-sm leading-8 text-krism-muted">
-              این فرم در حال حاضر رابط کاربری آماده برای اتصال به سامانه
-              پردازش فرم است.
+              این فرم با حفظ حریم خصوصی، برنامه ایمیل شما را باز می‌کند و پیام در وب‌سایت ذخیره نمی‌شود.
             </p>
 
-            <form class="mt-8 space-y-6">
+            <form id="contact-form" class="mt-8 space-y-6" data-recipient={contactEmail}>
 
               <div>
                 <label
@@ -104,6 +93,10 @@ import MainLayout from "../../layouts/MainLayout.astro";
                   id="fa-name"
                   name="name"
                   type="text"
+                  required
+                  minlength="2"
+                  maxlength="120"
+                  autocomplete="name"
                   class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
                   placeholder="نام شما"
                 />
@@ -121,6 +114,9 @@ import MainLayout from "../../layouts/MainLayout.astro";
                   id="fa-email"
                   name="email"
                   type="email"
+                  required
+                  maxlength="254"
+                  autocomplete="email"
                   dir="ltr"
                   class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
                   placeholder="you@example.com"
@@ -140,11 +136,11 @@ import MainLayout from "../../layouts/MainLayout.astro";
                   name="subject"
                   class="mt-2 w-full rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
                 >
-                  <option>همکاری پژوهشی</option>
-                  <option>برنامه آموزشی</option>
-                  <option>شبکه حرفه‌ای</option>
-                  <option>همکاری سازمانی</option>
-                  <option>درخواست عمومی</option>
+                  <option value="همکاری پژوهشی">همکاری پژوهشی</option>
+                  <option value="برنامه آموزشی">برنامه آموزشی</option>
+                  <option value="شبکه حرفه‌ای">شبکه حرفه‌ای</option>
+                  <option value="همکاری سازمانی">همکاری سازمانی</option>
+                  <option value="درخواست عمومی">درخواست عمومی</option>
                 </select>
               </div>
 
@@ -160,22 +156,26 @@ import MainLayout from "../../layouts/MainLayout.astro";
                   id="fa-message"
                   name="message"
                   rows="6"
+                  required
+                  minlength="20"
+                  maxlength="5000"
                   class="mt-2 w-full resize-y rounded-xl border border-krism-border bg-white px-4 py-3 text-sm outline-none transition focus:border-krism-500"
                   placeholder="پیام خود را وارد کنید"
                 ></textarea>
               </div>
 
               <button
-                type="button"
+                type="submit"
+                disabled={!contactEmail}
                 class="w-full rounded-full bg-krism-950 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-krism-800"
               >
                 ارسال درخواست
               </button>
 
               <p class="text-xs leading-6 text-krism-muted">
-                این فرم در مرحله فعلی صرفاً رابط کاربری است و در مرحله
-                بعدی به زیرساخت واقعی متصل خواهد شد.
+                {contactEmail ? "لطفاً اطلاعات پزشکی یا موارد فوری را در پیام وارد نکنید." : "برای فعال شدن فرم، نشانی دریافت‌کننده باید در تنظیمات سایت ثبت شود."}
               </p>
+              <p id="contact-status" class="text-sm font-semibold text-krism-700" role="status" aria-live="polite"></p>
 
             </form>
           </div>
@@ -184,4 +184,20 @@ import MainLayout from "../../layouts/MainLayout.astro";
       </div>
     </div>
   </section>
+  </>}
 </MainLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const recipient = form.dataset.recipient;
+    if (!recipient || !status) return;
+    const data = new FormData(form);
+    const subject = `[KRISM] ${String(data.get("subject") || "درخواست عمومی")}`;
+    const body = `نام: ${String(data.get("name") || "")}\nایمیل: ${String(data.get("email") || "")}\n\n${String(data.get("message") || "")}`;
+    status.textContent = "برنامه ایمیل شما باز می‌شود؛ لطفاً پیام را پیش از ارسال بازبینی کنید.";
+    window.location.href = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

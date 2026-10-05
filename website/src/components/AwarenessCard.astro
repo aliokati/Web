@@ -1,24 +1,25 @@
 ---
 import type { AwarenessArticle } from "../data/awareness";
+import ScienceIcon from "./ScienceIcon.astro";
 
 interface Props {
   article: AwarenessArticle;
+  lang?: "en" | "fa";
 }
 
-const { article } = Astro.props;
+const { article, lang = "en" } = Astro.props;
+const fa = lang === "fa";
 ---
 
 <a
-  href={`/awareness/${article.slug}`}
-  class="group soft-card block p-7 transition duration-300 hover:-translate-y-1"
+  href={`${fa ? "/fa" : ""}/awareness/${article.slug}`}
+  class="content-card group block min-h-full p-7"
 >
   <div class="flex items-start justify-between gap-4">
-    <span class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
-      {article.category}
-    </span>
+    <span class="flex items-center gap-3"><span class="icon-badge"><ScienceIcon name="moon" class="h-6 w-6" /></span><span class="card-kicker">{article.category}</span></span>
 
-    <span class="text-sm text-krism-muted transition group-hover:text-krism-600">
-      →
+    <span class="flex h-10 w-10 items-center justify-center rounded-full border border-krism-border text-sm text-krism-muted transition group-hover:border-krism-950 group-hover:bg-krism-950 group-hover:text-white">
+      {fa ? "←" : "→"}
     </span>
   </div>
 
@@ -30,7 +31,7 @@ const { article } = Astro.props;
     {article.excerpt}
   </p>
 
-  <div class="mt-7 text-sm font-semibold text-krism-600">
-    Read article →
+  <div class="card-action mt-7 border-t border-krism-border/70 pt-5">
+    {fa ? "مطالعه مقاله" : "Read article"} <span>{fa ? "←" : "→"}</span>
   </div>
 </a>

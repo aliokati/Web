@@ -1,4 +1,6 @@
 ---
+import ScienceIcon from "./ScienceIcon.astro";
+import { featuredOrganizations, featuredJournals } from "../data/affiliations";
 const currentPath = Astro.url.pathname;
 const isPersian = currentPath === "/fa" || currentPath.startsWith("/fa/");
 const link = (path: string) => isPersian ? (path === "/" ? "/fa" : `/fa${path}`) : path;
@@ -6,7 +8,7 @@ const groups = [
   {
     en: "Explore", fa: "دسترسی سریع",
     links: [
-      ["/about", "About", "درباره ما"], ["/research", "Research", "پژوهش"],
+      ["/about", "About", "درباره ما"], ["/board", "Research board", "شورای پژوهشی"], ["/research", "Research", "پژوهش"],
       ["/events", "Events", "رویدادها"], ["/network", "Network", "شبکه"],
     ],
   },
@@ -14,21 +16,50 @@ const groups = [
     en: "Learn", fa: "آموزش",
     links: [
       ["/resources", "Resources", "منابع"], ["/awareness", "Sleep health", "سلامت خواب"],
-      ["/contact", "Contact", "تماس"], ["/", "Home", "صفحه اصلی"],
+      ["/sleep-check", "Sleep Check", "ارزیابی خواب"], ["/contact", "Contact", "تماس"],
+      ["/affiliations", "Organizations & journals", "سازمان‌ها و مجلات"],
+      ["/standards", "Editorial & privacy", "اصول محتوا و حریم خصوصی"],
     ],
   },
 ];
+
 ---
 
-<footer class="overflow-hidden bg-krism-950 text-white">
+<footer class="tech-grid-dark relative overflow-hidden bg-krism-950 text-white">
+  <div class="pointer-events-none absolute -bottom-40 -start-40 h-96 w-96 rounded-full bg-krism-500/15 blur-3xl"></div>
+  <div class="relative border-b border-white/10">
+    <div class="page-wrap py-14 lg:py-16">
+      <div class="grid gap-10 lg:grid-cols-2">
+        {[
+          { title: isPersian ? "سازمان‌های علمی" : "Scientific organizations", label: isPersian ? "سازمان‌ها" : "ORGANIZATIONS", items: featuredOrganizations },
+          { title: isPersian ? "مجلات منتخب خواب" : "Selected sleep journals", label: isPersian ? "مجلات" : "JOURNALS", items: featuredJournals },
+        ].map((group) => (
+          <section>
+            <div class="flex items-end justify-between gap-4"><div><p class="tech-label text-[#68d7e8]">{group.label}</p><h2 class="mt-3 text-2xl font-medium sm:text-3xl">{group.title}</h2></div><span class="font-mono text-xs text-white/40">03 + 01</span></div>
+            <div class="mt-6 grid grid-cols-2 overflow-hidden rounded-[1.35rem] border border-white/12 bg-white/[.035]">
+              {group.items.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer" class="group flex min-h-32 flex-col justify-between border-b border-e border-white/10 p-4 transition hover:bg-white/[.075]">
+                  <div class="flex items-start justify-between gap-3"><span class="font-mono text-xs font-black tracking-[.09em] text-[#f6d46b]">{item.short}</span><span class="text-white/45 group-hover:text-[#68d7e8]">↗</span></div>
+                  <p class="mt-5 text-sm font-semibold leading-6 text-white/82">{isPersian ? item.nameFa : item.name}</p>
+                </a>
+              ))}
+              <a href={link("/affiliations")} class="group flex min-h-32 flex-col justify-between border-b border-e border-white/10 bg-[#68d7e8]/8 p-4 transition hover:bg-[#68d7e8]/15"><ScienceIcon name="globe" class="h-6 w-6 text-[#68d7e8]" /><p class="mt-5 flex items-center justify-between text-sm font-bold text-white"><span>{isPersian ? "مشاهده فهرست کامل" : "View full directory"}</span><span>{isPersian ? "←" : "→"}</span></p></a>
+            </div>
+          </section>
+        ))}
+      </div>
+      <p class="mt-7 max-w-4xl text-xs leading-6 text-white/45">{isPersian ? "پیوندهای خارجی برای دسترسی علمی ارائه شده‌اند و به‌معنای تأیید یا وابستگی رسمی نیستند. نام‌ها و نشان‌ها متعلق به مالکان آن‌هاست." : "External links are provided for scientific access and do not imply endorsement or formal affiliation. Names and marks belong to their respective owners."}</p>
+    </div>
+  </div>
+
   <div class="border-b border-white/10">
     <div class="mx-auto grid max-w-[1440px] gap-12 px-6 py-16 md:grid-cols-[1.5fr_1fr_1fr] lg:px-10 lg:py-20">
       <div class="max-w-xl">
         <a href={link("/")} class="inline-flex items-center gap-4">
-          <img src="/images/krism-logo.png" alt="" class="h-16 w-16 rounded-full" />
+          <img src="/images/krism-logo.png" alt="" class="h-16 w-16 rounded-full border border-white/15" />
           <div>
             <p class="text-2xl font-semibold tracking-tight">KRISM</p>
-            <p class="mt-1 text-xs uppercase tracking-[.15em] text-white/55">
+            <p class="mt-1 font-mono text-[10px] uppercase tracking-[.15em] text-white/55">
               {isPersian ? "پزشکی خواب خراسان" : "Khorasan Sleep Medicine"}
             </p>
           </div>
@@ -56,8 +87,8 @@ const groups = [
     </div>
   </div>
 
-  <div class="mx-auto flex max-w-[1440px] flex-col gap-4 px-6 py-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-4 px-6 py-7 font-mono text-xs uppercase tracking-[.08em] text-white/70 sm:flex-row sm:items-center sm:justify-between lg:px-10">
     <span>© 2026 KRISM. {isPersian ? "تمامی حقوق محفوظ است." : "All rights reserved."}</span>
-    <span>{isPersian ? "خراسان، ایران" : "Khorasan Region · Iran"}</span>
+    <span class="flex items-center gap-2"><span class="status-beacon" aria-hidden="true"></span>{isPersian ? "خراسان، ایران" : "Khorasan Region · Iran"}</span>
   </div>
 </footer>

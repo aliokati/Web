@@ -12,14 +12,18 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.6",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
-    "git": "^0.1.5",
     "mime": "^4.1.0",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }

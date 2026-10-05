@@ -1,0 +1,15 @@
+---
+import type { BoardMember } from "../data/board";
+interface Props { member: BoardMember; lang?: "en" | "fa"; }
+const { member, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const base = fa ? "/fa/board" : "/board";
+---
+
+<a href={`${base}/${member.slug}`} class="board-card group grid min-h-[28rem] overflow-hidden rounded-[1.8rem] border border-white/10 text-white sm:grid-cols-[.42fr_.58fr]">
+  <div class="board-portrait relative min-h-64 overflow-hidden">
+    {member.photo ? <img src={member.photo} alt={member.name} class="absolute inset-0 h-full w-full object-cover grayscale-[15%] transition duration-500 group-hover:scale-[1.025] group-hover:grayscale-0" loading="lazy" /> : <div class="absolute inset-0 flex items-center justify-center"><span class="reference-mark text-lg">{member.name.split(/\s+/).slice(0,2).map((part) => part[0]).join("")}</span></div>}
+    <div class="absolute inset-0 bg-gradient-to-t from-[#061923]/80 via-transparent to-transparent"></div>
+  </div>
+  <div class="flex flex-col p-7 sm:p-8"><p class="font-mono text-xs font-bold uppercase tracking-[.12em] text-[#f6d46b]">{member.role}</p><h2 class="mt-4 text-3xl font-medium leading-tight">{member.name}</h2>{member.credentials && <p class="mt-2 text-sm font-semibold text-[#9de8f2]">{member.credentials}</p>}<p class="mt-7 text-sm leading-7 text-white/62">{member.specialty} · {member.institution}</p><div class="mt-auto flex items-center justify-between border-t border-white/10 pt-6 text-sm font-bold text-[#b6eef0]"><span>{fa ? "مشاهده پروفایل علمی" : "View academic profile"}</span><span>{fa ? "←" : "→"}</span></div></div>
+</a>

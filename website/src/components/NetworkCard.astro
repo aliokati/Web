@@ -1,22 +1,23 @@
 ---
 import type { NetworkMember } from "../data/network";
+import ScienceIcon from "./ScienceIcon.astro";
 
 interface Props {
   member: NetworkMember;
+  lang?: "en" | "fa";
 }
 
-const { member } = Astro.props;
+const { member, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const memberIcon: "clinical" | "research" | "network" = member.type === "Professional" ? "clinical" : member.type === "Researcher" ? "research" : "network";
+const typeLabels: Record<string, string> = { Professional: "متخصص", Researcher: "پژوهشگر", Organization: "سازمان", Institution: "مؤسسه" };
 ---
 
 <article
-  class="soft-card p-7 transition duration-300 hover:-translate-y-1"
+  class="content-card flex min-h-[22rem] flex-col p-7"
 >
   <div class="flex items-start justify-between gap-4">
-    <span
-      class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600"
-    >
-      {member.type}
-    </span>
+    <span class="flex items-center gap-3"><span class="icon-badge"><ScienceIcon name={memberIcon} class="h-6 w-6" /></span><span class="card-kicker">{fa ? (typeLabels[member.type] ?? member.type) : member.type}</span></span>
 
     {member.city && (
       <span class="text-xs text-krism-muted">
@@ -50,9 +51,9 @@ const { member } = Astro.props;
       href={member.website}
       target="_blank"
       rel="noopener noreferrer"
-      class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+      class="card-action mt-auto pt-6"
     >
-      Visit website →
+      {fa ? "مشاهده وب‌سایت ←" : "Visit website →"}
     </a>
   )}
 </article>

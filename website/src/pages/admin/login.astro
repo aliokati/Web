@@ -1,0 +1,68 @@
+---
+import "../../styles/global.css";
+const existingUser = Astro.locals.user;
+if (existingUser) return Astro.redirect("/admin/content-manager", 303);
+const nextPath = Astro.url.searchParams.get("next");
+const safeNext = nextPath?.startsWith("/admin/") ? nextPath : "/admin/content-manager";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager Login — KRISM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-krism-950">
+    <main class="grid min-h-screen lg:grid-cols-[1.05fr_.95fr]">
+      <section class="relative hidden overflow-hidden bg-[#c9e5e7] p-12 text-krism-950 lg:flex lg:flex-col lg:justify-between">
+        <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full border border-krism-950/15"></div>
+        <a href="/" class="relative flex items-center gap-3 font-semibold"><img src="/images/krism-logo.png" alt="" class="h-14 w-14 rounded-full" /> KRISM</a>
+        <div class="relative max-w-2xl">
+          <p class="eyebrow text-krism-700">Content workspace</p>
+          <h1 class="mt-7 text-6xl font-medium leading-[.98] tracking-[-.045em]">Keep knowledge current and useful.</h1>
+          <p class="mt-7 max-w-lg text-base leading-8 text-krism-950/65">A focused workspace for the KRISM team to manage research, events, resources and public sleep-health information.</p>
+        </div>
+        <p class="relative text-xs font-semibold text-krism-950/50">Secure access · Role-based permissions · Versioned content</p>
+      </section>
+
+      <section class="flex items-center justify-center bg-[#fbf9f4] px-6 py-16">
+        <div class="w-full max-w-md">
+          <a href="/" class="mb-12 flex items-center gap-3 font-semibold lg:hidden"><img src="/images/krism-logo.png" alt="" class="h-12 w-12 rounded-full" /> KRISM</a>
+          <p class="text-xs font-bold uppercase tracking-[.16em] text-krism-600">Private administration</p>
+          <h2 class="mt-4 text-4xl font-medium tracking-tight text-krism-950">Welcome back.</h2>
+          <p class="mt-3 text-sm leading-6 text-krism-muted">Sign in with your assigned KRISM credentials.</p>
+
+          <form id="login-form" class="mt-9 space-y-5" data-next={safeNext}>
+            <div><label for="username" class="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-krism-muted">Username</label><input id="username" name="username" autocomplete="username" required class="w-full rounded-xl border border-krism-border bg-white px-4 py-3.5 outline-none transition focus:border-krism-600 focus:ring-4 focus:ring-krism-600/10" /></div>
+            <div><label for="password" class="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-krism-muted">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required class="w-full rounded-xl border border-krism-border bg-white px-4 py-3.5 outline-none transition focus:border-krism-600 focus:ring-4 focus:ring-krism-600/10" /></div>
+            <p id="login-error" class="hidden rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800" role="alert"></p>
+            <button id="login-button" class="w-full rounded-full bg-krism-950 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-krism-700">Sign in</button>
+          </form>
+          <a href="/" class="mt-8 inline-block text-sm font-semibold text-krism-600 hover:text-krism-950">← Return to public website</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector<HTMLFormElement>("#login-form")!;
+      const button = document.querySelector<HTMLButtonElement>("#login-button")!;
+      const errorBox = document.querySelector<HTMLElement>("#login-error")!;
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault(); button.disabled = true; button.textContent = "Signing in…"; errorBox.classList.add("hidden");
+        try {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Sign-in failed");
+          location.href = form.dataset.next || "/admin/content-manager";
+        } catch (error) { errorBox.textContent = error instanceof Error ? error.message : "Sign-in failed"; errorBox.classList.remove("hidden"); }
+        finally { button.disabled = false; button.textContent = "Sign in"; }
+      });
+    </script>
+  </body>
+</html>

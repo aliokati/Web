@@ -2,6 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import AwarenessCard from "../../components/AwarenessCard.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
+import PageHero from "../../components/PageHero.astro";
 import { awarenessArticles } from "../../data/awareness";
 
 const featuredArticles = awarenessArticles.filter(
@@ -13,22 +14,7 @@ const featuredArticles = awarenessArticles.filter(
   title="Sleep Awareness — KRISM"
   description="Public sleep-health information and educational resources from KRISM."
 >
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-        Sleep Awareness
-      </p>
-
-      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
-        Understanding sleep and sleep health
-      </h1>
-
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-krism-muted">
-        Accessible educational information about healthy sleep, common sleep
-        concerns and when professional evaluation may be appropriate.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="Sleep awareness" icon="clinical" title="Understanding sleep and sleep health" description="Accessible education about healthy sleep, common sleep concerns and when professional evaluation may be appropriate." />
 
   <section class="bg-krism-surface">
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
@@ -46,7 +32,7 @@ const featuredArticles = awarenessArticles.filter(
     </div>
   </section>
 
-  <section class="bg-white">
+  <section class="surface-paper">
     <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8">
       <div class="rounded-2xl border border-krism-border bg-krism-surface p-8 lg:p-10">
         <p class="text-sm font-semibold uppercase tracking-[0.15em] text-krism-600">

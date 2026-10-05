@@ -1,0 +1,31 @@
+---
+interface Props {
+  name?: "person" | "clinical" | "research" | "network" | "book" | "calendar" | "shield" | "moon" | "brain" | "airway" | "clock" | "movement" | "spark" | "globe";
+  class?: string;
+  label?: string;
+}
+
+const { name = "spark", class: className = "h-6 w-6", label } = Astro.props;
+
+const paths: Record<string, string[]> = {
+  person: ["M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z", "M4.5 21a7.5 7.5 0 0 1 15 0", "M17.5 8.5h4", "M19.5 6.5v4"],
+  clinical: ["M9 3h6", "M10 3v5a5 5 0 0 0 10 0V5", "M20 5h-3", "M7 3H4v7a7 7 0 0 0 14 0V8", "M12 17v4"],
+  research: ["M9 3h6", "M10 3v5l-5.5 9.5A2.3 2.3 0 0 0 6.5 21h11a2.3 2.3 0 0 0 2-3.5L14 8V3", "M7.5 15h9", "M9 12h6"],
+  network: ["M12 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "M5 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "M19 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "m10 6-3.2 3.8", "m14 6 3.2 3.8", "M8 17h8"],
+  book: ["M4 4.5A2.5 2.5 0 0 1 6.5 2H11v18H6.5A2.5 2.5 0 0 0 4 22V4.5Z", "M20 4.5A2.5 2.5 0 0 0 17.5 2H13v18h4.5A2.5 2.5 0 0 1 20 22V4.5Z"],
+  calendar: ["M5 3v3", "M19 3v3", "M3 8h18", "M5 5h14a2 2 0 0 1 2 2v13H3V7a2 2 0 0 1 2-2Z", "m8 12 2 2 4-5"],
+  shield: ["M12 2 20 6v6c0 5-3.4 8.8-8 10-4.6-1.2-8-5-8-10V6l8-4Z", "m9 12 2 2 4-5"],
+  moon: ["M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z", "M16.5 3.5v3", "M15 5h3"],
+  brain: ["M9.5 4.5A3 3 0 0 0 4 6a3 3 0 0 0-1 5.6A3.5 3.5 0 0 0 6 17a3 3 0 0 0 5.5 1.5V5A3 3 0 0 0 9.5 4.5Z", "M14.5 4.5A3 3 0 0 1 20 6a3 3 0 0 1 1 5.6A3.5 3.5 0 0 1 18 17a3 3 0 0 1-5.5 1.5V5a3 3 0 0 1 2-0.5Z", "M7 10h3", "M14 13h3"],
+  airway: ["M7 3c0 5 2 7 5 7s5-2 5-7", "M12 10v11", "M8 14c2 0 4 1.5 4 4", "M16 14c-2 0-4 1.5-4 4", "M5 21h14"],
+  clock: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "M12 6v6l4 2"],
+  movement: ["M13 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z", "m8 21 3-7 2 2v5", "m11 14-4-3-3 4", "m11 9 3 3 4-1", "M4 19h4"],
+  spark: ["m12 2 1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5L12 2Z", "m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"],
+  globe: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "M2 12h20", "M12 2c3 2.7 4.5 6 4.5 10S15 19.3 12 22c-3-2.7-4.5-6-4.5-10S9 4.7 12 2Z"],
+};
+---
+
+<svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden={label ? undefined : "true"} role={label ? "img" : undefined}>
+  {label && <title>{label}</title>}
+  {(paths[name] ?? paths.spark).map((d) => <path d={d} />)}
+</svg>

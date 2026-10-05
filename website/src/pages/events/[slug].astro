@@ -1,19 +1,10 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import RecordHero from "../../components/RecordHero.astro";
 import { events } from "../../data/events";
 
-export function getStaticPaths() {
-  return events.map((event) => ({
-    params: {
-      slug: event.slug,
-    },
-    props: {
-      event,
-    },
-  }));
-}
-
-const { event } = Astro.props;
+const event = events.find((item) => item.slug === Astro.params.slug);
+if (!event) return Astro.rewrite("/404");
 
 const date = new Date(event.date);
 
@@ -23,44 +14,17 @@ const formattedDate = date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
+const structuredData = { "@context": "https://schema.org", "@type": "Event", name: event.title, description: event.description, startDate: event.date, endDate: event.endDate, eventStatus: "https://schema.org/EventScheduled", eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode", location: { "@type": "Place", name: event.location }, url: new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href };
+const registrationHref = event.registrationMode === "external" && event.registrationUrl ? event.registrationUrl : `/events/${event.slug}/register`;
 ---
 
 <MainLayout
   title={`${event.title} — KRISM`}
   description={event.description}
+  structuredData={structuredData}
 >
 
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-24">
-
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-        {event.type}
-      </p>
-
-      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
-        {event.title}
-      </h1>
-
-      <div class="mt-8 grid gap-4 text-sm text-krism-muted sm:grid-cols-2">
-
-        <div>
-          <span class="font-semibold text-krism-950">
-            Date
-          </span>
-          <div class="mt-1">{formattedDate}</div>
-        </div>
-
-        <div>
-          <span class="font-semibold text-krism-950">
-            Location
-          </span>
-          <div class="mt-1">{event.location}</div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
+  <RecordHero icon="calendar" eyebrow={event.type} title={event.title} description={event.description} meta={[{label:"Date",value:formattedDate},{label:"Location",value:event.location},{label:"Access",value:event.registrationOpen ? "Registration open" : "Information"}]} />
 
 
   <section class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
@@ -76,15 +40,11 @@ const formattedDate = date.toLocaleDateString("en-US", {
           {event.description}
         </p>
 
-        <p class="mt-6 text-base leading-8 text-krism-muted">
-          Additional event information, scientific program,
-          speakers and registration details can be added here
-          when the official event is published.
-        </p>
+        {event.registrationOpen && <p class="mt-6 text-base leading-8 text-krism-muted">Registration is currently open. Use the official registration link in the event information panel.</p>}
       </div>
 
 
-      <aside class="h-fit rounded-2xl border border-krism-border bg-white p-6">
+      <aside class="content-card h-fit p-6">
 
         <p class="text-sm font-semibold text-krism-950">
           Event information
@@ -107,10 +67,12 @@ const formattedDate = date.toLocaleDateString("en-US", {
         {
           event.registrationOpen && (
             <a
-              href={event.registrationUrl ?? "/contact"}
+              href={registrationHref}
+              target={event.registrationMode === "external" ? "_blank" : undefined}
+              rel={event.registrationMode === "external" ? "noreferrer" : undefined}
               class="mt-7 block rounded-full bg-krism-900 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-krism-800"
             >
-              Registration
+              {event.registrationMode === "external" ? "Registration ↗" : "Register securely"}
             </a>
           )
         }

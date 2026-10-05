@@ -1,27 +1,37 @@
 ---
+import ScienceIcon from "./ScienceIcon.astro";
 interface Props {
   eyebrow: string;
   title: string;
   description: string;
+  icon?: "research" | "calendar" | "network" | "book" | "clinical" | "globe" | "shield" | "spark";
 }
 
-const { eyebrow, title, description } = Astro.props;
+const { eyebrow, title, description, icon = "spark" } = Astro.props;
+const isPersian = Astro.url.pathname === "/fa" || Astro.url.pathname.startsWith("/fa/");
 ---
 
-<section class="overflow-hidden bg-krism-950 text-white">
-  <div class="relative mx-auto max-w-[1440px] px-6 py-24 lg:px-10 lg:py-32">
+<section class="tech-grid-dark relative overflow-hidden bg-krism-950 text-white">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#68d7e8]/70 to-transparent"></div>
+  <div class="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-[#287789]/25 blur-3xl"></div>
+  <div class="relative page-wrap py-20 lg:py-24">
     <div class="absolute right-[-8rem] top-[-13rem] h-[32rem] w-[32rem] rounded-full border border-white/10"></div>
     <div class="absolute right-[4rem] top-[-6rem] h-[20rem] w-[20rem] rounded-full border border-white/10"></div>
-    <div class="relative grid gap-12 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
+    <svg class="signal-graph pointer-events-none absolute bottom-10 left-0 h-24 w-full text-[#68d7e8] opacity-20" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 70h110l18-1 12-28 16 64 22-89 19 54h110l17-2 15-35 19 75 21-83 18 45h132l16-1 13-25 18 60 20-82 21 48h114l15-2 17-28 16 63 22-90 20 55h175" fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke" />
+    </svg>
+    <div class="relative grid gap-10 lg:grid-cols-[1.22fr_.78fr] lg:items-center">
       <div>
-        <p class="eyebrow text-[#f5d86e]">{eyebrow}</p>
-        <h1 class="mt-7 max-w-4xl text-5xl font-medium leading-[.98] tracking-[-.04em] text-white sm:text-6xl lg:text-7xl">
+        <div class="flex items-center gap-4"><p class="tech-label text-[#68d7e8]">KRISM / 01</p><span class="h-px w-12 bg-white/20"></span><p class="text-xs font-bold uppercase tracking-[.12em] text-[#f5d86e]">{eyebrow}</p></div>
+        <h1 class="page-hero-title mt-7 max-w-4xl font-medium leading-[1.02] tracking-[-.04em] text-white">
           {title}
         </h1>
       </div>
-      <p class="max-w-xl border-l border-white/25 pl-7 text-base leading-8 text-white/70 lg:mb-1 lg:text-lg">
-        {description}
-      </p>
+      <aside class="page-hero-aside relative overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/[.045] p-6 lg:p-7">
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(115,213,223,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(115,213,223,.04)_1px,transparent_1px)] bg-[size:22px_22px]"></div>
+        <div class="relative flex items-start gap-5"><span class="icon-badge h-14 w-14 shrink-0"><ScienceIcon name={icon} class="h-7 w-7" /></span><p class="max-w-xl text-sm leading-7 text-white/68 lg:text-[15px]">{description}</p></div>
+        <div class="relative mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[.09em] text-white/70"><span class="rounded-full border border-white/15 px-3 py-1.5">{isPersian ? "شواهد" : "Evidence"}</span><span class="rounded-full border border-white/15 px-3 py-1.5">{isPersian ? "آموزش" : "Education"}</span><span class="rounded-full border border-white/15 px-3 py-1.5">{isPersian ? "شبکه" : "Network"}</span></div>
+      </aside>
     </div>
   </div>
 </section>

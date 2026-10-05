@@ -1,0 +1,13 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import BoardMemberCard from "../../../components/BoardMemberCard.astro";
+import { boardMembersFa as boardMembers } from "../../../data/board";
+const members = [...boardMembers].sort((a,b) => (a.displayOrder ?? 100) - (b.displayOrder ?? 100));
+---
+
+<MainLayout lang="fa" title="شورای پژوهشی — KRISM" description="اعضای شورای پژوهشی، تخصص‌ها، سوابق دانشگاهی و آثار علمی منتخب در KRISM.">
+  <PageHero eyebrow="رهبری علمی" icon="clinical" title="شورای پژوهشی" description="پزشکان و پژوهشگرانی که هدایت علمی، بازبینی و توسعه مسئولانه برنامه‌های KRISM را بر عهده دارند." />
+  <section class="surface-night text-white"><div class="page-wrap py-20 lg:py-28"><div class="grid gap-5 xl:grid-cols-2">{members.length ? members.map((member) => <BoardMemberCard member={member} lang="fa" />) : <div class="science-illustration xl:col-span-2 px-7 py-16 text-center"><p class="tech-label text-[#68d7e8]">شورا / راستی‌آزمایی</p><h2 class="mx-auto mt-6 max-w-3xl text-4xl font-medium">پروفایل‌های تأییدشده در حال آماده‌سازی‌اند.</h2><p class="mx-auto mt-5 max-w-2xl text-sm leading-8 text-white/62">زندگی‌نامه اعضا تنها پس از تأیید نقش، مدارک، حق استفاده از تصویر و ترجیحات تماس عمومی منتشر می‌شود.</p><a href="/fa/contact" class="mt-8 inline-flex rounded-full bg-[#68d7e8] px-6 py-3 text-sm font-bold text-[#061923]">تماس با KRISM</a></div>}</div></div></section>
+  <section class="surface-paper"><div class="page-wrap py-16"><div class="grid gap-6 md:grid-cols-3">{[["راهبری","اولویت‌های علمی و یکپارچگی پژوهش."],["بازبینی","نظارت بالینی و تحریریه بر اطلاعات عمومی."],["همکاری","پیوند چندرشته‌ای پژوهش، آموزش و مراقبت."]].map(([title,text]) => <div class="rounded-2xl border border-krism-border bg-white/70 p-6"><h2 class="text-xl font-semibold text-krism-950">{title}</h2><p class="mt-3 text-sm leading-8 text-krism-muted">{text}</p></div>)}</div></div></section>
+</MainLayout>

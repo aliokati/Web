@@ -1,0 +1,153 @@
+[
+  {
+    "slug": "why-sleep-matters",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Why Sleep Matters",
+    "excerpt": "Sleep is an essential part of physical health, cognitive function, emotional well-being and overall quality of life.",
+    "category": "Sleep Health",
+    "featured": true,
+    "content": [
+      "Sleep is a fundamental biological process that supports many aspects of health and daily functioning.",
+      "Adequate and good-quality sleep contributes to attention, memory, learning, emotional regulation and physical recovery.",
+      "Persistent difficulties with sleep should not simply be accepted as a normal part of life. When sleep problems are frequent or interfere with daily activities, professional evaluation may be appropriate."
+    ],
+    "translations": { "fa": { "title": "چرا خواب اهمیت دارد؟", "excerpt": "خواب بخش اساسی سلامت جسمی، عملکرد شناختی، سلامت روان و کیفیت زندگی است.", "category": "سلامت خواب", "content": ["خواب یک فرایند زیستی اساسی است که از جنبه‌های مختلف سلامت و عملکرد روزانه حمایت می‌کند.", "خواب کافی و باکیفیت می‌تواند در توجه، حافظه، یادگیری، تنظیم هیجانات و بازسازی جسمی نقش داشته باشد.", "مشکلات مداوم خواب نباید صرفاً بخشی طبیعی از زندگی تلقی شوند. اگر مشکلات خواب تکرار شوند یا بر فعالیت‌های روزانه اثر بگذارند، ارزیابی تخصصی می‌تواند مناسب باشد."] } }
+  },
+  {
+    "slug": "healthy-sleep-habits",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Healthy Sleep Habits",
+    "excerpt": "Simple and consistent habits can support a regular sleep schedule and a healthier sleep environment.",
+    "category": "Healthy Sleep",
+    "featured": true,
+    "content": [
+      "Keeping a relatively consistent sleep and wake schedule can help support regular sleep patterns.",
+      "A comfortable, quiet and appropriately dark sleep environment may make it easier to sleep.",
+      "Regular physical activity and thoughtful use of caffeine, nicotine and other stimulating substances can also influence sleep.",
+      "Individual sleep needs vary. Persistent or severe sleep difficulties may require assessment by a qualified healthcare professional."
+    ],
+    "translations": { "fa": { "title": "عادات خواب سالم", "excerpt": "برخی عادات ساده و منظم می‌توانند به داشتن الگوی خواب سالم‌تر کمک کنند.", "category": "خواب سالم", "content": ["داشتن زمان نسبتاً منظم برای خواب و بیداری می‌تواند به تنظیم الگوی خواب کمک کند.", "محیطی آرام، مناسب و تا حد امکان تاریک می‌تواند شرایط بهتری برای خواب ایجاد کند.", "فعالیت بدنی منظم و توجه به مصرف کافئین، نیکوتین و سایر مواد محرک نیز می‌تواند بر خواب اثر بگذارد.", "نیاز افراد به خواب متفاوت است و مشکلات مداوم یا شدید خواب ممکن است نیازمند ارزیابی توسط متخصص باشد."] } }
+  },
+  {
+    "slug": "when-to-seek-help-for-sleep-problems",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "When to Seek Professional Help",
+    "excerpt": "Some sleep problems are temporary, while persistent symptoms may warrant professional evaluation.",
+    "category": "Sleep Disorders",
+    "featured": true,
+    "content": [
+      "Occasional difficulty sleeping can occur for many reasons. Persistent problems deserve closer attention.",
+      "Loud habitual snoring, witnessed pauses in breathing, excessive daytime sleepiness, persistent insomnia or unusual nighttime behaviors can be reasons to discuss sleep with a healthcare professional.",
+      "A healthcare professional can determine whether further assessment or specialized sleep evaluation is appropriate."
+    ],
+    "translations": { "fa": { "title": "چه زمانی برای مشکلات خواب کمک بگیریم؟", "excerpt": "برخی مشکلات خواب موقتی هستند، اما علائم پایدار ممکن است نیازمند ارزیابی تخصصی باشند.", "category": "اختلالات خواب", "content": ["اختلالات گاه‌به‌گاه خواب می‌توانند به دلایل مختلف ایجاد شوند. مشکلات مداوم نیازمند توجه بیشتری هستند.", "خرخر شدید و مکرر، وقفه‌های قابل مشاهده در تنفس، خواب‌آلودگی بیش از حد در طول روز، بی‌خوابی مداوم یا برخی رفتارهای غیرمعمول هنگام خواب می‌توانند دلایلی برای مطرح کردن موضوع با پزشک باشند.", "متخصص سلامت می‌تواند مشخص کند که آیا ارزیابی بیشتر یا بررسی تخصصی خواب لازم است یا خیر."] } }
+  },
+  {
+    "slug": "understanding-insomnia",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Understanding Insomnia",
+    "excerpt": "When difficulty sleeping becomes frequent and affects daytime life, it deserves closer attention.",
+    "category": "Sleep Disorders",
+    "featured": false,
+    "content": [
+      "Insomnia can involve difficulty falling asleep, repeated waking, waking earlier than intended, or sleep that does not feel restorative despite adequate opportunity to sleep.",
+      "Short periods of poor sleep are common. A professional evaluation becomes more important when the problem persists, occurs frequently, or affects mood, concentration, work, study, safety or quality of life.",
+      "A sleep professional can review sleep timing, health conditions, medications, mental health, lifestyle and other sleep disorders. Cognitive behavioral therapy for insomnia is an established non-drug treatment that may be recommended after appropriate assessment.",
+      "Do not begin or stop sleep medication based only on online information. Discuss persistent symptoms and treatment choices with a qualified healthcare professional."
+    ],
+    "translations": { "fa": { "title": "آشنایی با بی‌خوابی", "excerpt": "وقتی دشواری خواب مکرر می‌شود و بر زندگی روزانه اثر می‌گذارد، نیاز به توجه بیشتری دارد.", "category": "اختلالات خواب", "content": ["بی‌خوابی می‌تواند شامل دشواری در به خواب رفتن، بیداری‌های مکرر، بیدار شدن زودتر از زمان مورد نظر یا خواب غیرترمیم‌کننده با وجود فرصت کافی برای خواب باشد.", "دوره‌های کوتاه خواب نامناسب شایع هستند. وقتی مشکل ادامه می‌یابد، مکرر رخ می‌دهد یا بر خلق، تمرکز، کار، تحصیل، ایمنی یا کیفیت زندگی اثر می‌گذارد، ارزیابی حرفه‌ای اهمیت بیشتری پیدا می‌کند.", "متخصص خواب می‌تواند زمان‌بندی خواب، بیماری‌ها، داروها، سلامت روان، سبک زندگی و سایر اختلالات خواب را بررسی کند. درمان شناختی رفتاری بی‌خوابی یک درمان غیردارویی شناخته‌شده است که ممکن است پس از ارزیابی مناسب پیشنهاد شود.", "صرفاً بر اساس اطلاعات آنلاین داروی خواب را شروع یا قطع نکنید. علائم مداوم و گزینه‌های درمان را با متخصص سلامت واجد شرایط در میان بگذارید."] } }
+  },
+  {
+    "slug": "snoring-and-sleep-apnea",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Snoring and Sleep Apnea Warning Signs",
+    "excerpt": "Loud snoring, witnessed breathing pauses and daytime sleepiness can justify professional assessment.",
+    "category": "Sleep Disorders",
+    "featured": false,
+    "content": [
+      "Snoring is common and does not always indicate a disorder. However, loud habitual snoring combined with witnessed breathing pauses, choking or gasping may be associated with obstructive sleep apnea.",
+      "Other possible warning signs include morning headaches, dry mouth, unrefreshing sleep, concentration difficulties, frequent nighttime urination and excessive daytime sleepiness.",
+      "Sleep apnea cannot be confirmed by symptoms or a questionnaire alone. A qualified professional may recommend a sleep study after reviewing symptoms, medical history and physical risk factors.",
+      "Seek prompt care for severe symptoms, and never drive when sleepy. Breathing difficulty or chest pain while awake requires urgent medical assistance."
+    ],
+    "translations": { "fa": { "title": "علائم هشدار خرخر و آپنه خواب", "excerpt": "خرخر بلند، توقف تنفس مشاهده‌شده و خواب‌آلودگی روزانه می‌توانند نیازمند ارزیابی حرفه‌ای باشند.", "category": "اختلالات خواب", "content": ["خرخر شایع است و همیشه نشان‌دهنده اختلال نیست. با این حال، خرخر بلند و همیشگی همراه با توقف تنفس مشاهده‌شده، احساس خفگی یا نفس‌نفس زدن می‌تواند با آپنه انسدادی خواب مرتبط باشد.", "سردرد صبحگاهی، خشکی دهان، خواب غیرترمیم‌کننده، مشکل تمرکز، ادرار شبانه مکرر و خواب‌آلودگی بیش از حد روزانه از دیگر علائم احتمالی هستند.", "آپنه خواب تنها با علائم یا پرسشنامه تأیید نمی‌شود. متخصص واجد شرایط پس از بررسی علائم، سابقه پزشکی و عوامل خطر جسمی ممکن است مطالعه خواب را توصیه کند.", "در صورت علائم شدید سریع‌تر پیگیری کنید و هنگام خواب‌آلودگی هرگز رانندگی نکنید. تنگی نفس یا درد قفسه سینه در بیداری نیازمند کمک فوری پزشکی است."] } }
+  },
+  {
+    "slug": "excessive-daytime-sleepiness",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Excessive Daytime Sleepiness",
+    "excerpt": "Repeated unintended sleep or irresistible sleep episodes should not be dismissed as ordinary tiredness.",
+    "category": "Sleep Disorders",
+    "featured": false,
+    "content": [
+      "Sleepiness is different from fatigue. Excessive daytime sleepiness involves difficulty staying awake or unintended sleep during activities when a person would normally remain alert.",
+      "Possible causes include insufficient sleep, irregular schedules, medication effects, sleep apnea, central disorders of hypersomnolence and other medical or psychological conditions.",
+      "Sudden irresistible sleep episodes, muscle weakness triggered by emotion, sleep paralysis or vivid dream-like experiences around sleep should be discussed with a sleep professional.",
+      "Sleepiness while driving is a major safety concern. Stop driving, arrange safe transportation and seek prompt professional evaluation."
+    ],
+    "translations": { "fa": { "title": "خواب‌آلودگی بیش از حد روزانه", "excerpt": "خواب ناخواسته مکرر یا حملات مقاومت‌ناپذیر خواب را نباید خستگی عادی تلقی کرد.", "category": "اختلالات خواب", "content": ["خواب‌آلودگی با خستگی متفاوت است. خواب‌آلودگی بیش از حد روزانه شامل دشواری در بیدار ماندن یا خواب ناخواسته هنگام فعالیت‌هایی است که فرد معمولاً باید هوشیار باشد.", "علل احتمالی شامل خواب ناکافی، برنامه نامنظم، اثر داروها، آپنه خواب، اختلالات مرکزی پرخوابی و سایر بیماری‌های جسمی یا روانی است.", "حملات ناگهانی و مقاومت‌ناپذیر خواب، ضعف عضلانی ناشی از هیجان، فلج خواب یا تجربه‌های رؤیامانند واضح اطراف زمان خواب باید با متخصص خواب در میان گذاشته شوند.", "خواب‌آلودگی هنگام رانندگی یک نگرانی جدی ایمنی است. رانندگی را متوقف کنید، رفت‌وآمد ایمن ترتیب دهید و برای ارزیابی سریع حرفه‌ای اقدام کنید."] } }
+  },
+  {
+    "slug": "body-clock-and-circadian-rhythm",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Your Body Clock and Sleep Timing",
+    "excerpt": "A mismatch between your internal clock and daily obligations can create persistent sleep and waking difficulties.",
+    "category": "Sleep Health",
+    "featured": false,
+    "content": [
+      "The circadian system helps regulate when the body is prepared for sleep and wakefulness. Light exposure, activity, meals, work schedules and individual biology all influence this timing.",
+      "Some people sleep well on their preferred schedule but struggle when work, school or family obligations require much earlier or later sleep. Shift work and frequently changing schedules can create similar problems.",
+      "A sleep diary is often useful for documenting sleep timing across workdays and free days. A professional may also use a validated chronotype questionnaire and consider other causes of insomnia or sleepiness.",
+      "Avoid making extreme changes with bright light, supplements or medication without professional advice, particularly when other health conditions are present."
+    ],
+    "translations": { "fa": { "title": "ساعت زیستی و زمان‌بندی خواب", "excerpt": "ناهماهنگی میان ساعت درونی و وظایف روزانه می‌تواند دشواری مداوم خواب و بیداری ایجاد کند.", "category": "سلامت خواب", "content": ["سامانه شبانه‌روزی به تنظیم زمان آمادگی بدن برای خواب و بیداری کمک می‌کند. نور، فعالیت، وعده‌های غذایی، برنامه کاری و ویژگی‌های زیستی فرد بر این زمان‌بندی اثر می‌گذارند.", "برخی افراد در برنامه دلخواه خود خوب می‌خوابند اما وقتی کار، تحصیل یا خانواده خواب بسیار زودتر یا دیرتر را ایجاب می‌کند، دچار مشکل می‌شوند. شیفت کاری و تغییر مکرر برنامه نیز می‌تواند مشکلات مشابهی ایجاد کند.", "دفترچه خواب برای ثبت زمان‌بندی خواب در روزهای کاری و آزاد مفید است. متخصص ممکن است از پرسشنامه معتبر تیپ زمانی استفاده کرده و علل دیگر بی‌خوابی یا خواب‌آلودگی را نیز بررسی کند.", "بدون راهنمایی حرفه‌ای، به‌ویژه در حضور بیماری‌های دیگر، تغییرات شدید با نور روشن، مکمل یا دارو ایجاد نکنید."] } }
+  },
+  {
+    "slug": "unusual-behaviors-during-sleep",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Unusual Behaviors During Sleep",
+    "excerpt": "Walking, shouting or acting out dreams during sleep can require assessment, especially when safety is affected.",
+    "category": "Sleep Disorders",
+    "featured": false,
+    "content": [
+      "Parasomnias include unwanted behaviors or experiences during sleep, such as sleepwalking, sleep terrors, confusional arousals, dream enactment and certain recurrent nightmares.",
+      "Descriptions from a bed partner can be particularly helpful because the person experiencing an episode may have limited memory of it. Note the timing, actions, injuries, dream recall and possible triggers.",
+      "New or worsening dream-enactment behavior in later adulthood deserves professional evaluation. Similar behavior can sometimes occur with sleep apnea, medication effects or neurological conditions.",
+      "Prioritize immediate safety by reducing sharp objects and fall hazards around the sleep area. Injurious or dangerous episodes warrant prompt assessment."
+    ],
+    "translations": { "fa": { "title": "رفتارهای غیرمعمول هنگام خواب", "excerpt": "راه رفتن، فریاد زدن یا اجرای رؤیا هنگام خواب، به‌ویژه وقتی ایمنی را تهدید کند، می‌تواند نیازمند ارزیابی باشد.", "category": "اختلالات خواب", "content": ["پاراسومنیاها شامل رفتارها یا تجربه‌های ناخواسته هنگام خواب هستند؛ مانند خواب‌گردی، وحشت شبانه، بیداری گیج، اجرای رؤیا و برخی کابوس‌های تکراری.", "توضیحات هم‌خواب می‌تواند بسیار مفید باشد، زیرا فرد ممکن است خاطره محدودی از رخداد داشته باشد. زمان، رفتارها، آسیب‌ها، یادآوری رؤیا و محرک‌های احتمالی را ثبت کنید.", "رفتار جدید یا رو به تشدید اجرای رؤیا در سنین بالاتر نیازمند ارزیابی حرفه‌ای است. رفتار مشابه گاهی با آپنه خواب، اثر داروها یا بیماری‌های عصبی رخ می‌دهد.", "با کاهش اشیای تیز و خطر سقوط اطراف محل خواب، ایمنی فوری را در اولویت قرار دهید. رخدادهای آسیب‌زا یا خطرناک نیازمند بررسی سریع هستند."] } }
+  },
+  {
+    "slug": "restless-legs-and-sleep-movements",
+    "status": "published",
+    "translationStatus": "published",
+    "reviewedAt": "2026-10-04",
+    "title": "Restless Legs and Sleep Movements",
+    "excerpt": "An evening urge to move the legs that improves with movement has a recognizable clinical pattern.",
+    "category": "Sleep Disorders",
+    "featured": false,
+    "content": [
+      "Restless legs syndrome commonly involves an urge to move the legs, often with uncomfortable sensations. Symptoms begin or worsen during rest, improve temporarily with movement, and are usually more prominent in the evening or at night.",
+      "Leg cramps, joint discomfort, nerve problems and habitual movements can resemble restless legs symptoms, so a professional history remains important.",
+      "A clinician may review medications, pregnancy, kidney health, iron status and other conditions. Do not begin iron supplements without appropriate testing and professional advice.",
+      "Repeated limb movements reported by a bed partner may occur with or without restless legs symptoms and may require a different assessment."
+    ],
+    "translations": { "fa": { "title": "پای بی‌قرار و حرکات مرتبط با خواب", "excerpt": "میل عصرگاهی به حرکت دادن پاها که با حرکت بهتر می‌شود، الگوی بالینی شناخته‌شده‌ای دارد.", "category": "اختلالات خواب", "content": ["سندرم پای بی‌قرار معمولاً شامل میل به حرکت دادن پاها، اغلب همراه با احساس ناخوشایند است. علائم هنگام استراحت آغاز یا بدتر می‌شوند، با حرکت موقتاً بهبود می‌یابند و معمولاً عصر یا شب برجسته‌تر هستند.", "گرفتگی پا، ناراحتی مفصل، مشکلات عصبی و حرکات عادتی می‌توانند شبیه علائم پای بی‌قرار باشند؛ بنابراین شرح حال حرفه‌ای اهمیت دارد.", "متخصص ممکن است داروها، بارداری، سلامت کلیه، وضعیت آهن و بیماری‌های دیگر را بررسی کند. بدون آزمایش مناسب و توصیه حرفه‌ای مکمل آهن را شروع نکنید.", "حرکات تکراری اندام که هم‌خواب گزارش می‌کند ممکن است همراه یا بدون علائم پای بی‌قرار رخ دهد و به ارزیابی متفاوتی نیاز داشته باشد."] } }
+  }
+]

@@ -1,36 +1,5 @@
-export interface ResearchItem {
-  slug: string;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  type: string;
-  collaborators?: string[];
-  featured?: boolean;
-  registrationOpen?: boolean
-}
-
-export const researchProjects: ResearchItem[] = [
-  {
-    slug: "sleep-medicine-scientific-meeting",
-    title: "Sleep Medicine Scientific Meeting",
-    date: "2026-11-20",
-    location: "Mashhad, Iran",
-    type: "Scientific Meeting",
-    description:
-      "Placeholder event demonstrating the KRISM scientific meeting structure. Replace with the official event information.",
-    featured: true,
-    registrationOpen: true,
-  },
-
-  {
-    slug: "sleep-medicine-education-workshop",
-    title: "Sleep Medicine Education Workshop",
-    date: "2026-12-12",
-    location: "Mashhad, Iran",
-    type: "Educational Workshop",
-    description:
-      "Placeholder educational event demonstrating the KRISM event architecture.",
-    registrationOpen: false,
-  },
-];
+import { createLiveCollection, createLocalizedCollection } from "../content-manager/live-data";
+import type { PublishingMetadata } from "../content-manager/types";
+export interface ResearchItem extends PublishingMetadata { slug: string; title: string; description: string; location?: string; date?: string; type: string; statusLabel?: string; leadInvestigators?: string[]; collaborators?: string[]; funding?: string; ethicsReference?: string; projectUrl?: string; featured?: boolean; translations?: { fa?: Partial<Pick<ResearchItem, "title" | "description" | "location" | "type" | "leadInvestigators" | "collaborators" | "funding">> } }
+export const researchProjects = createLiveCollection<ResearchItem>("research");
+export const researchProjectsFa = createLocalizedCollection<ResearchItem>("research", "fa");

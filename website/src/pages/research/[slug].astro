@@ -1,43 +1,21 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import RecordHero from "../../components/RecordHero.astro";
 import { researchProjects } from "../../data/research";
 
-export function getStaticPaths() {
-  return researchProjects.map((project) => ({
-    params: {
-      slug: project.slug,
-    },
-    props: {
-      project,
-    },
-  }));
-}
-
-const { project } = Astro.props;
+const project = researchProjects.find((item) => item.slug === Astro.params.slug);
+if (!project) return Astro.rewrite("/404");
+const projectMeta = [project.statusLabel && { label: "Status", value: project.statusLabel }, project.date && { label: "Started", value: project.date }, project.location && { label: "Location", value: project.location }].filter(Boolean) as Array<{ label: string; value: string }>;
+const structuredData = { "@context": "https://schema.org", "@type": "ResearchProject", name: project.title, description: project.description, inLanguage: "en", funder: project.funding ? { "@type": "Organization", name: project.funding } : undefined, url: project.projectUrl || new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href };
 ---
 
 <MainLayout
   title={`${project.title} — KRISM`}
   description={project.description}
+  structuredData={structuredData}
 >
 
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-24">
-
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-        {project.type}
-      </p>
-
-      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
-        {project.title}
-      </h1>
-
-      <p class="mt-6 max-w-3xl text-lg leading-8 text-krism-muted">
-        {project.description}
-      </p>
-
-    </div>
-  </section>
+  <RecordHero icon="research" eyebrow={project.type} title={project.title} description={project.description} meta={projectMeta} />
 
 
   <section class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
@@ -54,20 +32,13 @@ const { project } = Astro.props;
           {project.description ?? project.description}
         </p>
 
-        <h2 class="mt-12 text-2xl font-semibold text-krism-950">
-          Research collaboration
-        </h2>
-
-        <p class="mt-5 text-base leading-8 text-krism-muted">
-          Further information about investigators, institutions,
-          methodology, findings and opportunities for collaboration
-          can be added here as the project develops.
-        </p>
+        {project.leadInvestigators?.length && <><h2 class="mt-12 text-2xl font-semibold text-krism-950">Lead investigators</h2><ul class="mt-5 space-y-2 text-base leading-8 text-krism-muted">{project.leadInvestigators.map((name) => <li>{name}</li>)}</ul></>}
+        {project.collaborators?.length && <><h2 class="mt-12 text-2xl font-semibold text-krism-950">Collaborating institutions</h2><ul class="mt-5 space-y-2 text-base leading-8 text-krism-muted">{project.collaborators.map((name) => <li>{name}</li>)}</ul></>}
 
       </div>
 
 
-      <aside class="h-fit rounded-2xl border border-krism-border bg-white p-6">
+      <aside class="content-card h-fit p-6">
 
         <div>
           <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
@@ -75,12 +46,12 @@ const { project } = Astro.props;
           </div>
 
           <div class="mt-2 text-sm font-medium text-krism-950">
-            {project.registrationOpen}
+            {project.statusLabel ?? "Current"}
           </div>
         </div>
 
 
-        <div class="mt-6">
+        {project.date && <div class="mt-6">
           <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
             Year
           </div>
@@ -88,22 +59,24 @@ const { project } = Astro.props;
           <div class="mt-2 text-sm text-krism-muted">
             {project.date}
           </div>
-        </div>
+        </div>}
 
 
         {
-          project.collaborators && (
+          project.ethicsReference && (
             <div class="mt-6">
               <div class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
-                collaborators
+                Ethics reference
               </div>
 
               <div class="mt-2 text-sm text-krism-muted">
-                {project.collaborators}
+                {project.ethicsReference}
               </div>
             </div>
           )
         }
+
+        {project.projectUrl && <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" class="card-action mt-7">Official project page →</a>}
 
       </aside>
 

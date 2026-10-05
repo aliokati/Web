@@ -1,40 +1,19 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import RecordHero from "../../components/RecordHero.astro";
 import { awarenessArticles } from "../../data/awareness";
 
-export function getStaticPaths() {
-  return awarenessArticles.map((article) => ({
-    params: {
-      slug: article.slug,
-    },
-    props: {
-      article,
-    },
-  }));
-}
-
-const { article } = Astro.props;
+const article = awarenessArticles.find((item) => item.slug === Astro.params.slug);
+if (!article) return Astro.rewrite("/404");
+const structuredData = { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.excerpt, inLanguage: "en", dateModified: article.reviewedAt, author: { "@type": "Organization", name: article.author || "KRISM" }, publisher: { "@type": "Organization", name: "KRISM" } };
 ---
 
 <MainLayout
   title={`${article.title} — KRISM`}
   description={article.excerpt}
+  structuredData={structuredData}
 >
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-        {article.category}
-      </p>
-
-      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
-        {article.title}
-      </h1>
-
-      <p class="mt-6 text-lg leading-8 text-krism-muted">
-        {article.excerpt}
-      </p>
-    </div>
-  </section>
+  <RecordHero icon="moon" eyebrow={article.category} title={article.title} description={article.excerpt} meta={[{label:"Format",value:"Public education"},{label:"Reading",value:"Evidence-led"},{label:"Language",value:"EN / FA"}]} />
 
   <article class="bg-white">
     <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">

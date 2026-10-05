@@ -1,0 +1,36 @@
+---
+import ScienceIcon from "./ScienceIcon.astro";
+interface Props { lang?: "en" | "fa"; compact?: boolean }
+const { lang = "en", compact = false } = Astro.props;
+const fa = lang === "fa";
+const t = (en: string, persian: string) => fa ? persian : en;
+const nodes = [
+  { icon: "brain", en: "Insomnia", fa: "بی‌خوابی", className: "sleep-node-1" },
+  { icon: "airway", en: "Breathing", fa: "تنفس", className: "sleep-node-2" },
+  { icon: "spark", en: "Sleepiness", fa: "خواب‌آلودگی", className: "sleep-node-3" },
+  { icon: "clock", en: "Body clock", fa: "ساعت زیستی", className: "sleep-node-4" },
+  { icon: "moon", en: "Parasomnia", fa: "پاراسومنیا", className: "sleep-node-5" },
+  { icon: "movement", en: "Movement", fa: "حرکت", className: "sleep-node-6" },
+] as const;
+---
+
+<div class:list={["sleep-system", compact && "sleep-system-compact"]} aria-label={t("Six sleep-disorder domains", "شش حوزه اختلالات خواب")}>
+  <div class="sleep-system-grid" aria-hidden="true"></div>
+  <svg class="sleep-system-links" viewBox="0 0 500 500" aria-hidden="true">
+    <circle cx="250" cy="250" r="156" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 8" />
+    <circle cx="250" cy="250" r="104" fill="none" stroke="currentColor" stroke-width="1" opacity=".35" />
+    <path d="M250 250 250 60M250 250 414 155M250 250 414 345M250 250 250 440M250 250 86 345M250 250 86 155" fill="none" stroke="currentColor" stroke-width="1" opacity=".35" />
+  </svg>
+  <div class="sleep-core">
+    <span class="sleep-core-pulse"></span>
+    <ScienceIcon name="moon" class="h-10 w-10" />
+    <span>{t("Sleep system", "سامانه خواب")}</span>
+  </div>
+  {nodes.map((node, index) => (
+    <div class:list={["sleep-node", node.className]}>
+      <span class="sleep-node-index">0{index + 1}</span>
+      <ScienceIcon name={node.icon} class="h-5 w-5" />
+      <span class="sleep-node-label">{fa ? node.fa : node.en}</span>
+    </div>
+  ))}
+</div>

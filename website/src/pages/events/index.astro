@@ -28,11 +28,13 @@ const pastEvents = events
 >
   <PageHero
     eyebrow="Events & Education"
+    icon="calendar"
     title="Scientific and educational activities."
     description="Discover upcoming scientific meetings, educational workshops and other activities connected to sleep medicine."
   />
 
-  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+  <section class="surface-mineral">
+    <div class="page-wrap py-20 lg:py-24">
 
     <SectionHeader
       eyebrow="Upcoming"
@@ -42,7 +44,7 @@ const pastEvents = events
 
     {
       upcomingEvents.length > 0 ? (
-        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="mt-12 grid auto-rows-fr gap-6 lg:grid-cols-2">
           {upcomingEvents.map((event) => (
             <EventCard event={event} />
           ))}
@@ -56,13 +58,14 @@ const pastEvents = events
       )
     }
 
+    </div>
   </section>
 
 
   {
     pastEvents.length > 0 && (
-      <section class="border-t border-krism-border bg-white">
-        <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <section class="surface-mineral border-t border-krism-950/10">
+        <div class="page-wrap py-20 lg:py-24">
 
           <SectionHeader
             eyebrow="Archive"
@@ -70,7 +73,7 @@ const pastEvents = events
             description="A record of previous KRISM activities."
           />
 
-          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          <div class="mt-12 grid auto-rows-fr gap-6 lg:grid-cols-2">
             {pastEvents.map((event) => (
               <EventCard event={event} />
             ))}

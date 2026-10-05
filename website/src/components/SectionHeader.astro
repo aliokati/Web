@@ -8,8 +8,8 @@ interface Props {
 const { eyebrow, title, description } = Astro.props;
 ---
 
-<div class="max-w-3xl">
-  <p class="eyebrow text-krism-600">{eyebrow}</p>
+<div class="section-heading max-w-3xl">
+  <div class="flex items-center gap-4"><p class="tech-label text-krism-600">KRISM / SECTION</p><span class="h-px w-9 bg-krism-500/40"></span><p class="text-xs font-bold uppercase tracking-[.1em] text-krism-600">{eyebrow}</p></div>
 
   <h2 class="mt-5 text-4xl font-medium leading-[1.05] tracking-[-.035em] text-krism-950 sm:text-5xl">
     {title}

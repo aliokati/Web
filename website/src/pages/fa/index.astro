@@ -1,9 +1,10 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
-import { events } from "../../data/events";
-import { researchProjects } from "../../data/research";
-import { awarenessArticles } from "../../data/awareness";
-import { networkMembers } from "../../data/network";
+import HomePage from "../../components/HomePage.astro";
+import { eventsFa as events } from "../../data/events";
+import { researchProjectsFa as researchProjects } from "../../data/research";
+import { awarenessArticlesFa as awarenessArticles } from "../../data/awareness";
+import { networkMembersFa as networkMembers } from "../../data/network";
 
 const featuredEvents = events
   .filter((event) => event.featured)
@@ -42,18 +43,10 @@ const categoryLabel = (category: string) => {
   return labels[category] ?? category;
 };
 
-const statusLabel = (status: string) => {
-  const labels: Record<string, string> = {
-    Ongoing: "در حال انجام",
-    Completed: "تکمیل‌شده",
-    Collaboration: "همکاری",
-  };
-
-  return labels[status] ?? status;
-};
 ---
 
-<MainLayout
+<HomePage lang="fa" />
+{false && (<MainLayout
   lang="fa"
   title="KRISM — نمایندگی خراسان انجمن‌های طب خواب ایران"
   description="نمایندگی خراسان انجمن‌های طب خواب ایران؛ با تمرکز بر پژوهش، آموزش، آگاهی‌رسانی و توسعه همکاری‌های حرفه‌ای در حوزه پزشکی خواب."
@@ -499,4 +492,4 @@ const statusLabel = (status: string) => {
     </div>
   </section>
 
-</MainLayout>
+</MainLayout>)}

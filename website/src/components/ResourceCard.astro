@@ -1,19 +1,22 @@
 ---
 import type { ResourceItem } from "../data/resources";
+import ScienceIcon from "./ScienceIcon.astro";
 
 interface Props {
   resource: ResourceItem;
+  lang?: "en" | "fa";
 }
 
-const { resource } = Astro.props;
+const { resource, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const categoryLabels: Record<string, string> = { "Sleep deprivation": "کم‌خوابی", "Sleep health": "سلامت خواب", Guideline: "راهنما", Educational: "آموزشی", Clinical: "بالینی", Research: "پژوهشی", Public: "عمومی", External: "منبع خارجی" };
+const internalHref = `${fa ? "/fa" : ""}/resources/${resource.slug}`;
 ---
 
 <article
-  class="soft-card p-7 transition duration-300 hover:-translate-y-1"
+  class="content-card flex min-h-[21rem] flex-col p-7"
 >
-  <p class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
-    {resource.category}
-  </p>
+  <div class="flex items-center justify-between"><span class="icon-badge"><ScienceIcon name="book" class="h-6 w-6" /></span><p class="card-kicker">{fa ? (categoryLabels[resource.category] ?? resource.category) : resource.category}</p></div>
 
   <h2 class="mt-5 text-2xl font-medium leading-tight text-krism-950">
     {resource.title}
@@ -23,20 +26,26 @@ const { resource } = Astro.props;
     {resource.description}
   </p>
 
-  {
-    resource.url ? (
+  {(resource.source || resource.readTime || resource.audience) && <p class="mt-4 text-xs font-semibold leading-6 text-krism-muted">{[resource.source, resource.readTime || resource.audience].filter(Boolean).join(" · ")}</p>}
+
+  <div class="mt-auto pt-6">{
+    resource.internalPage ? (
+      <a href={internalHref} class="card-action">
+        {fa ? "مطالعه صفحه آموزشی" : "Read learning page"} <span aria-hidden="true">→</span>
+      </a>
+    ) : resource.url ? (
       <a
         href={resource.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+        class="card-action"
       >
-        Open resource →
+        {fa ? "مشاهده منبع خارجی ↗" : "Open external resource ↗"}
       </a>
     ) : (
       <span class="mt-6 inline-block text-sm font-medium text-krism-muted">
-        Coming soon
+        {fa ? "پیوند در دسترس نیست" : "Link unavailable"}
       </span>
     )
-  }
+  }</div>
 </article>

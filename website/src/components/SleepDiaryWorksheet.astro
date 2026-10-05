@@ -1,0 +1,39 @@
+---
+interface Props { lang?: "en" | "fa" }
+const { lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const days = Array.from({ length: 7 }, (_, index) => index + 1);
+const fields = fa
+  ? [["date","تاریخ"],["bed","رفتن به تخت"],["latency","مدت تا خواب"],["wake","بیدار شدن"],["awakenings","بیداری شبانه"],["nap","چرت"],["caffeine","کافئین / زمان"],["alertness","هوشیاری ۱–۴"],["notes","دارو، فعالیت و یادداشت"]]
+  : [["date","Date"],["bed","Bedtime"],["latency","Time to sleep"],["wake","Wake time"],["awakenings","Night waking"],["nap","Nap"],["caffeine","Caffeine / time"],["alertness","Alertness 1–4"],["notes","Medicine, activity & notes"]];
+---
+
+<section class="diary-print-section surface-paper border-y border-krism-border py-16 lg:py-20">
+  <div class="page-wrap">
+    <div class="learning-noprint flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div><p class="tech-label text-krism-600">{fa ? "کاربرگ اختصاصی KRISM" : "KRISM ORIGINAL WORKSHEET"}</p><h2 class="mt-3 text-3xl font-semibold text-krism-950">{fa ? "دفترچه هفت‌روزه خواب" : "Seven-day sleep diary"}</h2><p class="mt-3 max-w-2xl text-sm leading-7 text-krism-muted">{fa ? "این فرم اطلاعاتی ارسال یا ذخیره نمی‌کند. در مرورگر تکمیل و سپس چاپ کنید، یا نسخه خالی را چاپ کنید." : "This form does not send or save information. Complete it in your browser and print, or print a blank copy."}</p></div>
+      <div class="flex flex-wrap gap-3"><button type="button" data-diary-print class="rounded-full bg-krism-950 px-5 py-3 text-sm font-bold text-white hover:bg-krism-700">{fa ? "چاپ دفترچه" : "Print diary"}</button><button type="button" data-diary-clear class="rounded-full border border-krism-border bg-white px-5 py-3 text-sm font-bold text-krism-950">{fa ? "پاک کردن" : "Clear fields"}</button></div>
+    </div>
+
+    <div class="sleep-diary-sheet mt-10 rounded-[1.5rem] border border-krism-border bg-white/80 p-4 shadow-xl shadow-krism-950/8 sm:p-6">
+      <div class="mb-5 flex items-center justify-between gap-4"><div><p class="text-xl font-semibold text-krism-950">KRISM / {fa ? "ثبت خواب" : "SLEEP LOG"}</p><p class="mt-1 text-xs text-krism-muted">{fa ? "مقیاس هوشیاری: ۱ بسیار خواب‌آلود — ۴ هوشیار" : "Alertness scale: 1 very sleepy — 4 alert"}</p></div><span class="rounded-full border border-krism-border px-3 py-1 text-xs font-bold text-krism-600">7 DAYS</span></div>
+      <div class="overflow-x-auto">
+        <table class="diary-table w-full min-w-[76rem] border-collapse text-left text-xs rtl:text-right">
+          <thead><tr><th>{fa ? "روز" : "Day"}</th>{fields.map(([, label]) => <th>{label}</th>)}</tr></thead>
+          <tbody>{days.map((day) => <tr><th>{fa ? `روز ${day}` : `Day ${day}`}</th>{fields.map(([name, label]) => <td><label class="sr-only" for={`${name}-${day}`}>{label} — {fa ? `روز ${day}` : `day ${day}`}</label><input id={`${name}-${day}`} type="text" autocomplete="off" /></td>)}</tr>)}</tbody>
+        </table>
+      </div>
+      <div class="mt-5 grid gap-3 text-xs leading-6 text-krism-muted sm:grid-cols-3"><p>{fa ? "صبح: زمان‌ها، بیداری‌ها و احساس بیدار شدن" : "Morning: timing, awakenings, and how you feel"}</p><p>{fa ? "شب: چرت، کافئین، دارو، فعالیت و خواب‌آلودگی" : "Evening: naps, caffeine, medicine, activity, and sleepiness"}</p><p>{fa ? "برای تفسیر پزشکی، دفترچه را با متخصص مرور کنید." : "Review the diary with a clinician for medical interpretation."}</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-diary-print]').forEach((button) => button.addEventListener('click', () => window.print()));
+  document.querySelectorAll('[data-diary-clear]').forEach((button) => button.addEventListener('click', () => document.querySelectorAll('.sleep-diary-sheet input').forEach((input) => { if (input instanceof HTMLInputElement) input.value = ''; })));
+</script>
+
+<style>
+  .diary-table th,.diary-table td{border:1px solid rgba(10,35,51,.13);padding:.45rem}.diary-table thead th{background:#0a2333;color:white;font-weight:750}.diary-table tbody th{background:rgba(40,119,137,.09);color:#0a2333;white-space:nowrap}.diary-table input{width:100%;min-width:6rem;border:0;border-bottom:1px solid rgba(10,35,51,.15);background:transparent;padding:.45rem .25rem;outline:none}.diary-table input:focus{border-color:#287789;background:rgba(104,215,232,.06)}
+  @media print{header,footer,.record-hero,.learning-noprint,.learning-resource-body,.learning-related{display:none!important}.diary-print-section{border:0!important;background:white!important;padding:0!important}.sleep-diary-sheet{margin:0!important;border:0!important;box-shadow:none!important}.site-main{background:white!important}.diary-table input{min-width:4rem}}
+</style>

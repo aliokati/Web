@@ -1,0 +1,95 @@
+---
+import ScienceIcon from "./ScienceIcon.astro";
+import type { ResourceGraphic } from "../data/resources";
+
+interface Props { variant?: ResourceGraphic; lang?: "en" | "fa" }
+const { variant = "deprivation", lang = "en" } = Astro.props;
+const fa = lang === "fa";
+
+const labels = {
+  deprivation: fa ? ["مدت ناکافی", "زمان‌بندی نامناسب", "کیفیت پایین", "اختلال خواب"] : ["Too little", "Wrong timing", "Poor quality", "Sleep disorder"],
+  health: fa ? ["مغز و خلق", "قلب و سوخت‌وساز", "ایمنی و ترمیم", "عملکرد و ایمنی"] : ["Brain & mood", "Heart & metabolism", "Immunity & repair", "Performance & safety"],
+  habits: fa ? ["نور روز", "فعالیت", "آرام‌سازی", "محیط خواب"] : ["Daylight", "Activity", "Wind down", "Sleep environment"],
+  healthy: fa ? ["مقدار", "کیفیت", "نظم", "زمان‌بندی"] : ["Amount", "Quality", "Regularity", "Timing"],
+};
+---
+
+<figure class="learning-graphic" aria-label={fa ? "تصویر آموزشی اختصاصی KRISM" : "Original KRISM learning visual"}>
+  <div class="learning-graphic__scan" aria-hidden="true"></div>
+
+  {variant === "deprivation" && (
+    <div class="grid w-full gap-3 sm:grid-cols-2">
+      {labels.deprivation.map((label, index) => (
+        <div class="learning-data-cell">
+          <span class="learning-index">0{index + 1}</span>
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#68d7e8]/25 bg-[#68d7e8]/10 text-[#8ee8ef]"><ScienceIcon name={index === 3 ? "clinical" : index === 2 ? "moon" : "clock"} class="h-5 w-5" /></span>
+          <strong>{label}</strong>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {variant === "body-clock" && (
+    <div class="w-full">
+      <div class="mb-6 flex items-center justify-between text-xs font-bold text-white/55"><span>{fa ? "بیداری" : "WAKE"}</span><span class="text-[#f6d46b]">24H</span><span>{fa ? "خواب" : "SLEEP"}</span></div>
+      <svg viewBox="0 0 720 260" class="w-full" role="img" aria-label={fa ? "تعامل فشار خواب و ریتم شبانه‌روزی" : "Interaction of sleep pressure and circadian rhythm"}>
+        <defs><linearGradient id="sleepCurve" x1="0" x2="1"><stop stop-color="#68d7e8"/><stop offset="1" stop-color="#f6d46b"/></linearGradient></defs>
+        <path d="M20 210 C170 205 260 150 370 62 C470 5 560 55 700 135" fill="none" stroke="#68d7e8" stroke-width="7" stroke-linecap="round"/>
+        <path d="M20 135 C120 20 230 26 350 135 C470 245 580 238 700 135" fill="none" stroke="url(#sleepCurve)" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+        <circle cx="370" cy="62" r="10" fill="#f6d46b"/><circle cx="700" cy="135" r="8" fill="#68d7e8"/>
+      </svg>
+      <div class="mt-4 grid gap-2 text-xs sm:grid-cols-2"><span class="rounded-xl bg-white/6 px-4 py-3 text-[#aeeef2]">{fa ? "خط پیوسته: فشار خواب" : "Solid: sleep pressure"}</span><span class="rounded-xl bg-white/6 px-4 py-3 text-[#f7dc84]">{fa ? "خط‌چین: ساعت شبانه‌روزی" : "Dashed: circadian timing"}</span></div>
+    </div>
+  )}
+
+  {variant === "health-effects" && (
+    <div class="relative grid w-full gap-3 sm:grid-cols-2">
+      {labels.health.map((label, index) => (
+        <div class="learning-data-cell min-h-28">
+          <span class="learning-index">SYS-{index + 1}</span><ScienceIcon name={index === 0 ? "brain" : index === 1 ? "clinical" : index === 2 ? "shield" : "spark"} class="h-7 w-7 text-[#8ee8ef]"/><strong>{label}</strong>
+        </div>
+      ))}
+      <div class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#f6d46b]/40 bg-[#09232f] text-[#f6d46b] shadow-[0_0_2rem_rgba(246,212,107,.16)]"><ScienceIcon name="moon" class="h-9 w-9" /></div>
+    </div>
+  )}
+
+  {variant === "duration" && (
+    <div class="w-full space-y-4">
+      {[
+        [fa ? "۴–۱۲ ماه" : "4–12 months", "12–16", "100%"], [fa ? "۱–۵ سال" : "1–5 years", "10–14", "88%"], [fa ? "۶–۱۲ سال" : "6–12 years", "9–12", "75%"], [fa ? "۱۳–۱۸ سال" : "13–18 years", "8–10", "63%"], [fa ? "بزرگسال" : "Adult", "7–8", "50%"]
+      ].map(([age, hours, width]) => (
+        <div class="grid grid-cols-[6.5rem_1fr_3.4rem] items-center gap-3 text-xs sm:grid-cols-[8rem_1fr_4rem]"><span class="font-bold text-white/68">{age}</span><span class="h-3 overflow-hidden rounded-full bg-white/7"><i class="block h-full rounded-full bg-gradient-to-r from-[#287789] to-[#68d7e8]" style={`width:${width}`}></i></span><strong class="text-[#f6d46b]">{hours}h</strong></div>
+      ))}
+    </div>
+  )}
+
+  {variant === "habits" && (
+    <div class="grid w-full gap-3 sm:grid-cols-4">
+      {labels.habits.map((label, index) => (
+        <div class="learning-data-cell text-center"><span class="learning-index">{["07:00", "17:00", "22:00", "23:00"][index]}</span><ScienceIcon name={index === 0 ? "spark" : index === 1 ? "movement" : index === 2 ? "book" : "moon"} class="mx-auto h-7 w-7 text-[#8ee8ef]"/><strong>{label}</strong></div>
+      ))}
+    </div>
+  )}
+
+  {variant === "diary" && (
+    <div class="w-full rounded-2xl border border-white/10 bg-white/[.035] p-5">
+      <div class="mb-4 flex items-center justify-between"><strong class="text-lg text-white">{fa ? "۷ روز / یک الگو" : "7 days / one pattern"}</strong><ScienceIcon name="calendar" class="h-7 w-7 text-[#8ee8ef]" /></div>
+      <div class="grid grid-cols-7 gap-2">{Array.from({ length: 28 }).map((_, index) => <span class:list={["h-8 rounded-md border", index % 7 === 0 ? "border-[#f6d46b]/35 bg-[#f6d46b]/12" : "border-[#68d7e8]/16 bg-[#68d7e8]/7"]}></span>)}</div>
+      <svg viewBox="0 0 700 90" class="mt-5 w-full text-[#68d7e8]" aria-hidden="true"><path d="M0 55h80l12-20 16 42 22-64 24 42h92l15-28 22 50 28-60 24 38h95l13-22 20 44 30-64 24 42h115" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+    </div>
+  )}
+
+  {variant === "healthy-need" && (
+    <div class="grid w-full gap-3 sm:grid-cols-2">
+      {labels.healthy.map((label, index) => (
+        <div class="learning-data-cell min-h-28"><span class="learning-index">DIMENSION {index + 1}</span><span class="text-3xl font-semibold text-[#f6d46b]">{["7–8h", "≈", "↻", "☀"][index]}</span><strong>{label}</strong></div>
+      ))}
+    </div>
+  )}
+
+  <figcaption class="mt-6 text-xs leading-6 text-white/45">{fa ? "تصویر آموزشی اختصاصی KRISM؛ برای توضیح مفهومی و نه اندازه‌گیری بالینی" : "Original KRISM educational visual; conceptual, not a clinical measurement"}</figcaption>
+</figure>
+
+<style>
+  .learning-graphic{position:relative;overflow:hidden;border:1px solid rgba(104,215,232,.18);border-radius:2rem;background:radial-gradient(circle at 85% 4%,rgba(104,215,232,.18),transparent 18rem),linear-gradient(rgba(104,215,232,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(104,215,232,.045) 1px,transparent 1px),linear-gradient(145deg,#0d3441,#061923);background-size:auto,30px 30px,30px 30px,auto;padding:clamp(1.25rem,4vw,3rem);box-shadow:0 30px 80px rgba(3,17,25,.2);color:white}.learning-graphic__scan{position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 50%,rgba(104,215,232,.018) 50%);background-size:100% 5px}.learning-data-cell{position:relative;display:flex;flex-direction:column;justify-content:center;gap:.65rem;border:1px solid rgba(255,255,255,.1);border-radius:1rem;background:rgba(255,255,255,.045);padding:1rem}.learning-data-cell strong{font-size:.85rem;color:rgba(255,255,255,.82)}.learning-index{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.6rem;font-weight:800;letter-spacing:.12em;color:rgba(104,215,232,.58)}
+</style>

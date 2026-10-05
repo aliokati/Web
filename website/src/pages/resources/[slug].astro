@@ -1,0 +1,12 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import LearningResourcePage from "../../components/LearningResourcePage.astro";
+import { resources } from "../../data/resources";
+
+const resource = resources.find((item) => item.slug === Astro.params.slug && item.internalPage);
+if (!resource) return Astro.rewrite("/404");
+const structuredData = { "@context": "https://schema.org", "@type": "Article", headline: resource.title, description: resource.description, inLanguage: "en", dateModified: resource.reviewedAt, isBasedOn: resource.url, author: { "@type": "Organization", name: "KRISM" }, publisher: { "@type": "Organization", name: "KRISM" } };
+---
+<MainLayout title={`${resource.title} — KRISM`} description={resource.description} structuredData={structuredData}>
+  <LearningResourcePage resource={resource} allResources={resources} />
+</MainLayout>

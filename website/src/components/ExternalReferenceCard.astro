@@ -1,0 +1,20 @@
+---
+import ScienceIcon from "./ScienceIcon.astro";
+import type { ExternalReference } from "../data/affiliations";
+interface Props { item: ExternalReference; lang?: "en" | "fa"; }
+const { item, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+---
+
+<a href={item.url} target="_blank" rel="noreferrer" class="external-reference-card group flex min-h-[20rem] flex-col rounded-[1.6rem] border border-white/10 p-6 text-white transition hover:-translate-y-1 hover:border-[#68d7e8]/45">
+  <div class="flex items-start justify-between gap-4">
+    <span class="reference-mark" aria-hidden="true">{item.short}</span>
+    <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-[#68d7e8]"><ScienceIcon name={item.category === "journal" ? "book" : "globe"} class="h-5 w-5" /></span>
+  </div>
+  <div class="mt-auto pt-12">
+    <p class="font-mono text-xs font-bold uppercase tracking-[.12em] text-[#f6d46b]">{fa ? item.regionFa : item.region}</p>
+    <h2 class="mt-3 text-2xl font-medium leading-tight">{fa ? item.nameFa : item.name}</h2>
+    <p class="mt-4 text-sm leading-7 text-white/62">{fa ? item.descriptionFa : item.description}</p>
+    <p class="mt-6 flex items-center justify-between text-xs font-bold text-[#a9e8ed]"><span>{fa ? "وب‌سایت رسمی" : item.sourceLabel}</span><span>{fa ? "↖" : "↗"}</span></p>
+  </div>
+</a>

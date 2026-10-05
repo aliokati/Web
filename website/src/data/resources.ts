@@ -1,58 +1,29 @@
-export interface ResourceItem {
+import { createLiveCollection, createLocalizedCollection } from "../content-manager/live-data";
+import type { PublishingMetadata } from "../content-manager/types";
+
+export type ResourceGraphic = "deprivation" | "body-clock" | "health-effects" | "duration" | "habits" | "diary" | "healthy-need";
+
+export interface ResourceItem extends PublishingMetadata {
   slug: string;
   title: string;
-  category:
-    | "Guideline"
-    | "Educational"
-    | "Clinical"
-    | "Research"
-    | "Public"
-    | "External";
+  category: "Sleep deprivation" | "Sleep health" | "Guideline" | "Educational" | "Clinical" | "Research" | "Public" | "External" | string;
   description: string;
-  url?: string;
+  audience?: string;
+  source?: string;
+  url: string;
   featured?: boolean;
+  internalPage?: boolean;
+  graphic?: ResourceGraphic;
+  readTime?: string;
+  content?: string[];
+  takeaways?: string[];
+  practicalSteps?: string[];
+  warningSigns?: string[];
+  relatedSlugs?: string[];
+  downloadUrl?: string;
+  translations?: {
+    fa?: Partial<Pick<ResourceItem, "title" | "category" | "description" | "source" | "readTime" | "content" | "takeaways" | "practicalSteps" | "warningSigns">>;
+  };
 }
-
-export const resources: ResourceItem[] = [
-  {
-    slug: "sleep-medicine-guidelines",
-    title: "Sleep Medicine Guidelines",
-    category: "Guideline",
-    description:
-      "A future collection of relevant clinical guidelines and professional recommendations.",
-    featured: true,
-  },
-
-  {
-    slug: "sleep-medicine-education",
-    title: "Sleep Medicine Educational Materials",
-    category: "Educational",
-    description:
-      "Educational materials for healthcare professionals, students and researchers.",
-    featured: true,
-  },
-
-  {
-    slug: "clinical-sleep-resources",
-    title: "Clinical Sleep Resources",
-    category: "Clinical",
-    description:
-      "Clinical reference materials and resources related to sleep medicine.",
-  },
-
-  {
-    slug: "research-resources",
-    title: "Research Resources",
-    category: "Research",
-    description:
-      "Research-related resources for investigators working in sleep medicine.",
-  },
-
-  {
-    slug: "public-sleep-health",
-    title: "Sleep Health Information",
-    category: "Public",
-    description:
-      "Public-facing educational information about healthy sleep and sleep disorders.",
-  },
-];
+export const resources = createLiveCollection<ResourceItem>("resources");
+export const resourcesFa = createLocalizedCollection<ResourceItem>("resources", "fa");

@@ -1,10 +1,13 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+const isPersian = Astro.url.pathname === "/fa" || Astro.url.pathname.startsWith("/fa/");
 ---
 
 <MainLayout
-  title="Page Not Found — KRISM"
-  description="The requested KRISM page could not be found."
+  lang={isPersian ? "fa" : "en"}
+  title={isPersian ? "صفحه پیدا نشد — KRISM" : "Page Not Found — KRISM"}
+  description={isPersian ? "صفحه مورد نظر در وب‌سایت KRISM پیدا نشد." : "The requested KRISM page could not be found."}
+  robots="noindex, follow"
 >
 
   <section class="flex min-h-[65vh] items-center">
@@ -15,32 +18,32 @@ import MainLayout from "../layouts/MainLayout.astro";
       </p>
 
       <h1 class="mt-5 text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl">
-        Page not found
+        {isPersian ? "صفحه پیدا نشد" : "Page not found"}
       </h1>
 
       <p class="mx-auto mt-6 max-w-xl text-base leading-8 text-krism-muted">
-        The page you are looking for does not exist or may have moved.
+        {isPersian ? "صفحه مورد نظر وجود ندارد یا ممکن است جابه‌جا شده باشد." : "The page you are looking for does not exist or may have moved."}
       </p>
 
       <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
 
         <a
-          href="/"
+          href={isPersian ? "/fa" : "/"}
           class="rounded-full bg-krism-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-krism-800"
         >
-          Return home
+          {isPersian ? "بازگشت به خانه" : "Return home"}
         </a>
 
         <a
-          href="/contact"
+          href={isPersian ? "/fa/contact" : "/contact"}
           class="rounded-full border border-krism-border bg-white px-6 py-3 text-sm font-semibold text-krism-900 transition hover:border-krism-500 hover:text-krism-600"
         >
-          Contact KRISM
+          {isPersian ? "تماس با KRISM" : "Contact KRISM"}
         </a>
 
       </div>
 
-      <div class="mt-16 border-t border-krism-border pt-10">
+      {!isPersian && <div class="mt-16 border-t border-krism-border pt-10">
 
         <p
           class="text-sm font-medium text-krism-900"
@@ -65,7 +68,7 @@ import MainLayout from "../layouts/MainLayout.astro";
           </a>
         </div>
 
-      </div>
+      </div>}
 
     </div>
   </section>

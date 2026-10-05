@@ -12,6 +12,7 @@ import { networkMembers } from "../data/network";
 >
   <PageHero
     eyebrow="KRISM Network"
+    icon="network"
     title="Connecting the sleep medicine community."
     description="A professional and institutional network connecting clinicians, researchers, organizations and institutions working in sleep medicine across Khorasan."
   />
@@ -25,9 +26,9 @@ import { networkMembers } from "../data/network";
     />
 
     <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {networkMembers.map((member) => (
+      {networkMembers.length ? networkMembers.map((member) => (
         <NetworkCard member={member} />
-      ))}
+      )) : <div class="md:col-span-2 lg:col-span-3 rounded-2xl border border-dashed border-krism-border bg-krism-surface p-10 text-center"><p class="font-semibold text-krism-950">The verified public directory is being prepared.</p><p class="mt-3 text-sm leading-7 text-krism-muted">Profiles are published only with approval from the person or institution represented.</p></div>}
     </div>
 
   </section>

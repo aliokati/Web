@@ -1,41 +1,41 @@
 ---
-import type { ResourceItem } from "../data/resources";
+import type { Publication } from "../data/publications";
+import ScienceIcon from "./ScienceIcon.astro";
 
 interface Props {
-  resource: ResourceItem;
+  publication: Publication;
+  lang?: "en" | "fa";
 }
 
-const { resource } = Astro.props;
+const { publication, lang = "en" } = Astro.props;
+const fa = lang === "fa";
 
 ---
 <article
-  class="soft-card mb-5 p-7 transition duration-300 hover:-translate-y-1"
+  class="content-card mb-5 p-7"
 >
-  <p class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
-    {resource.category}
-  </p>
+  <div class="flex items-center gap-3"><span class="icon-badge"><ScienceIcon name="research" class="h-6 w-6" /></span><p class="card-kicker">{publication.category ?? (fa ? "انتشار علمی" : "Publication")}</p></div>
 
   <h2 class="mt-5 text-2xl font-medium leading-tight text-krism-950">
-    {resource.title}
+    {publication.title}
   </h2>
 
-  <p class="mt-3 text-sm leading-7 text-krism-muted">
-    {resource.description}
-  </p>
+  <p class="mt-3 text-sm leading-7 text-krism-muted">{publication.authors}</p>
+  <p class="mt-1 text-sm leading-7 text-krism-muted">{publication.journal} · {publication.year}</p>
 
   {
-    resource.url ? (
+    publication.url ? (
       <a
-        href={resource.url}
+        href={publication.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-6 inline-block text-sm font-semibold text-krism-600 hover:text-krism-900"
+        class="card-action mt-6"
       >
-        Open resource →
+        {fa ? "مطالعه مقاله ←" : "Open publication →"}
       </a>
     ) : (
       <span class="mt-6 inline-block text-sm font-medium text-krism-muted">
-        Coming soon
+        {fa ? "پیوند در دسترس نیست" : "Link unavailable"}
       </span>
     )
   }

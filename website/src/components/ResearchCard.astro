@@ -1,26 +1,27 @@
 ---
 import type { ResearchItem } from "../data/research";
+import ScienceIcon from "./ScienceIcon.astro";
 
 interface Props {
   project: ResearchItem;
+  lang?: "en" | "fa";
 }
 
-const { project } = Astro.props;
+const { project, lang = "en" } = Astro.props;
+const fa = lang === "fa";
 ---
 
 <a
-  href={`/research/${project.slug}`}
-  class="group soft-card block p-7 transition duration-300 hover:-translate-y-1"
+  href={`${fa ? "/fa" : ""}/research/${project.slug}`}
+  class="content-card group block min-h-full p-7"
 >
 
   <div class="flex items-start justify-between gap-4">
 
-    <span class="text-xs font-semibold uppercase tracking-[0.15em] text-krism-600">
-      {project.type}
-    </span>
+    <span class="flex items-center gap-3"><span class="icon-badge"><ScienceIcon name="research" class="h-6 w-6" /></span><span class="card-kicker">{project.type}</span></span>
 
     <span class="rounded-full bg-krism-surface px-3 py-1 text-xs text-krism-muted">
-      {project.registrationOpen}
+      {project.statusLabel ?? (fa ? "پروژه پژوهشی" : "Research project")}
     </span>
 
   </div>
@@ -36,14 +37,14 @@ const { project } = Astro.props;
   </p>
 
 
-  <div class="mt-7 flex items-center justify-between text-sm">
+  <div class="mt-8 flex items-center justify-between border-t border-krism-border/70 pt-5 text-sm">
 
     <span class="text-krism-muted">
       {project.date}
     </span>
 
-    <span class="font-semibold text-krism-600">
-      View project →
+    <span class="card-action">
+      {fa ? "مشاهده پروژه" : "View project"} <span>{fa ? "←" : "→"}</span>
     </span>
 
   </div>

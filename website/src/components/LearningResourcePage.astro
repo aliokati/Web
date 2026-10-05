@@ -1,0 +1,82 @@
+---
+import type { ResourceItem } from "../data/resources";
+import RecordHero from "./RecordHero.astro";
+import LearningGraphic from "./LearningGraphic.astro";
+import SleepDiaryWorksheet from "./SleepDiaryWorksheet.astro";
+import ScienceIcon from "./ScienceIcon.astro";
+
+interface Props { resource: ResourceItem; allResources: ResourceItem[]; lang?: "en" | "fa" }
+const { resource, allResources, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const prefix = fa ? "/fa" : "";
+const related = (resource.relatedSlugs ?? []).map((slug) => allResources.find((item) => item.slug === slug && item.internalPage)).filter(Boolean) as ResourceItem[];
+const reviewed = resource.reviewedAt ? new Intl.DateTimeFormat(fa ? "fa-IR" : "en-GB", { year: "numeric", month: "short", day: "numeric" }).format(new Date(`${resource.reviewedAt}T12:00:00Z`)) : (fa ? "در حال بازبینی" : "Review pending");
+const durationRows = fa
+  ? [["۴ تا ۱۲ ماه", "۱۲ تا ۱۶ ساعت، شامل چرت"], ["۱ تا ۲ سال", "۱۱ تا ۱۴ ساعت، شامل چرت"], ["۳ تا ۵ سال", "۱۰ تا ۱۳ ساعت، شامل چرت"], ["۶ تا ۱۲ سال", "۹ تا ۱۲ ساعت"], ["۱۳ تا ۱۸ سال", "۸ تا ۱۰ ساعت"], ["۱۸ سال و بیشتر", "۷ تا ۸ ساعت"]]
+  : [["4–12 months", "12–16 hours, including naps"], ["1–2 years", "11–14 hours, including naps"], ["3–5 years", "10–13 hours, including naps"], ["6–12 years", "9–12 hours"], ["13–18 years", "8–10 hours"], ["18 years and older", "7–8 hours"]];
+---
+
+<RecordHero icon="book" eyebrow={resource.category} title={resource.title} description={resource.description} meta={[
+  { label: fa ? "قالب" : "Format", value: fa ? "آموزش عمومی" : "Public learning" },
+  { label: fa ? "زمان" : "Reading", value: resource.readTime || (fa ? "مطالعه کوتاه" : "Short read") },
+  { label: fa ? "بازبینی" : "Reviewed", value: reviewed },
+]} />
+
+<article class="learning-resource-body surface-paper">
+  <div class="page-wrap grid gap-12 py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,.95fr)] lg:py-24">
+    <div>
+      <div class="flex items-center gap-3"><span class="status-beacon"></span><p class="tech-label text-krism-600">{fa ? "مرور علمی برای عموم" : "SCIENCE, MADE USEFUL"}</p></div>
+      <div class="mt-8 space-y-7">{(resource.content ?? []).map((paragraph) => <p class="text-base leading-8 text-krism-text lg:text-lg lg:leading-9">{paragraph}</p>)}</div>
+
+      {resource.graphic === "duration" && (
+        <section class="mt-12 overflow-hidden rounded-3xl border border-krism-border bg-white/75">
+          <div class="bg-krism-950 px-6 py-5 text-white"><p class="tech-label text-[#8ee8ef]">{fa ? "راهنمای سنی NHLBI" : "NHLBI AGE GUIDE"}</p><h2 class="mt-2 text-2xl font-semibold">{fa ? "مقدار خواب توصیه‌شده" : "Recommended sleep duration"}</h2></div>
+          <div>{durationRows.map(([age, amount]) => <div class="grid grid-cols-[.8fr_1.2fr] gap-5 border-b border-krism-border px-6 py-4 last:border-0"><strong class="text-sm text-krism-950">{age}</strong><span class="text-sm text-krism-muted">{amount}</span></div>)}</div>
+        </section>
+      )}
+
+      <section class="mt-12 rounded-3xl border border-krism-border bg-white/70 p-7 sm:p-9">
+        <p class="tech-label text-krism-600">{fa ? "ایده‌های کلیدی" : "KEY IDEAS"}</p>
+        <ul class="mt-6 space-y-4">{(resource.takeaways ?? []).map((item, index) => <li class="grid grid-cols-[2rem_1fr] gap-3 text-sm leading-7 text-krism-text"><span class="font-mono text-xs font-bold text-krism-600">0{index + 1}</span><span>{item}</span></li>)}</ul>
+      </section>
+    </div>
+
+    <aside class="space-y-8 lg:sticky lg:top-32 lg:self-start">
+      <LearningGraphic variant={resource.graphic} lang={lang} />
+      <div class="rounded-3xl border border-krism-border bg-krism-950 p-7 text-white shadow-2xl shadow-krism-950/15">
+        <div class="flex items-center gap-3"><ScienceIcon name="spark" class="h-6 w-6 text-[#8ee8ef]"/><h2 class="text-xl font-semibold">{fa ? "از دانستن تا عمل" : "From knowledge to action"}</h2></div>
+        <ul class="mt-6 space-y-4">{(resource.practicalSteps ?? []).map((item) => <li class="flex gap-3 text-sm leading-7 text-white/72"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f6d46b]"></span><span>{item}</span></li>)}</ul>
+      </div>
+    </aside>
+  </div>
+
+  {(resource.warningSigns?.length ?? 0) > 0 && (
+    <section class="surface-night border-y border-white/8 py-16 text-white">
+      <div class="page-wrap grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-start">
+        <div><p class="tech-label text-[#f6d46b]">{fa ? "چه زمانی کمک بگیریم" : "WHEN TO SEEK HELP"}</p><h2 class="mt-4 text-3xl font-semibold">{fa ? "ایمنی را جدی بگیرید." : "Take safety seriously."}</h2><p class="mt-4 text-sm leading-7 text-white/58">{fa ? "این صفحه تشخیص پزشکی ارائه نمی‌کند. اگر علائم شدید، پایدار یا خطرناک‌اند، ارزیابی حرفه‌ای بگیرید." : "This page does not diagnose. Seek professional assessment for severe, persistent, or safety-critical symptoms."}</p></div>
+        <div class="grid gap-3 sm:grid-cols-2">{resource.warningSigns?.map((item) => <div class="rounded-2xl border border-white/10 bg-white/[.045] p-5 text-sm leading-7 text-white/76"><span class="mb-3 block h-1.5 w-10 rounded-full bg-gradient-to-r from-[#e67b67] to-[#f6d46b]"></span>{item}</div>)}</div>
+      </div>
+    </section>
+  )}
+</article>
+
+{resource.graphic === "diary" && <SleepDiaryWorksheet lang={lang} />}
+
+<section class="learning-related surface-mineral py-16 lg:py-20">
+  <div class="page-wrap">
+    <div class="grid gap-8 lg:grid-cols-[.75fr_1.25fr]">
+      <div>
+        <p class="tech-label text-krism-600">{fa ? "منبع و حقوق استفاده" : "SOURCE & REUSE"}</p>
+        <h2 class="mt-4 text-3xl font-semibold text-krism-950">{fa ? "شفافیت منبع" : "Source transparency"}</h2>
+        <p class="mt-4 text-sm leading-7 text-krism-muted">{fa ? "این ترجمه، بازنویسی و تصویرسازی آموزشی توسط KRISM بر پایه منبع رسمی پیوندشده تهیه شده است. بیشتر اطلاعات NIH در مالکیت عمومی است، مگر آنکه خلاف آن ذکر شود؛ برای نسخه به‌روز همیشه منبع اصلی را بررسی کنید. استفاده از نام منبع به معنای تأیید KRISM توسط NIH نیست و هیچ نشان یا تصویر NHLBI بازنشر نشده است." : "This KRISM translation, paraphrase, and educational visual are based on the linked official source. Most NIH information is public domain unless noted; always check the original for updates. Attribution does not imply NIH endorsement, and no NHLBI logos or photography are reproduced."}</p>
+        <a href={resource.url} target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex rounded-full bg-krism-950 px-5 py-3 text-sm font-bold text-white hover:bg-krism-700">{fa ? "مشاهده منبع رسمی ↗" : "View official source ↗"}</a>
+        {resource.downloadUrl && <a href={resource.downloadUrl} target="_blank" rel="noopener noreferrer" class="mt-3 block text-sm font-bold text-krism-700 hover:text-krism-950">{fa ? "دریافت فایل اصلی NHLBI ↗" : "Open original NHLBI PDF ↗"}</a>}
+      </div>
+      <div>
+        <p class="tech-label text-krism-600">{fa ? "ادامه یادگیری" : "KEEP LEARNING"}</p>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">{related.map((item) => <a href={`${prefix}/resources/${item.slug}`} class="lift-link rounded-2xl border border-krism-border bg-white/70 p-5"><p class="text-xs font-bold text-krism-600">{item.category}</p><h3 class="mt-2 text-xl font-semibold text-krism-950">{item.title}</h3><span class="mt-4 inline-block text-xs font-bold text-krism-600">{fa ? "مطالعه ←" : "Read →"}</span></a>)}</div>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col gap-4 border-t border-krism-border pt-8 text-sm leading-7 text-krism-muted sm:flex-row sm:items-center sm:justify-between"><p>{fa ? "مطالب این بخش آموزشی‌اند و جایگزین ارزیابی یا توصیه پزشکی فردی نیستند." : "This material is educational and does not replace individual medical assessment or advice."}</p><a href={`${prefix}/resources`} class="shrink-0 font-bold text-krism-700 hover:text-krism-950">{fa ? "← همه منابع" : "← All resources"}</a></div>
+  </div>
+</section>

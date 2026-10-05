@@ -1,0 +1,13 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ExternalReferenceCard from "../components/ExternalReferenceCard.astro";
+import { organizations, journals } from "../data/affiliations";
+---
+
+<MainLayout title="Sleep Medicine Organizations & Journals — KRISM" description="A curated directory of professional sleep-medicine organizations, academies and journals.">
+  <PageHero eyebrow="Scientific ecosystem" icon="globe" title="Organizations, academies and journals." description="A curated gateway to established sleep-medicine organizations and peer-reviewed publishing. External listing does not imply endorsement or formal affiliation." />
+  <section class="surface-night text-white"><div class="page-wrap py-20 lg:py-28"><div class="max-w-3xl"><p class="tech-label text-[#68d7e8]">DIRECTORY / ORGANIZATIONS</p><h2 class="mt-5 text-4xl font-medium sm:text-5xl">Professional organizations</h2><p class="mt-5 text-base leading-8 text-white/62">Use these links to reach the source organization directly. KRISM does not reproduce third-party standards or imply a partnership unless it is explicitly confirmed.</p></div><div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{organizations.map((item) => <ExternalReferenceCard item={item} />)}</div></div></section>
+  <section class="surface-teal text-white"><div class="page-wrap py-20 lg:py-28"><div class="max-w-3xl"><p class="tech-label text-[#f6d46b]">DIRECTORY / JOURNALS</p><h2 class="mt-5 text-4xl font-medium sm:text-5xl">Sleep-science journals</h2><p class="mt-5 text-base leading-8 text-white/62">Publisher links for discovering current peer-reviewed sleep and circadian research. Access conditions and copyright remain with each publisher.</p></div><div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{journals.map((item) => <ExternalReferenceCard item={item} />)}</div></div></section>
+  <section class="surface-paper"><div class="page-wrap py-14"><p class="max-w-4xl text-sm leading-7 text-krism-muted"><strong class="text-krism-950">Names and marks:</strong> Organization and journal names belong to their respective owners and are presented only for identification and linking. Protected logos are not reproduced without an approved asset or documented permission. Please report a changed URL through the KRISM contact page.</p></div></section>
+</MainLayout>

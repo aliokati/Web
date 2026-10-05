@@ -1,0 +1,29 @@
+---
+interface Props { eventSlug: string; lang?: "en" | "fa"; }
+const { eventSlug, lang = "en" } = Astro.props;
+const fa = lang === "fa";
+const t = (en:string,faText:string) => fa ? faText : en;
+---
+
+<form class="event-registration-form grid gap-5 sm:grid-cols-2" data-event-form data-event={eventSlug} data-locale={lang}>
+  <label><span class="form-label">{t("Full name", "نام و نام خانوادگی")}</span><input name="fullName" required minlength="2" maxlength="120" autocomplete="name" class="form-control" /></label>
+  <label><span class="form-label">{t("Email", "ایمیل")}</span><input name="email" type="email" required maxlength="254" autocomplete="email" class="form-control" /></label>
+  <label><span class="form-label">{t("Phone (optional)", "تلفن (اختیاری)")}</span><input name="phone" type="tel" maxlength="50" autocomplete="tel" class="form-control" /></label>
+  <label><span class="form-label">{t("City", "شهر")}</span><input name="city" maxlength="120" autocomplete="address-level2" class="form-control" /></label>
+  <label><span class="form-label">{t("Institution", "مؤسسه / دانشگاه")}</span><input name="institution" required maxlength="180" autocomplete="organization" class="form-control" /></label>
+  <label><span class="form-label">{t("Profession / specialty", "حرفه / تخصص")}</span><input name="profession" required maxlength="120" autocomplete="organization-title" class="form-control" /></label>
+  <label class="sm:col-span-2"><span class="form-label">{t("Attendance mode", "نحوه شرکت")}</span><select name="attendanceMode" required class="form-control"><option value="">{t("Choose an option", "یک گزینه انتخاب کنید")}</option><option value="in-person">{t("In person", "حضوری")}</option><option value="online">{t("Online", "آنلاین")}</option><option value="either">{t("Either / no preference", "بدون ترجیح")}</option></select></label>
+  <label class="sm:col-span-2"><span class="form-label">{t("Accessibility requirements (optional)", "نیازهای دسترسی‌پذیری (اختیاری)")}</span><textarea name="accessibility" maxlength="1000" rows="3" class="form-control resize-y"></textarea></label>
+  <label class="sm:col-span-2"><span class="form-label">{t("Dietary requirements (optional)", "نیازهای غذایی (اختیاری)")}</span><input name="dietary" maxlength="500" class="form-control" /></label>
+  <label class="hidden" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+  <label class="sm:col-span-2 flex items-start gap-3 rounded-xl border border-krism-border bg-krism-surface/70 p-4"><input name="consent" type="checkbox" required class="mt-1 h-4 w-4 accent-krism-700" /><span class="text-xs leading-6 text-krism-muted">{t("I agree that KRISM may store and use these details to administer this event registration. I understand this is not a healthcare consultation.", "موافقم KRISM این اطلاعات را برای مدیریت ثبت‌نام رویداد ذخیره و استفاده کند. می‌دانم این فرم مشاوره پزشکی نیست.")}</span></label>
+  <div class="sm:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center"><button type="submit" class="rounded-full bg-krism-950 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-krism-700">{t("Submit registration", "ثبت‌نام")}</button><p class="form-status text-sm font-semibold text-krism-700" role="status" aria-live="polite"></p></div>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-event-form]").forEach((form) => form.addEventListener("submit", async (event) => {
+    event.preventDefault(); const button=form.querySelector<HTMLButtonElement>('button[type="submit"]'); const status=form.querySelector<HTMLElement>(".form-status"); if(!button||!status||!form.reportValidity())return;
+    button.disabled=true; status.textContent=form.dataset.locale==="fa"?"در حال ثبت…":"Submitting…"; const payload=Object.fromEntries(new FormData(form).entries()) as Record<string,unknown>; payload.consent=Boolean(form.querySelector<HTMLInputElement>('[name="consent"]')?.checked); payload.locale=form.dataset.locale||"en";
+    try{const response=await fetch(`/api/forms/register/${encodeURIComponent(form.dataset.event||"")}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const data=await response.json();if(!response.ok)throw new Error(data.error||"Registration failed");form.reset();status.textContent=form.dataset.locale==="fa"?`ثبت‌نام دریافت شد. کد پیگیری: ${data.reference}`:`Registration received. Reference: ${data.reference}`;}catch(error){status.textContent=error instanceof Error?error.message:"Registration failed";}finally{button.disabled=false;}
+  }));
+</script>

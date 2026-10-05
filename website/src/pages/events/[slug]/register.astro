@@ -1,0 +1,14 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import RecordHero from "../../../components/RecordHero.astro";
+import EventRegistrationForm from "../../../components/EventRegistrationForm.astro";
+import { events } from "../../../data/events";
+const event = events.find((item) => item.slug === Astro.params.slug);
+if (!event || !event.registrationOpen || (event.registrationMode ?? "internal") !== "internal") return Astro.rewrite("/404");
+const date = new Date(event.date).toLocaleDateString("en-US", { year:"numeric",month:"long",day:"numeric" });
+---
+
+<MainLayout title={`Register — ${event.title} — KRISM`} description={`Registration for ${event.title}.`} robots="noindex, follow">
+  <RecordHero icon="calendar" eyebrow="Event registration" title={event.title} description="Submit one registration per attendee. A reference number will be shown after successful submission." meta={[{label:"Date",value:date},{label:"Location",value:event.location},{label:"Privacy",value:"Private submission"}]} />
+  <section class="surface-mineral"><div class="page-wrap grid gap-10 py-20 lg:grid-cols-[.72fr_1.28fr]"><aside><p class="tech-label text-krism-600">REGISTRATION / INFORMATION</p><h2 class="mt-5 text-3xl font-medium text-krism-950">Before you register</h2><ul class="mt-7 space-y-4 text-sm leading-7 text-krism-muted"><li class="border-s-2 border-krism-500/25 ps-4">Your details are used only to administer this event.</li><li class="border-s-2 border-krism-500/25 ps-4">Do not enter medical records or confidential patient information.</li><li class="border-s-2 border-krism-500/25 ps-4">Keep the reference number shown after submission.</li>{event.registrationDeadline && <li class="border-s-2 border-krism-500/25 ps-4">Registration deadline: {event.registrationDeadline}</li>}{event.capacity && <li class="border-s-2 border-krism-500/25 ps-4">Planned capacity: {event.capacity} attendees.</li>}</ul></aside><div class="rounded-[1.8rem] border border-krism-border bg-white/80 p-6 shadow-[0_28px_80px_rgba(5,31,41,.12)] sm:p-9"><h2 class="text-3xl font-medium text-krism-950">Attendee details</h2><p class="mt-3 text-sm leading-7 text-krism-muted">Fields marked by the browser as required must be completed.</p><div class="mt-8"><EventRegistrationForm eventSlug={event.slug} /></div></div></div></section>
+</MainLayout>

@@ -7,7 +7,9 @@ import PublicationCard from "../components/PublicationCard.astro";
 import { resources } from "../data/resources";
 import { publications } from "../data/publications";
 
-const featuredResources = resources.filter((resource) => resource.featured);
+const sleepDeprivation = resources.filter((resource) => resource.internalPage && resource.category === "Sleep deprivation");
+const sleepHealth = resources.filter((resource) => resource.internalPage && resource.category === "Sleep health");
+const externalResources = resources.filter((resource) => !resource.internalPage);
 ---
 
 <MainLayout
@@ -16,26 +18,31 @@ const featuredResources = resources.filter((resource) => resource.featured);
 >
   <PageHero
     eyebrow="Resources"
+    icon="book"
     title="Knowledge and resources for sleep medicine."
     description="A growing collection of educational materials, clinical resources, research references and public sleep health information."
   />
 
-  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-
-    <SectionHeader
-      eyebrow="Resources"
-      title="Explore our resources"
-      description="Resources will grow as KRISM develops its educational and scientific activities."
-    />
-
-    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {resources.map((resource) => (
-        <ResourceCard resource={resource} />
-      ))}
+  <section class="surface-mineral py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <SectionHeader eyebrow="Sleep deprivation" title="Understand sleep loss through trusted science" description="Four original KRISM learning pages explain sleep deficiency, body-clock biology, health effects, and sleep needs—with transparent links to NHLBI." />
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">{sleepDeprivation.map((resource) => <ResourceCard resource={resource} />)}</div>
     </div>
-
   </section>
 
+  <section class="surface-paper py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <SectionHeader eyebrow="Sleep health" title="Build a healthier sleep pattern" description="Practical education for everyday sleep, including an original browser-based sleep diary you can print and discuss with a professional." />
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{sleepHealth.map((resource) => <ResourceCard resource={resource} />)}</div>
+    </div>
+  </section>
+
+  <section class="surface-night py-20 text-white">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="tech-label text-[#8ee8ef]">External gateways</p><h2 class="mt-4 text-4xl font-semibold">Continue with established organizations</h2><p class="mt-4 max-w-2xl text-sm leading-7 text-white/60">These links open third-party websites. Their inclusion is for education and does not imply endorsement.</p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">{externalResources.map((resource) => <ResourceCard resource={resource} />)}</div>
+    </div>
+  </section>
 
   <section class="border-t border-krism-border bg-white">
     <div class="mx-auto max-w-4xl px-6 py-20 lg:px-8">
@@ -47,9 +54,9 @@ const featuredResources = resources.filter((resource) => resource.featured);
       />
 
       <div class="mt-10">
-        {resources.map((project) => (
-          <PublicationCard resource={project} />
-        ))}
+        {publications.length ? publications.map((publication) => (
+          <PublicationCard publication={publication} />
+        )) : <div class="rounded-2xl border border-dashed border-krism-border bg-krism-surface p-8 text-sm leading-7 text-krism-muted">Verified KRISM-associated publications will appear here after bibliographic review.</div>}
       </div>
 
     </div>

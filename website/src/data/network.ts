@@ -1,45 +1,5 @@
-export interface NetworkMember {
-  slug: string;
-  name: string;
-  type: "Professional" | "Researcher" | "Organization" | "Institution";
-  specialty?: string;
-  affiliation?: string;
-  city?: string;
-  description: string;
-  website?: string;
-  featured?: boolean;
-}
-
-export const networkMembers: NetworkMember[] = [
-  {
-    slug: "krism-research-group",
-    name: "KRISM Research Group",
-    type: "Researcher",
-    specialty: "Sleep Medicine",
-    affiliation: "KRISM",
-    city: "Mashhad",
-    description:
-      "Placeholder research group profile for demonstrating the KRISM professional network.",
-    featured: true,
-  },
-
-  {
-    slug: "sleep-medicine-institution",
-    name: "Example Sleep Medicine Institution",
-    type: "Institution",
-    specialty: "Sleep Medicine",
-    city: "Mashhad",
-    description:
-      "Placeholder institution profile. Replace with an official participating institution.",
-  },
-
-  {
-    slug: "example-medical-society",
-    name: "Example Medical Society",
-    type: "Organization",
-    specialty: "Sleep Medicine",
-    city: "Mashhad",
-    description:
-      "Placeholder organization profile for demonstrating the KRISM network.",
-  },
-];
+import { createLiveCollection, createLocalizedCollection } from "../content-manager/live-data";
+import type { PublishingMetadata } from "../content-manager/types";
+export interface NetworkMember extends PublishingMetadata { slug: string; name: string; type: "Professional" | "Researcher" | "Organization" | "Institution" | string; credentials?: string; specialty?: string; affiliation?: string; city?: string; languages?: string[]; description: string; website?: string; publicConsent?: boolean; featured?: boolean; translations?: { fa?: Partial<Pick<NetworkMember, "name" | "type" | "credentials" | "specialty" | "affiliation" | "city" | "languages" | "description">> } }
+export const networkMembers = createLiveCollection<NetworkMember>("network");
+export const networkMembersFa = createLocalizedCollection<NetworkMember>("network", "fa");

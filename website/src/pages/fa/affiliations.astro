@@ -1,0 +1,13 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ExternalReferenceCard from "../../components/ExternalReferenceCard.astro";
+import { organizations, journals } from "../../data/affiliations";
+---
+
+<MainLayout lang="fa" title="سازمان‌ها و مجلات پزشکی خواب — KRISM" description="فهرست منتخب سازمان‌ها، آکادمی‌ها و مجلات معتبر پزشکی خواب.">
+  <PageHero eyebrow="زیست‌بوم علمی" icon="globe" title="سازمان‌ها، آکادمی‌ها و مجلات" description="درگاهی منتخب به سازمان‌های شناخته‌شده پزشکی خواب و مجلات داوری‌شده؛ درج پیوند به‌معنای تأیید یا وابستگی رسمی نیست." />
+  <section class="surface-night text-white"><div class="page-wrap py-20 lg:py-28"><div class="max-w-3xl"><p class="tech-label text-[#68d7e8]">فهرست / سازمان‌ها</p><h2 class="mt-5 text-4xl font-medium sm:text-5xl">سازمان‌های حرفه‌ای</h2><p class="mt-5 text-base leading-8 text-white/62">هر پیوند شما را مستقیماً به منبع اصلی می‌برد. KRISM استانداردهای دیگر سازمان‌ها را بازنشر نمی‌کند و همکاری تأییدنشده‌ای را القا نمی‌کند.</p></div><div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{organizations.map((item) => <ExternalReferenceCard item={item} lang="fa" />)}</div></div></section>
+  <section class="surface-teal text-white"><div class="page-wrap py-20 lg:py-28"><div class="max-w-3xl"><p class="tech-label text-[#f6d46b]">فهرست / مجلات</p><h2 class="mt-5 text-4xl font-medium sm:text-5xl">مجلات علم خواب</h2><p class="mt-5 text-base leading-8 text-white/62">پیوند ناشران برای دسترسی به پژوهش‌های داوری‌شده خواب و ریتم شبانه‌روزی؛ شرایط دسترسی و حقوق نشر متعلق به ناشر است.</p></div><div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{journals.map((item) => <ExternalReferenceCard item={item} lang="fa" />)}</div></div></section>
+  <section class="surface-paper"><div class="page-wrap py-14"><p class="max-w-4xl text-sm leading-8 text-krism-muted"><strong class="text-krism-950">نام‌ها و نشان‌ها:</strong> نام سازمان‌ها و مجلات متعلق به مالکان آن‌هاست و فقط برای شناسایی و پیوند ارائه شده است. لوگوهای حفاظت‌شده بدون فایل موردتأیید یا اجازه مستند بازنشر نمی‌شوند.</p></div></section>
+</MainLayout>

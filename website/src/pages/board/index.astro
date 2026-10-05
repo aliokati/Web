@@ -1,0 +1,13 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import BoardMemberCard from "../../components/BoardMemberCard.astro";
+import { boardMembers } from "../../data/board";
+const members = [...boardMembers].sort((a,b) => (a.displayOrder ?? 100) - (b.displayOrder ?? 100));
+---
+
+<MainLayout title="Research Board — KRISM" description="KRISM research-board members, expertise, academic history and selected scholarly work.">
+  <PageHero eyebrow="Scientific leadership" icon="clinical" title="Research board" description="The clinicians and researchers responsible for scientific direction, review and responsible development of KRISM programs." />
+  <section class="surface-night text-white"><div class="page-wrap py-20 lg:py-28"><div class="grid gap-5 xl:grid-cols-2">{members.length ? members.map((member) => <BoardMemberCard member={member} />) : <div class="science-illustration xl:col-span-2 px-7 py-16 text-center"><p class="tech-label text-[#68d7e8]">BOARD / VERIFICATION</p><h2 class="mx-auto mt-6 max-w-3xl text-4xl font-medium">Verified profiles are being prepared.</h2><p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/62">Board biographies will appear only after each member’s role, credentials, portrait rights and public contact preferences have been confirmed.</p><a href="/contact" class="mt-8 inline-flex rounded-full bg-[#68d7e8] px-6 py-3 text-sm font-bold text-[#061923]">Contact KRISM</a></div>}</div></div></section>
+  <section class="surface-paper"><div class="page-wrap py-16"><div class="grid gap-6 md:grid-cols-3">{[["Governance","Scientific priorities and research integrity."],["Review","Clinical and editorial oversight for public information."],["Collaboration","Multidisciplinary links across research, education and care."]].map(([title,text]) => <div class="rounded-2xl border border-krism-border bg-white/70 p-6"><h2 class="text-xl font-semibold text-krism-950">{title}</h2><p class="mt-3 text-sm leading-7 text-krism-muted">{text}</p></div>)}</div></div></section>
+</MainLayout>

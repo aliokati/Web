@@ -16,6 +16,15 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+
+# content-manager recovery files
+content/.history/
+content/*.tmp
+content/*.previous
+
+# Private form submissions (contains personal data)
+.private/
 
 # macOS-specific files
 .DS_Store

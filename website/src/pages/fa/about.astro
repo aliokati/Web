@@ -1,5 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import AboutExperience from "../../components/AboutExperience.astro";
 ---
 
 <MainLayout
@@ -7,24 +9,11 @@ import MainLayout from "../../layouts/MainLayout.astro";
   title="درباره KRISM — پزشکی خواب خراسان"
   description="درباره نمایندگی خراسان انجمن‌های طب خواب ایران"
 >
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-      <p class="text-sm font-semibold tracking-[0.12em] text-krism-600">
-        درباره KRISM
-      </p>
+  <AboutExperience lang="fa" />
+  {false && <>
+  <PageHero eyebrow="درباره KRISM" icon="network" title="توسعه و اتصال جامعه پزشکی خواب در خراسان" description="بستری منطقه‌ای برای پژوهش، آموزش، همکاری حرفه‌ای و ارتقای آگاهی عمومی در حوزه پزشکی خواب." />
 
-      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
-        توسعه و اتصال جامعه پزشکی خواب در خراسان
-      </h1>
-
-      <p class="mt-6 max-w-3xl text-lg leading-9 text-krism-muted">
-        نمایندگی خراسان انجمن‌های طب خواب ایران بستری برای پژوهش، آموزش،
-        همکاری حرفه‌ای و ارتقای آگاهی عمومی در حوزه پزشکی خواب فراهم می‌کند.
-      </p>
-    </div>
-  </section>
-
-  <section class="bg-white">
+  <section class="surface-paper">
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
 
       <div class="max-w-2xl">
@@ -159,4 +148,5 @@ import MainLayout from "../../layouts/MainLayout.astro";
 
     </div>
   </section>
+  </>}
 </MainLayout>

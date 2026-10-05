@@ -1,31 +1,19 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import PageHero from "../components/PageHero.astro";
+import AboutExperience from "../components/AboutExperience.astro";
 ---
 
 <MainLayout
   title="About KRISM — Khorasan Sleep Medicine"
   description="Learn about KRISM, its mission, activities and role in advancing sleep medicine across Khorasan."
 >
-  <section class="border-b border-krism-border bg-white">
-    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-krism-600">
-        About KRISM
-      </p>
+  <AboutExperience />
+  {false && <>
+  <PageHero eyebrow="About KRISM" icon="network" title="Connecting sleep medicine across Khorasan" description="A regional platform for research, education, professional collaboration and public awareness in sleep medicine." />
 
-      <h1 class="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-krism-950 sm:text-5xl lg:text-6xl">
-        Connecting sleep medicine across Khorasan
-      </h1>
-
-      <p class="mt-6 max-w-3xl text-lg leading-8 text-krism-muted">
-        The Khorasan Representative of Iranian Sleep Medicine Societies
-        provides a regional platform for research, education, professional
-        collaboration and public awareness in sleep medicine.
-      </p>
-    </div>
-  </section>
-
-  <section class="bg-white">
+  <section class="surface-paper">
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
       <SectionHeader
         eyebrow="Who we are"
@@ -145,4 +133,5 @@ import SectionHeader from "../components/SectionHeader.astro";
       </div>
     </div>
   </section>
+  </>}
 </MainLayout>
