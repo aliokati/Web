@@ -1,0 +1,11 @@
+'use client';
+import {useEffect,useState} from 'react';
+import type {Locale} from '@/i18n/config';
+const keys=['krism-sleep-workspace-v1','krism-learning-progress-v1','krism-reminders-v1','krism-install-dismissed'];
+export default function PortalDataControls({locale}:{locale:Locale}){
+ const fa=locale==='fa';const [online,setOnline]=useState(true);const [message,setMessage]=useState('');
+ useEffect(()=>{setOnline(navigator.onLine);const on=()=>setOnline(true);const off=()=>setOnline(false);window.addEventListener('online',on);window.addEventListener('offline',off);return()=>{window.removeEventListener('online',on);window.removeEventListener('offline',off)}},[]);
+ function exportAll(){const payload=Object.fromEntries(keys.map(key=>[key,localStorage.getItem(key)]));const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),data:payload},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='krism-sleep-data.json';a.click();URL.revokeObjectURL(url);setMessage(fa?'نسخه پشتیبان آماده شد.':'Your local backup is ready.')}
+ function clearLocal(){if(!window.confirm(fa?'همه داده‌های ذخیره‌شده روی این دستگاه حذف شود؟':'Delete all data stored on this device?'))return;keys.forEach(key=>localStorage.removeItem(key));setMessage(fa?'داده‌های این دستگاه حذف شد.':'Device data deleted.')}
+ return <section className="data-controls" id="privacy"><div><p className="tech-label">{fa?'کنترل داده‌ها':'DATA CONTROL'}</p><h2>{fa?'اطلاعات شما، انتخاب شما':'Your data, your choice'}</h2><p>{fa?'اطلاعات بدون ورود ابتدا روی همین دستگاه ذخیره می‌شود. می‌توانید هر زمان نسخه پشتیبان بگیرید یا داده محلی را حذف کنید.':'Without sign-in, information stays on this device first. Export a backup or delete local data whenever you choose.'}</p></div><div className="data-actions"><span className={online?'connection online':'connection'}><i/>{online?(fa?'اتصال برقرار است':'Online'):(fa?'آفلاین':'Offline')}</span><button className="outline-button" onClick={exportAll}>{fa?'دریافت نسخه پشتیبان':'Export local backup'}</button><button className="text-button danger" onClick={clearLocal}>{fa?'حذف داده دستگاه':'Delete device data'}</button>{message&&<small role="status">{message}</small>}</div></section>;
+}
