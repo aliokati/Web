@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "dr-amini",
+    "status": "published",
+    "translationStatus": "published",
+    "publishedAt": "2026-10-05",
+    "reviewedAt": "2026-10-05",
+    "name": "Dr Mahnaz Amini",
+    "role": "Chairman of the Board",
+    "specialty": "Professor of Pulmonology and Intensive Care | Sleep medicine fellowship",
+    "institution": "Mashhad University of Medical Sciences",
+    "biography": "hello",
+    "education": [],
+    "appointments": [],
+    "researchInterests": [],
+    "selectedPublications": [],
+    "googleScholar": "https://scholar.google.com/citations?user=Ow5jMaQAAAAJ&hl=en",
+    "orcid": "https://orcid.org/0000-0002-5205-4647",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/?term=Amini+M&cauthor_id=40442798",
+    "photo": "/public/images/dr_amini.jpg",
+    "profileConsent": true,
+    "displayOrder": 100,
+    "featured": false,
+    "translations": {
+      "fa": {
+        "name": "دکتر مهناز امینی",
+        "role": "رئیس هیئت پژوهشی",
+        "specialty": "استاد بیماری های ریه و مراقب های ویژه| فلوشیپ بیماری های خواب",
+        "institution": "دانشگاه علوم پزشکی مشهد",
+        "biography": "سلام",
+        "education": [],
+        "appointments": [],
+        "researchInterests": [],
+        "selectedPublications": []
+      }
+    }
+  }
+]

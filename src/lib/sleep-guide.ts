@@ -1,0 +1,58 @@
+export type Category = 'insomnia'|'breathing'|'sleepiness'|'circadian'|'parasomnia'|'movement';
+export type Copy = {en:string;fa:string};
+export type Question = {text:Copy;help?:Copy;category?:Category;weights?:Partial<Record<Category,number>>;danger?:string};
+export const labels: Record<Category, Copy> = {
+        insomnia: { en: "Insomnia concerns", fa: "نگرانی‌های بی‌خوابی" }, breathing: { en: "Sleep-related breathing concerns", fa: "نگرانی‌های تنفسی مرتبط با خواب" }, sleepiness: { en: "Excessive sleepiness concerns", fa: "نگرانی‌های خواب‌آلودگی بیش از حد" }, circadian: { en: "Body-clock and sleep-timing concerns", fa: "نگرانی‌های ساعت زیستی و زمان‌بندی خواب" }, parasomnia: { en: "Unusual sleep behaviors", fa: "رفتارهای غیرمعمول در خواب" }, movement: { en: "Sleep-related movement concerns", fa: "نگرانی‌های حرکتی مرتبط با خواب" },
+      };
+export const details: Record<Category, { assessment: Copy; resource: string; resourceLabel: Copy; questions: Question[] }> = {
+        insomnia: { assessment: { en: "A clinician can assess duration, frequency, daytime effects and possible causes of insomnia symptoms.", fa: "متخصص می‌تواند مدت، تکرار، اثرات روزانه و علل احتمالی علائم بی‌خوابی را بررسی کند." }, resource: "understanding-insomnia", resourceLabel: { en: "Understanding insomnia", fa: "آشنایی با بی‌خوابی" }, questions: [
+          { text:{en:"Does it usually take you more than about 30 minutes to fall asleep?",fa:"آیا معمولاً به خواب رفتن شما بیش از حدود ۳۰ دقیقه طول می‌کشد؟"} }, { text:{en:"Do you wake repeatedly or earlier than intended and struggle to return to sleep?",fa:"آیا بارها بیدار می‌شوید یا زودتر از زمان مورد نظر بیدار شده و برای خواب مجدد مشکل دارید؟"} }, { text:{en:"Does this happen at least three nights in a typical week?",fa:"آیا این وضعیت در یک هفته معمول دست‌کم سه شب رخ می‌دهد؟"} }, { text:{en:"Does it affect mood, concentration, work or daytime functioning?",fa:"آیا بر خلق، تمرکز، کار یا عملکرد روزانه شما اثر می‌گذارد؟"} },
+        ]},
+        breathing: { assessment: { en: "A clinician can review breathing symptoms, medical risk factors and whether a sleep study is appropriate.", fa: "متخصص می‌تواند علائم تنفسی، عوامل خطر پزشکی و نیاز احتمالی به مطالعه خواب را بررسی کند." }, resource: "snoring-and-sleep-apnea", resourceLabel:{en:"Snoring and sleep apnea warning signs",fa:"علائم هشدار خرخر و آپنه خواب"}, questions:[
+          {text:{en:"Has someone witnessed pauses in your breathing during sleep?",fa:"آیا کسی توقف تنفس شما را هنگام خواب مشاهده کرده است؟"}}, {text:{en:"Do you wake choking, gasping or with a racing heartbeat?",fa:"آیا با احساس خفگی، نفس‌نفس زدن یا تپش قلب بیدار می‌شوید؟"}}, {text:{en:"Is your snoring loud, frequent or disruptive to others?",fa:"آیا خرخر شما بلند، مکرر یا برای دیگران آزاردهنده است؟"}}, {text:{en:"Do you have morning headaches, dry mouth or marked daytime sleepiness?",fa:"آیا سردرد صبحگاهی، خشکی دهان یا خواب‌آلودگی قابل توجه روزانه دارید؟"}},
+        ]},
+        sleepiness: { assessment:{en:"A clinician can distinguish sleepiness from fatigue and review sleep duration, medications and central sleep disorders.",fa:"متخصص می‌تواند خواب‌آلودگی را از خستگی تفکیک کرده و مدت خواب، داروها و اختلالات مرکزی خواب را بررسی کند."}, resource:"excessive-daytime-sleepiness", resourceLabel:{en:"Excessive daytime sleepiness",fa:"خواب‌آلودگی بیش از حد روزانه"}, questions:[
+          {text:{en:"Do you unintentionally fall asleep during quiet daytime activities?",fa:"آیا هنگام فعالیت‌های آرام روزانه ناخواسته به خواب می‌روید؟"}}, {text:{en:"Do you experience irresistible sleep episodes despite allowing enough time for sleep?",fa:"آیا با وجود اختصاص زمان کافی برای خواب، حملات مقاومت‌ناپذیر خواب را تجربه می‌کنید؟"}}, {text:{en:"Have strong emotions ever been followed by sudden muscle weakness?",fa:"آیا پس از هیجان شدید دچار ضعف ناگهانی عضلات شده‌اید؟"}}, {text:{en:"Does sleepiness interfere with study, work, conversation or safety?",fa:"آیا خواب‌آلودگی در تحصیل، کار، گفت‌وگو یا ایمنی شما اختلال ایجاد می‌کند؟"}},
+        ]},
+        circadian: { assessment:{en:"A two-week sleep diary can help a clinician review timing across workdays and free days.",fa:"دفترچه دو هفته‌ای خواب می‌تواند به متخصص برای بررسی زمان‌بندی در روزهای کاری و آزاد کمک کند."}, resource:"body-clock-and-circadian-rhythm", resourceLabel:{en:"Your body clock and sleep timing",fa:"ساعت زیستی و زمان‌بندی خواب"}, questions:[
+          {text:{en:"Can you sleep normally when allowed to follow your preferred schedule?",fa:"آیا وقتی برنامه زمانی دلخواهتان را دنبال می‌کنید، خواب طبیعی دارید؟"}}, {text:{en:"Is your preferred sleep time more than two hours earlier or later than required?",fa:"آیا زمان خواب دلخواه شما بیش از دو ساعت زودتر یا دیرتر از زمان مورد نیاز است؟"}}, {text:{en:"Do shift work or changing schedules repeatedly disrupt your sleep?",fa:"آیا شیفت کاری یا تغییر برنامه‌ها مرتباً خواب شما را مختل می‌کند؟"}}, {text:{en:"Has this timing problem affected attendance, work, study or relationships?",fa:"آیا این مشکل زمان‌بندی بر حضور، کار، تحصیل یا روابط شما اثر گذاشته است؟"}},
+        ]},
+        parasomnia: { assessment:{en:"A clinician can review episode timing, dream recall, injuries, medications and witness descriptions.",fa:"متخصص می‌تواند زمان رخداد، یادآوری رؤیا، آسیب‌ها، داروها و شرح شاهد را بررسی کند."}, resource:"unusual-behaviors-during-sleep", resourceLabel:{en:"Unusual behaviors during sleep",fa:"رفتارهای غیرمعمول هنگام خواب"}, questions:[
+          {text:{en:"Do you shout, punch, kick, walk or perform complex actions while asleep?",fa:"آیا هنگام خواب فریاد می‌زنید، مشت یا لگد می‌زنید، راه می‌روید یا رفتارهای پیچیده انجام می‌دهید؟"}}, {text:{en:"Have you or a bed partner been injured or nearly injured during an episode?",fa:"آیا شما یا هم‌خوابتان هنگام این رخداد آسیب دیده یا در آستانه آسیب بوده‌اید؟"}}, {text:{en:"Do the movements appear connected to vivid or threatening dreams?",fa:"آیا حرکات با رؤیاهای واضح یا تهدیدآمیز مرتبط به نظر می‌رسند؟"}}, {text:{en:"Are the episodes new, worsening or occurring in later adulthood?",fa:"آیا این رخدادها جدید، رو به تشدید یا در سنین بالاتر آغاز شده‌اند؟"}},
+        ]},
+        movement: { assessment:{en:"A clinician can review the symptom pattern, medicines, iron status and conditions that may resemble restless legs.",fa:"متخصص می‌تواند الگوی علائم، داروها، وضعیت آهن و بیماری‌های مشابه پای بی‌قرار را بررسی کند."}, resource:"restless-legs-and-sleep-movements", resourceLabel:{en:"Restless legs and sleep movements",fa:"پای بی‌قرار و حرکات مرتبط با خواب"}, questions:[
+          {text:{en:"Do you feel an urge to move your legs with uncomfortable sensations?",fa:"آیا همراه با احساس ناخوشایند، میل شدیدی به حرکت دادن پاها دارید؟"}}, {text:{en:"Do the sensations begin or become worse while resting?",fa:"آیا این احساسات هنگام استراحت آغاز یا بدتر می‌شوند؟"}}, {text:{en:"Does walking, stretching or moving provide temporary relief?",fa:"آیا راه رفتن، کشش یا حرکت موقتاً علائم را کاهش می‌دهد؟"}}, {text:{en:"Are symptoms mainly worse in the evening or at night?",fa:"آیا علائم عمدتاً عصر یا شب بدتر می‌شوند؟"}},
+        ]},
+      };
+export const safety: Question[] = [
+        { text:{en:"Are you 18 years of age or older?",fa:"آیا ۱۸ سال یا بیشتر دارید؟"}, help:{en:"This version has been designed only for adults.",fa:"این نسخه فقط برای بزرگسالان طراحی شده است."}, danger:"age" },
+        { text:{en:"Are you currently struggling to breathe, experiencing chest pain, severe confusion or another medical emergency?",fa:"آیا اکنون دچار تنگی نفس، درد قفسه سینه، گیجی شدید یا وضعیت اورژانسی دیگری هستید؟"}, danger:"emergency" },
+        { text:{en:"Have you fallen asleep while driving, or had a recent near miss because of sleepiness?",fa:"آیا هنگام رانندگی به خواب رفته‌اید یا اخیراً به دلیل خواب‌آلودگی در آستانه حادثه بوده‌اید؟"}, danger:"driving" },
+        { text:{en:"Have sleep behaviors caused a significant injury or created an immediate risk to you or someone else?",fa:"آیا رفتارهای هنگام خواب باعث آسیب قابل توجه یا خطر فوری برای شما یا فرد دیگری شده‌اند؟"}, danger:"injury" },
+      ];
+export const router: Question[] = [
+        {text:{en:"Do you regularly struggle to fall asleep, stay asleep or wake feeling restored?",fa:"آیا مرتباً برای به خواب رفتن، در خواب ماندن یا بیدار شدن با احساس شادابی مشکل دارید؟"},weights:{insomnia:2}},
+        {text:{en:"Do you snore loudly, wake choking or have witnessed breathing pauses?",fa:"آیا خرخر بلند، بیدار شدن با احساس خفگی یا توقف تنفس مشاهده‌شده دارید؟"},weights:{breathing:3}},
+        {text:{en:"Are you excessively sleepy during the day despite allowing enough time for sleep?",fa:"آیا با وجود زمان کافی برای خواب، در طول روز بیش از حد خواب‌آلود هستید؟"},weights:{sleepiness:2,breathing:1}},
+        {text:{en:"Do you have sudden, difficult-to-resist sleep episodes?",fa:"آیا حملات ناگهانی و دشوار برای مقاومت در برابر خواب دارید؟"},weights:{sleepiness:3}},
+        {text:{en:"Is your natural sleep schedule much earlier or later than work, school or family life requires?",fa:"آیا برنامه طبیعی خواب شما بسیار زودتر یا دیرتر از نیاز کار، تحصیل یا زندگی خانوادگی است؟"},weights:{circadian:3}},
+        {text:{en:"Does shift work or an irregular schedule repeatedly disrupt your sleep?",fa:"آیا شیفت کاری یا برنامه نامنظم مرتباً خواب شما را مختل می‌کند؟"},weights:{circadian:2,insomnia:1}},
+        {text:{en:"Do you walk, shout, act out dreams or perform unusual behaviors while asleep?",fa:"آیا هنگام خواب راه می‌روید، فریاد می‌زنید، رؤیاها را اجرا می‌کنید یا رفتارهای غیرمعمول دارید؟"},weights:{parasomnia:3}},
+        {text:{en:"Do unpleasant leg sensations create an urge to move, especially at rest in the evening?",fa:"آیا احساس ناخوشایند پاها، به‌ویژه هنگام استراحت در عصر، میل به حرکت ایجاد می‌کند؟"},weights:{movement:3}},
+        {text:{en:"Has a bed partner noticed repeated kicking or limb movements during your sleep?",fa:"آیا هم‌خوابتان متوجه لگد زدن یا حرکات تکراری اندام‌ها هنگام خواب شده است؟"},weights:{movement:2,parasomnia:1}},
+        {text:{en:"Have these sleep concerns affected your mood, concentration, work, study or relationships?",fa:"آیا این مشکلات خواب بر خلق، تمرکز، کار، تحصیل یا روابط شما اثر گذاشته‌اند؟"},weights:{insomnia:1,sleepiness:1,circadian:1}},
+      ];
+
+export type GuideState={mode:'intro'|'safety'|'router'|'detail'|'result';index:number;primary:Category;special?:string;scores:Record<Category,number>};
+export const initialState=():GuideState=>({mode:'intro',index:0,primary:'insomnia',scores:{insomnia:0,breathing:0,sleepiness:0,circadian:0,parasomnia:0,movement:0}});
+export function questionsFor(state:GuideState):Question[]{return state.mode==='safety'?safety:state.mode==='router'?router:state.mode==='detail'?details[state.primary].questions:[];}
+export function advance(state:GuideState,yes:boolean):GuideState {
+ if(!['safety','router','detail'].includes(state.mode))return state;
+ const q=questionsFor(state)[state.index];
+ if(state.mode==='safety'&&((q.danger==='age'&&!yes)||(q.danger!=='age'&&yes)))return {...state,mode:'result',special:q.danger};
+ const scores={...state.scores};if(state.mode==='router'&&yes)for(const [key,weight] of Object.entries(q.weights||{}))scores[key as Category]+=weight||0;
+ if(state.index+1<questionsFor(state).length)return {...state,scores,index:state.index+1};
+ if(state.mode==='safety')return {...state,mode:'router',index:0};
+ if(state.mode==='router'){const order=(Object.entries(scores) as [Category,number][]).sort((a,b)=>b[1]-a[1]);return order[0][1]===0?{...state,scores,mode:'result',special:'none'}:{...state,scores,mode:'detail',index:0,primary:order[0][0]};}
+ return {...state,mode:'result'};
+}
