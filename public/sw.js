@@ -1,5 +1,5 @@
-const CACHE = 'krism-sleep-v1';
-const CORE = ['/en/sleep-hygiene', '/fa/sleep-hygiene', '/images/krism-logo.png'];
+const CACHE = 'krism-sleep-v2';
+const CORE = ['/en/sleep-hygiene', '/fa/sleep-hygiene', '/en/sleep-hygiene/tools', '/fa/sleep-hygiene/tools', '/images/krism-logo.png'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE))));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))));
 self.addEventListener('fetch', event => {
