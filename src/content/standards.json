@@ -1,0 +1,46 @@
+{
+  "en": [
+    {
+      "title": "Educational scope",
+      "body": "Public sleep-health material is general education, not individual medical advice. It must not diagnose, prescribe treatment or discourage professional care."
+    },
+    {
+      "title": "Review and freshness",
+      "body": "Managed content has draft, review, published and archived states. Bilingual publication is tracked separately. Health material should show a review date and named reviewer when formal clinical review has occurred."
+    },
+    {
+      "title": "Sources and corrections",
+      "body": "External material is labeled with its source and does not imply endorsement or affiliation. Correction requests can be sent through the contact page and should identify the page and supporting source."
+    },
+    {
+      "title": "Privacy",
+      "body": "Sleep Check answers remain in browser memory and are not transmitted or persisted by this app. The sleep diary is completed locally and can be printed. Submitting the contact form emails your name, contact details and message to the KRISM mailbox. The app does not maintain a separate database of enquiries. A temporary hash of the sender email is used to limit repeated submissions."
+    },
+    {
+      "title": "Safety",
+      "body": "The website is not an emergency service. People with urgent symptoms or an immediate safety concern should stop using the educational tools and contact appropriate local emergency or urgent-care services."
+    }
+  ],
+  "fa": [
+    {
+      "title": "دامنه آموزشی",
+      "body": "مطالب عمومی سلامت خواب برای آموزش است و جایگزین توصیه پزشکی فردی نیست. این مطالب نباید تشخیص دهند، درمان تجویز کنند یا مانع مراجعه حرفه‌ای شوند."
+    },
+    {
+      "title": "بازبینی و تازگی",
+      "body": "محتوا دارای وضعیت پیش‌نویس، بازبینی، منتشرشده و بایگانی است. انتشار ترجمه فارسی جداگانه کنترل می‌شود. مطالب سلامت پس از بازبینی رسمی باید تاریخ و نام بازبین را نمایش دهند."
+    },
+    {
+      "title": "منابع و اصلاحات",
+      "body": "منابع خارجی با نام منبع مشخص می‌شوند و به معنی تأیید یا وابستگی نیستند. درخواست اصلاح را می‌توان با ذکر صفحه و منبع پشتیبان از طریق صفحه تماس ارسال کرد."
+    },
+    {
+      "title": "حریم خصوصی",
+      "body": "پاسخ‌های ارزیابی خواب در حافظه مرورگر باقی می‌مانند و توسط این برنامه ارسال یا ذخیره دائمی نمی‌شوند. دفترچه خواب به صورت محلی تکمیل و چاپ می‌شود. با ثبت فرم تماس، نام، اطلاعات تماس و پیام شما به صندوق ایمیل KRISM ارسال می‌شود. برنامه پایگاه داده جداگانه‌ای برای درخواست‌ها نگهداری نمی‌کند. برای محدود کردن ارسال‌های مکرر، به‌طور موقت از هش نشانی ایمیل فرستنده استفاده می‌شود."
+    },
+    {
+      "title": "ایمنی",
+      "body": "این وب‌سایت خدمت اورژانسی نیست. در صورت علائم فوری یا خطر ایمنی، استفاده از ابزار آموزشی را متوقف کرده و با خدمات اورژانس یا مراقبت فوری مناسب تماس بگیرید."
+    }
+  ]
+}

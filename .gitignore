@@ -1,0 +1,10 @@
+node_modules/
+.next/
+
+.env*
+!.env.example
+
+# Private owner credentials, published content and recovery files
+data/cms/
+data/users/
+.next-*/

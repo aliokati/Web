@@ -1,0 +1,10 @@
+import resources from '@/content/resources.json';
+import awareness from '@/content/awareness.json';
+import board from '@/content/board.json';
+import research from '@/content/research.json';
+import publications from '@/content/publications.json';
+import events from '@/content/events.json';
+import network from '@/content/network.json';
+import organizations from '@/content/organizations.json';
+import type {CollectionName, RecordData} from './content-model';
+export const seedCollections: Record<CollectionName, RecordData[]> = {resources, awareness, board, research, publications, events, network, organizations};
