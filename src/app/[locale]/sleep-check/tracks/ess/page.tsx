@@ -75,7 +75,7 @@ export default function EssTrackPage() {
       ) : (
         <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="w-full p-6 sm:p-8 rounded-3xl border border-slate-800 bg-slate-900/20 backdrop-blur-xl">
           <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-            <span className="text-sm font-mono text-slate-400">{isRtl ? "نمره کل خواب‌آلودگی روزانه:" : "Total ESS Index Value:"}</span>
+            <span className="text-sm font-mono text-slate-400">{isRtl ? "نمره کل ESS:" : "Total ESS score:"}</span>
             <span className="text-2xl font-mono font-black text-sky-400">{totalScore} / 24</span>
           </div>
 
@@ -85,11 +85,11 @@ export default function EssTrackPage() {
               {isRtl ? evaluation?.severityFa : evaluation?.severityEn}
             </div>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              {isRtl ? evaluation?.actionFa : evaluation?.actionEn}
+            {isRtl ? evaluation?.actionFa : evaluation?.actionEn}
             </p>
           </div>
 
-          <button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
+          <p className="text-xs text-slate-400 leading-relaxed mb-5">{isRtl ? "ESS فقط خواب‌آلودگی روزانه را اندازه می‌گیرد و علت آن را تشخیص نمی‌دهد. هنگام خواب‌آلودگی رانندگی نکنید." : "ESS measures daytime sleep propensity; it does not identify the cause. Do not drive when sleepy."}</p><button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> {isRtl ? "تست مجدد" : "Retake Track"}
           </button>
         </motion.div>

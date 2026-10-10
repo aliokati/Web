@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import { MEQ_QUESTIONS, MEQ_INTERPRETATION } from "@/config/meqTrackData";
 import { ArrowLeft, Compass, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import TrackUnavailable from "@/components/sleep-check/TrackUnavailable";
 
 export default function MeqTrackPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale === "fa" ? "fa" : "en";
   const isRtl = locale === "fa";
+  return <TrackUnavailable locale={locale} slug="meq" />;
 
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [isEvaluated, setIsEvaluated] = useState(false);

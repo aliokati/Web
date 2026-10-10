@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import { IRLS_QUESTIONS, IRLS_INTERPRETATION } from "@/config/irlsTrackData";
 import { ArrowLeft, Activity, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import TrackUnavailable from "@/components/sleep-check/TrackUnavailable";
 
 export default function IrlsTrackPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale === "fa" ? "fa" : "en";
   const isRtl = locale === "fa";
+  return <TrackUnavailable locale={locale} slug="irls" />;
 
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [isEvaluated, setIsEvaluated] = useState(false);

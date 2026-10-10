@@ -28,17 +28,19 @@ export default function StopBangTrackPage() {
   let actionActionFa = "بر اساس شاخص‌های اولیه، نیاز مبرمی به مداخله ساختاری فوری وجود ندارد.";
   let riskColorClass = "bg-emerald-500/5 border-emerald-500/10 text-emerald-400";
 
-  if (totalScore >= 5 || (totalScore >= 3 && (answers["sb_snore"] === 1 || answers["sb_tired"] === 1 || answers["sb_observed"] === 1))) {
+  const stopScore=(answers["sb_snore"]||0)+(answers["sb_tired"]||0)+(answers["sb_observed"]||0)+(answers["sb_pressure"]||0);
+  const intermediateHigh=stopScore>=2&&(answers["sb_gender"]===1||answers["sb_bmi"]===1||answers["sb_neck"]===1);
+  if (totalScore >= 5 || intermediateHigh) {
     riskLevelEn = "High Risk of Obstructive Sleep Apnea";
     riskLevelFa = "ریسک بالای آپنه انسدادی خواب";
-    actionEn = "Urgent referral required for an overnight sleep study (Polysomnography) at a certified sleep facility.";
-    actionActionFa = "ارجاع فوری جهت انجام تست خواب شبانه (پلی‌سومنوگرافی) در کلینیک‌های معتبر طب خواب شدیداً الزامی است.";
+    actionEn = "Discuss diagnostic evaluation with a qualified clinician; the score does not diagnose obstructive sleep apnea.";
+    actionActionFa = "برای ارزیابی تشخیصی با پزشک واجد شرایط گفت‌وگو کنید؛ این امتیاز آپنه انسدادی خواب را تشخیص نمی‌دهد.";
     riskColorClass = "bg-rose-500/5 border-rose-500/10 text-rose-400";
   } else if (totalScore >= 3) {
     riskLevelEn = "Intermediate Risk of Obstructive Sleep Apnea";
     riskLevelFa = "ریسک متوسط آپنه انسدادی خواب";
-    actionEn = "Clinical sleep evaluation is recommended to evaluate upper airway resistance configurations.";
-    actionActionFa = "ارزیابی بالینی مجاری هوایی جهت سنجش میزان مقاومت بافت‌های فوقانی حین خواب توصیه می‌شود.";
+    actionEn = "Consider a clinical review, especially if you have witnessed pauses, loud snoring or daytime sleepiness.";
+    actionActionFa = "به‌ویژه در صورت وقفه تنفسی مشاهده‌شده، خرخر بلند یا خواب‌آلودگی روزانه، ارزیابی بالینی را در نظر بگیرید.";
     riskColorClass = "bg-amber-500/5 border-amber-500/10 text-amber-400";
   }
 
@@ -108,7 +110,7 @@ export default function StopBangTrackPage() {
 
           <div className="flex gap-3 p-4 rounded-xl border border-amber-500/10 bg-amber-500/5 text-amber-200/80 text-xs mb-8">
             <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-            <p>{isRtl ? "ریسک‌های بالا در ارزیابی تنفسی نیازمند پایش شبانه پالس‌اکسیمتری یا پلی‌سومنوگرافی تیپ ۱ تحت نظر تکنسین خواب هستند." : "High respiratory scores necessitate standard nocturnal clinical metrics or full laboratory Type-1 Attended Polysomnography."}</p>
+            <p>{isRtl ? "STOP-BANG یک ابزار غربالگری است؛ نتیجه مثبت باید با شرح‌حال و ارزیابی پزشک پیگیری شود و به‌تنهایی تشخیص نیست." : "STOP-BANG is a screening tool. A positive result should be followed by clinical history and assessment; it is not a diagnosis by itself."}</p>
           </div>
 
           <button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
