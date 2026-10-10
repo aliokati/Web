@@ -1,43 +1,31 @@
-export const MEQ_QUESTIONS = [
-  {
-    id: "meq_1",
-    textEn: "Considering only your own best rhythm, what time would you get up if you were entirely free to plan your day?",
-    textFa: "تنها با در نظر گرفتن ریتم بدنی خودتان، اگر کاملاً در برنامه‌ریزی روز آزاد بودید چه ساعتی از خواب بیدار می‌شدید؟",
-    options: [
-      { score: 5, textEn: "5:00 AM - 6:30 AM", textFa: "۰۵:۰۰ تا ۰۶:۳۰ صبح" },
-      { score: 4, textEn: "6:30 AM - 7:45 AM", textFa: "۰۶:۳۰ تا ۰۷:۴۵ صبح" },
-      { score: 3, textEn: "7:45 AM - 9:45 AM", textFa: "۰۷:۴۵ تا ۰۹:۴۵ صبح" },
-      { score: 2, textEn: "9:45 AM - 11:00 AM", textFa: "۰۹:۴۵ تا ۱۱:۰۰ صبح" },
-      { score: 1, textEn: "11:00 AM - 12:00 PM (Noon)", textFa: "۱۱:۰۰ صبح تا ۱۲:۰۰ ظهر" }
-    ]
-  },
-  {
-    id: "meq_2",
-    textEn: "During the first half-hour after you wake up in the morning, how tired do you feel?",
-    textFa: "در طول نیم ساعت اول پس از بیدار شدن از خواب در صبح، چقدر احساس خستگی می‌کنید؟",
-    options: [
-      { score: 1, textEn: "Very tired", textFa: "بسیار خسته و فرسوده" },
-      { score: 2, textEn: "Fairly tired", textFa: "تا حدودی خسته" },
-      { score: 3, textEn: "Fairly refreshed", textFa: "تا حدودی سرحال و باانرژی" },
-      { score: 4, textEn: "Very refreshed", textFa: "کاملاً سرحال و پرانرژی" }
-    ]
-  },
-  {
-    id: "meq_3",
-    textEn: "At what time in the evening do you feel tired and as a result in need of sleep?",
-    textFa: "چه ساعتی در شب احساس خستگی می‌کنید و در نتیجه نیاز به خواب رفتن دارید؟",
-    options: [
-      { score: 5, textEn: "8:00 PM - 9:00 PM", textFa: "۰۸:۰۰ تا ۰۹:۰۰ شب" },
-      { score: 4, textEn: "9:00 PM - 10:15 PM", textFa: "۰۹:۰۰ تا ۱۰:۱۵ شب" },
-      { score: 3, textEn: "10:15 PM - 12:30 AM", textFa: "۱۰:۱۵ شب تا ۱۲:۳۰ بامداد" },
-      { score: 2, textEn: "12:30 AM - 1:45 AM", textFa: "۱۲:۳۰ بامداد تا ۰۱:۴۵ شب" },
-      { score: 1, textEn: "1:45 AM - 3:00 AM", textFa: "۰۱:۴۵ تا ۰۳:۰۰ بامداد" }
-    ]
-  }
+export type MeqOption={score:number;textEn:string;textFa:string};
+export type MeqQuestion={id:string;textEn:string;textFa:string;options:MeqOption[]};
+const o=(items:[number,string,string][]):MeqOption[]=>items.map(([score,textEn,textFa])=>({score,textEn,textFa}));
+export const MEQ_QUESTIONS:MeqQuestion[]=[
+{id:"q1",textEn:"What time would you get up if entirely free to plan your day?",textFa:"اگر کاملاً آزاد بودید روزتان را برنامه‌ریزی کنید، چه ساعتی بیدار می‌شدید؟",options:o([[5,"5:00–6:30 AM","۰۵:۰۰–۰۶:۳۰"],[4,"6:30–7:45 AM","۰۶:۳۰–۰۷:۴۵"],[3,"7:45–9:45 AM","۰۷:۴۵–۰۹:۴۵"],[2,"9:45–11:00 AM","۰۹:۴۵–۱۱:۰۰"],[1,"11:00 AM–12 noon","۱۱:۰۰–۱۲:۰۰"]])},
+{id:"q2",textEn:"What time would you go to bed if entirely free to plan your evening?",textFa:"اگر کاملاً آزاد بودید شب خود را برنامه‌ریزی کنید، چه ساعتی می‌خوابیدید؟",options:o([[5,"8:00–9:00 PM","۲۰:۰۰–۲۱:۰۰"],[4,"9:00–10:15 PM","۲۱:۰۰–۲۲:۱۵"],[3,"10:15 PM–12:30 AM","۲۲:۱۵–۰۰:۳۰"],[2,"12:30–1:45 AM","۰۰:۳۰–۰۱:۴۵"],[1,"1:45–3:00 AM","۰۱:۴۵–۰۳:۰۰"]])},
+{id:"q3",textEn:"How much do you depend on an alarm clock?",textFa:"چقدر به ساعت زنگ‌دار وابسته‌اید؟",options:o([[4,"Not at all","اصلاً"],[3,"Slightly","کمی"],[2,"Somewhat","تاحدی"],[1,"Very much","خیلی زیاد"]])},
+{id:"q4",textEn:"How easy is it to get up in the morning?",textFa:"بیدار شدن صبح‌ها چقدر آسان است؟",options:o([[1,"Very difficult","خیلی دشوار"],[2,"Somewhat difficult","تاحدی دشوار"],[3,"Fairly easy","نسبتاً آسان"],[4,"Very easy","خیلی آسان"]])},
+{id:"q5",textEn:"How alert do you feel during the first half hour after waking?",textFa:"در نیم ساعت اول پس از بیداری چقدر هوشیار هستید؟",options:o([[1,"Not at all alert","اصلاً هوشیار نیستم"],[2,"Slightly alert","کمی هوشیار"],[3,"Fairly alert","نسبتاً هوشیار"],[4,"Very alert","خیلی هوشیار"]])},
+{id:"q6",textEn:"How hungry do you feel during the first half hour after waking?",textFa:"در نیم ساعت اول پس از بیداری چقدر گرسنه هستید؟",options:o([[1,"Not at all hungry","اصلاً گرسنه نیستم"],[2,"Slightly hungry","کمی گرسنه"],[3,"Fairly hungry","نسبتاً گرسنه"],[4,"Very hungry","خیلی گرسنه"]])},
+{id:"q7",textEn:"How do you feel during the first half hour after waking?",textFa:"در نیم ساعت اول پس از بیداری چه احساسی دارید؟",options:o([[1,"Very tired","خیلی خسته"],[2,"Fairly tired","نسبتاً خسته"],[3,"Fairly refreshed","نسبتاً سرحال"],[4,"Very refreshed","خیلی سرحال"]])},
+{id:"q8",textEn:"With no commitments tomorrow, when would you go to bed compared with usual?",textFa:"اگر فردا تعهدی نداشتید، نسبت به زمان معمول چه زمانی می‌خوابیدید؟",options:o([[4,"Seldom or never later","به‌ندرت یا هرگز دیرتر"],[3,"Less than 1 hour later","کمتر از یک ساعت دیرتر"],[2,"1–2 hours later","۱–۲ ساعت دیرتر"],[1,"More than 2 hours later","بیش از ۲ ساعت دیرتر"]])},
+{id:"q9",textEn:"How would you perform exercising between 7–8 AM?",textFa:"اگر بین ۷ تا ۸ صبح ورزش کنید، عملکردتان چگونه خواهد بود؟",options:o([[4,"Good form","خیلی خوب"],[3,"Reasonable form","نسبتاً خوب"],[2,"Difficult","دشوار"],[1,"Very difficult","خیلی دشوار"]])},
+{id:"q10",textEn:"At what time do you feel tired and in need of sleep?",textFa:"چه زمانی خسته و نیازمند خواب می‌شوید؟",options:o([[5,"8:00–9:00 PM","۲۰:۰۰–۲۱:۰۰"],[4,"9:00–10:15 PM","۲۱:۰۰–۲۲:۱۵"],[3,"10:15 PM–12:45 AM","۲۲:۱۵–۰۰:۴۵"],[2,"12:45–2:00 AM","۰۰:۴۵–۰۲:۰۰"],[1,"2:00–3:00 AM","۰۲:۰۰–۰۳:۰۰"]])},
+{id:"q11",textEn:"Which two-hour test time would you choose for peak performance?",textFa:"برای اوج عملکرد ذهنی کدام زمان دو ساعته را انتخاب می‌کنید؟",options:o([[6,"8–10 AM","۰۸–۱۰"],[4,"11 AM–1 PM","۱۱–۱۳"],[2,"3–5 PM","۱۵–۱۷"],[0,"7–9 PM","۱۹–۲۱"]])},
+{id:"q12",textEn:"If you got into bed at 11 PM, how tired would you be?",textFa:"اگر ساعت ۲۳ به رختخواب بروید چقدر خسته‌اید؟",options:o([[0,"Not at all tired","اصلاً خسته نیستم"],[2,"A little tired","کمی خسته"],[3,"Fairly tired","نسبتاً خسته"],[5,"Very tired","خیلی خسته"]])},
+{id:"q13",textEn:"After going to bed several hours later than usual, what would you most likely do?",textFa:"اگر چند ساعت دیرتر از معمول بخوابید، احتمالاً چه می‌کنید؟",options:o([[4,"Wake at usual time and not sleep again","در زمان معمول بیدار می‌شوم و دوباره نمی‌خوابم"],[3,"Wake at usual time and doze","در زمان معمول بیدار و سپس چرت می‌زنم"],[2,"Wake at usual time and fall asleep again","در زمان معمول بیدار و دوباره می‌خوابم"],[1,"Wake later than usual","دیرتر از معمول بیدار می‌شوم"]])},
+{id:"q14",textEn:"For a 4–6 AM night watch, which arrangement suits you best?",textFa:"برای نگهبانی ۴ تا ۶ صبح، کدام برنامه برایتان مناسب‌تر است؟",options:o([[1,"Stay awake until the watch is over","تا پایان نگهبانی بیدار می‌مانم"],[2,"Nap before and sleep after","قبل چرت و بعد خواب"],[3,"Good sleep before and nap after","قبل خواب کافی و بعد چرت"],[4,"Take all sleep before the watch","همه خواب را قبل از نگهبانی انجام می‌دهم"]])},
+{id:"q15",textEn:"For two hours of hard physical work, which time would you choose?",textFa:"برای دو ساعت کار فیزیکی سنگین، کدام زمان را انتخاب می‌کنید؟",options:o([[4,"8–10 AM","۰۸–۱۰"],[3,"11 AM–1 PM","۱۱–۱۳"],[2,"3–5 PM","۱۵–۱۷"],[1,"7–9 PM","۱۹–۲۱"]])},
+{id:"q16",textEn:"How would you perform physical exercise between 10–11 PM?",textFa:"اگر بین ۲۲ تا ۲۳ ورزش کنید، عملکردتان چگونه خواهد بود؟",options:o([[4,"Good form","خیلی خوب"],[3,"Reasonable form","نسبتاً خوب"],[2,"Difficult","دشوار"],[1,"Very difficult","خیلی دشوار"]])},
+{id:"q17",textEn:"If you could choose your work hours for a five-hour day, when would you start?",textFa:"اگر می‌توانستید زمان کار پنج‌ساعته خود را انتخاب کنید، چه زمانی شروع می‌کردید؟",options:o([[5,"4–8 AM","۰۴–۰۸"],[4,"8–9 AM","۰۸–۰۹"],[3,"9 AM–2 PM","۰۹–۱۴"],[2,"2–5 PM","۱۴–۱۷"],[1,"5 PM–4 AM","۱۷–۰۴"]])},
+{id:"q18",textEn:"At what time of day do you usually feel your best?",textFa:"معمولاً چه زمانی از روز بهترین احساس را دارید؟",options:o([[5,"5–8 AM","۰۵–۰۸"],[4,"8–10 AM","۰۸–۱۰"],[3,"10 AM–5 PM","۱۰–۱۷"],[2,"5–10 PM","۱۷–۲۲"],[1,"10 PM–5 AM","۲۲–۰۵"]])},
+{id:"q19",textEn:"Which type do you consider yourself?",textFa:"خودتان را متعلق به کدام تیپ می‌دانید؟",options:o([[4,"Definitely morning","قطعاً صبحگاهی"],[3,"More morning than evening","بیشتر صبحگاهی"],[2,"More evening than morning","بیشتر شبانه"],[1,"Definitely evening","قطعاً شبانه"]])},
 ];
-
-export const MEQ_INTERPRETATION = [
-  { minScore: 3, maxScore: 5, severityEn: "Definite Evening Type (Owl)", severityFa: "تیپ شب‌زنده‌دار قطعی (جغد شب)", actionEn: "High vulnerability to social jetlag. Consider chronotherapy or specialized bright light therapy configurations.", actionFa: "آسیب‌پذیری بالا نسبت به جت‌لگ اجتماعی. استفاده از چرخه‌های نوردرمانی تخصصی توصیه می‌شود." },
-  { minScore: 6, maxScore: 11, severityEn: "Intermediate Type (Neutral)", severityFa: "تیپ خنثی / میانه", actionEn: "Flexible sleep window layout options.", actionFa: "انعطاف‌پذیری مناسب در بازه‌های زمانی خواب و بیداری عمومی." },
-  { minScore: 12, maxScore: 14, severityEn: "Definite Morning Type (Lark)", severityFa: "تیپ سحرخیز قطعی (چکاوک صبح)", actionEn: "Optimal structural peak alertness aligns with early light values.", actionFa: "اوج سطح هوشیاری شما کاملاً هماهنگ با ساعات اولیه طلوع خورشید و صبح است." }
+export const MEQ_INTERPRETATION=[
+{minScore:16,maxScore:30,severityEn:"Definitely evening type",severityFa:"تیپ قطعاً شبانه",actionEn:"This describes a chronotype preference, not a disorder. Use it to plan sleep timing and light exposure.",actionFa:"این نتیجه ترجیح زمانی بدن را توصیف می‌کند، نه بیماری را. از آن برای برنامه‌ریزی خواب و نور استفاده کنید."},
+{minScore:31,maxScore:41,severityEn:"Moderately evening type",severityFa:"تیپ نسبتاً شبانه",actionEn:"Consider consistent wake times and morning light if your schedule allows.",actionFa:"در صورت امکان زمان بیداری منظم و نور صبحگاهی را در نظر بگیرید."},
+{minScore:42,maxScore:58,severityEn:"Intermediate type",severityFa:"تیپ میانه",actionEn:"Your preferences do not strongly favor morning or evening timing.",actionFa:"ترجیحات شما به‌طور قوی صبحگاهی یا شبانه نیست."},
+{minScore:59,maxScore:69,severityEn:"Moderately morning type",severityFa:"تیپ نسبتاً صبحگاهی",actionEn:"Your preferences favor earlier timing.",actionFa:"ترجیحات شما بیشتر به زمان‌های زودتر گرایش دارد."},
+{minScore:70,maxScore:86,severityEn:"Definitely morning type",severityFa:"تیپ قطعاً صبحگاهی",actionEn:"Your preferences strongly favor earlier timing.",actionFa:"ترجیحات شما به‌طور واضح به زمان‌های زودتر گرایش دارد."},
 ];

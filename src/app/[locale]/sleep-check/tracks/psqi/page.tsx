@@ -1,100 +1,10 @@
 "use client";
-
-import { useState } from "react";
-import { useParams } from "next/navigation";
-import { PSQI_QUESTIONS, PSQI_INTERPRETATION } from "@/config/psqiTrackData";
-import { ArrowLeft, Sliders, CheckCircle } from "lucide-react";
-import { motion } from "framer-motion";
-import TrackUnavailable from "@/components/sleep-check/TrackUnavailable";
-
-export default function PsqiTrackPage() {
-  const params = useParams<{ locale: string }>();
-  const locale = params.locale === "fa" ? "fa" : "en";
-  const isRtl = locale === "fa";
-  return <TrackUnavailable locale={locale} slug="psqi" />;
-
-  const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [isEvaluated, setIsEvaluated] = useState(false);
-
-  const handleSelect = (qId: string, score: number) => {
-    setAnswers(prev => ({ ...prev, [qId]: score }));
-  };
-
-  const totalScore = Object.values(answers).reduce((acc, curr) => acc + curr, 0);
-  const isComplete = PSQI_QUESTIONS.every(q => answers[q.id] !== undefined);
-
-  const evaluation = PSQI_INTERPRETATION.find(
-    range => totalScore >= range.minScore && totalScore <= range.maxScore
-  ) || PSQI_INTERPRETATION[1];
-
-  return (
-    <main className="flex-grow flex flex-col items-center justify-center px-4 py-12 max-w-2xl mx-auto w-full">
-      <div className={`w-full mb-8 ${isRtl ? "text-right" : "text-left"}`}>
-        <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">
-          {isRtl ? "شاخص کیفیت خواب پیتسبورگ (PSQI)" : "Pittsburgh Sleep Quality Index (PSQI)"}
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-400">
-          {isRtl ? "کیفیت ذهنی و الگوهای مخدوش خواب خود را در بازه یک ماه اخیر ارزیابی کنید." : "Rate macro quality and sleep stability disruption variables over a 1-month framework."}
-        </p>
-      </div>
-
-      {!isEvaluated ? (
-        <div className="w-full space-y-4">
-          {PSQI_QUESTIONS.map((q, idx) => (
-            <div key={q.id} className="p-4 rounded-xl border border-slate-900 bg-slate-950/20 space-y-3">
-              <h3 className="text-xs sm:text-sm font-medium text-slate-200">
-                {idx + 1}. {isRtl ? q.textFa : q.textEn}
-              </h3>
-              <div className="grid grid-cols-1 gap-2">
-                {q.options.map(opt => (
-                  <button
-                    key={opt.score}
-                    onClick={() => handleSelect(q.id, opt.score)}
-                    className={`p-3 rounded-xl border text-xs text-right font-medium transition-all ${
-                      isRtl ? "text-right" : "text-left"
-                    } ${
-                      answers[q.id] === opt.score
-                        ? "border-sky-500 bg-sky-500/10 text-sky-400"
-                        : "border-slate-800 bg-slate-900/10 text-slate-400 hover:border-slate-700"
-                    }`}
-                  >
-                    {isRtl ? opt.textFa : opt.textEn}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <button
-            disabled={!isComplete}
-            onClick={() => setIsEvaluated(true)}
-            className="w-full py-4 rounded-xl font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 disabled:opacity-40 disabled:pointer-events-none transition-all text-sm mt-4"
-          >
-            {isRtl ? "محاسبه شاخص کیفیت جهانی پیتسبورگ" : "Compile Global PSQI Quality Metrics"}
-          </button>
-        </div>
-      ) : (
-        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="w-full p-6 sm:p-8 rounded-3xl border border-slate-800 bg-slate-900/20 backdrop-blur-xl">
-          <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-            <span className="text-sm font-mono text-slate-400">{isRtl ? "امتیاز مأخوذه پیتسبورگ:" : "Pittsburgh Component Score Summary:"}</span>
-            <span className="text-2xl font-mono font-black text-sky-400">{totalScore} / 9</span>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-sky-500/5 border border-sky-500/10 mb-6 space-y-2">
-            <div className="flex items-center gap-2 text-white font-bold text-lg">
-              <Sliders className="w-5 h-5 text-sky-400" />
-              {isRtl ? evaluation.severityFa : evaluation.severityEn}
-            </div>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              {isRtl ? evaluation.actionFa : evaluation.actionEn}
-            </p>
-          </div>
-
-          <button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> {isRtl ? "تست مجدد" : "Retake Track"}
-          </button>
-        </motion.div>
-      )}
-    </main>
-  );
-}
+import {useState} from "react";
+import {useParams} from "next/navigation";
+import {PSQI_QUESTIONS,PSQI_INTERPRETATION} from "@/config/psqiTrackData";
+import {ArrowLeft,Sliders} from "lucide-react";
+import {motion} from "framer-motion";
+const freq=["Not during the past month","Less than once a week","Once or twice a week","Three or more times a week"];
+const freqFa=["در طول ماه گذشته اصلاً","کمتر از یک بار در هفته","یک یا دو بار در هفته","سه بار یا بیشتر در هفته"];
+const qual=["Very good","Fairly good","Fairly bad","Very bad"]; const qualFa=["خیلی خوب","نسبتاً خوب","نسبتاً بد","خیلی بد"];
+export default function PsqiTrackPage(){const p=useParams<{locale:string}>();const fa=p.locale==="fa";const[a,setA]=useState<Record<string,string|number>>({});const[done,setDone]=useState(false);const set=(k:string,v:string|number)=>setA(x=>({...x,[k]:v}));const ready=PSQI_QUESTIONS.every(q=>a[q.id]!==undefined);const t=(id:string)=>Number(a[id]||0);const q2=t("q2"),q4=t("q4");const c1=t("q6");const lb=q2<15?0:q2<=30?1:q2<=60?2:3;const c2s=lb+t("q5a");const c2=c2s===0?0:c2s<=2?1:c2s<=4?2:3;const c3=q4>7?0:q4>=6?1:q4>=5?2:3;const parse=(x:string)=>{const v=x.split(":").map(Number);return v.length===2?v[0]*60+v[1]:undefined};const bt=parse(String(a.q1||"")),wk=parse(String(a.q3||""));const ib=bt!==undefined&&wk!==undefined?((wk-bt+1440)%1440)||1440:0;const eff=ib?(q4/ib)*100:0;const c4=eff>=85?0:eff>=75?1:eff>=65?2:3;const d=["q5b","q5c","q5d","q5e","q5f","q5g","q5h","q5i","q5j"].reduce((s,k)=>s+t(k),0);const c5=d===0?0:d<=9?1:d<=18?2:3;const c6=t("q7");const ds=t("q8")+t("q9");const c7=ds===0?0:ds<=2?1:ds<=4?2:3;const total=c1+c2+c3+c4+c5+c6+c7;const result=PSQI_INTERPRETATION.find(r=>total>=r.minScore&&total<=r.maxScore)||PSQI_INTERPRETATION[1];const render=(q:any,i:number)=>{let body:any;if(["q1","q3"].includes(q.id))body=<input type="time" value={String(a[q.id]||"")} onChange={e=>set(q.id,e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-3 text-white"/>;else if(["q2","q4"].includes(q.id))body=<input type="number" min="0" max="300" step={q.id==="q4"?"0.5":"1"} value={String(a[q.id]??"")} onChange={e=>set(q.id,e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-3 text-white"/>;else{const opts=q.id==="q6"?qual:freq;const optsFa=q.id==="q6"?qualFa:freqFa;body=<div className="grid grid-cols-1 sm:grid-cols-4 gap-2">{opts.map((x:string,j:number)=><button key={j} onClick={()=>set(q.id,j)} className={`p-3 rounded-xl border text-xs ${a[q.id]===j?"border-sky-500 bg-sky-500/10 text-sky-400":"border-slate-800 text-slate-400"}`}>{fa?optsFa[j]:x}</button>)}</div>;}return <div key={q.id} className="p-4 rounded-xl border border-slate-900 bg-slate-950/20 space-y-3"><h3 className="text-sm font-medium text-slate-200">{i+1}. {fa?q.textFa:q.textEn}</h3>{body}</div>};return <main className={`flex-grow flex flex-col items-center px-4 py-12 max-w-3xl mx-auto w-full ${fa?"text-right":"text-left"}`} dir={fa?"rtl":"ltr"}><div className="w-full mb-8"><h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">{fa?"شاخص کیفیت خواب پیتسبورگ (PSQI)":"Pittsburgh Sleep Quality Index (PSQI)"}</h1><p className="text-xs sm:text-sm text-slate-400">{fa?"۱۹ سؤال درباره چهار هفته گذشته؛ امتیاز جهانی از ۰ تا ۲۱.":"Complete the 19-item form for the past month. Global score: 0–21."}</p></div>{!done?<div className="w-full space-y-4">{PSQI_QUESTIONS.map(render)}<button disabled={!ready} onClick={()=>setDone(true)} className="w-full py-4 rounded-xl font-semibold bg-sky-500 text-slate-950 disabled:opacity-40">{fa?"محاسبه امتیاز PSQI":"Calculate PSQI score"}</button></div>:<motion.div initial={{opacity:0}} animate={{opacity:1}} className="w-full p-6 sm:p-8 rounded-3xl border border-slate-800 bg-slate-900/20"><div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4"><span className="text-sm text-slate-400">{fa?"امتیاز جهانی PSQI":"Global PSQI score"}</span><span className="text-2xl font-mono font-black text-sky-400">{total} / 21</span></div><div className="p-5 rounded-2xl bg-sky-500/5 border border-sky-500/10 mb-6"><div className="flex items-center gap-2 text-white font-bold text-lg"><Sliders className="w-5 h-5 text-sky-400" />{fa?result.severityFa:result.severityEn}</div><p className="text-sm text-slate-400 mt-2">{fa?result.actionFa:result.actionEn}</p></div><button onClick={()=>{setDone(false);setA({})}} className="px-5 py-2.5 rounded-xl border border-slate-800 text-xs font-semibold text-slate-300 inline-flex items-center gap-2"><ArrowLeft className="w-4 h-4" />{fa?"تکرار":"Retake"}</button></motion.div>}</main>}
