@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useState} from 'react';
 import type {Locale} from '@/i18n/config';
-const keys=['krism-sleep-workspace-v1','krism-learning-progress-v1','krism-reminders-v1','krism-install-dismissed'];
+const keys=['krism-sleep-workspace-v1','krism-learning-progress-v1','krism-reminders-v1','krism-reminder-time-v1','krism-install-dismissed'];
 export default function PortalDataControls({locale}:{locale:Locale}){
  const fa=locale==='fa';const [online,setOnline]=useState(true);const [message,setMessage]=useState('');
  useEffect(()=>{setOnline(navigator.onLine);const on=()=>setOnline(true);const off=()=>setOnline(false);window.addEventListener('online',on);window.addEventListener('offline',off);return()=>{window.removeEventListener('online',on);window.removeEventListener('offline',off)}},[]);
