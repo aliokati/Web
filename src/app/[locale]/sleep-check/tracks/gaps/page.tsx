@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import { GAPS_QUESTIONS, GAPS_INTERPRETATION } from "@/config/gapsTrackData";
 import { ArrowLeft, ShieldAlert, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import TrackUnavailable from "@/components/sleep-check/TrackUnavailable";
 
 export default function GapsTrackPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale === "fa" ? "fa" : "en";
   const isRtl = locale === "fa";
+  return <TrackUnavailable locale={locale} slug="gaps" />;
 
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [isEvaluated, setIsEvaluated] = useState(false);

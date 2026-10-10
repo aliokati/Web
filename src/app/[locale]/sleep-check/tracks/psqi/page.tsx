@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import { PSQI_QUESTIONS, PSQI_INTERPRETATION } from "@/config/psqiTrackData";
 import { ArrowLeft, Sliders, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import TrackUnavailable from "@/components/sleep-check/TrackUnavailable";
 
 export default function PsqiTrackPage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale === "fa" ? "fa" : "en";
   const isRtl = locale === "fa";
+  return <TrackUnavailable locale={locale} slug="psqi" />;
 
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [isEvaluated, setIsEvaluated] = useState(false);
