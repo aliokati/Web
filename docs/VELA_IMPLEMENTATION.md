@@ -29,6 +29,6 @@ VELA follows **Notice → Understand → Choose → Practice → Reflect**. The 
 - Every new record is exportable and deletable.
 - The shell remains useful without an account or network connection.
 - Clinical review and server validation remain outside this implementation pass per the product direction.
-## Public and private layers
+## Canonical product route
 
-The website is intentionally a quiet invitation, not the entire application. `/[locale]/sleep-hygiene` presents the premium proposition, the three-step loop, data principles, and a clear entry point. `/[locale]/sleep-hygiene/app` contains the full VELA workspace, its tools, local-first records, sync controls, reports, and experiments. The installable PWA starts at the private app route and the service worker caches both the invitation and app shell.
+The full VELA workspace is the canonical experience at /[locale]/sleep-hygiene. There is no separate public or guidance layer for the product. The former /[locale]/sleep-hygiene/app path is only a compatibility redirect, while the installable PWA and offline service-worker shell use the canonical workspace URL.
