@@ -33,23 +33,23 @@ export const GAPS_INTERPRETATION: TrackScoreInterpretation[] = [
     maxScore: 3, 
     severityEn: "Low / Isolated Parasomnia Indicators", 
     severityFa: "شاخص‌های پاراسومنیای پایین / ایزوله", 
-    actionEn: "No current evidence of severe behavioral sleep disruption.", 
-    actionFa: "شواهدی از اختلال رفتاری شدید حین خواب در حال حاضر مشاهده نمی‌شود." 
+    actionEn: "No current evidence of severe behavioral sleep disruption",
+    actionFa: "شواهدی از اختلال رفتاری شدید حین خواب در حال حاضر مشاهده نمی‌شود"
   },
   { 
     minScore: 4, 
     maxScore: 9, 
     severityEn: "Moderate / Sub-clinical Parasomnia Activity", 
     severityFa: "فعالیت پاراسومنیای متوسط / تحت‌بالینی", 
-    actionEn: "Ensure sleep environment safety (e.g., secure windows, clear floors). Medical observation recommended.", 
-    actionFa: "ایمنی محیط خواب (قفل کردن پنجره‌ها، تخلیه کف اتاق) را تامین کنید. نظارت پزشکی توصیه می‌شود." 
+    actionEn: "Ensure sleep environment safety (e.g., secure windows, clear floors). Medical observation recommended",
+    actionFa: "ایمنی محیط خواب (قفل کردن پنجره‌ها، تخلیه کف اتاق) را تامین کنید. نظارت پزشکی توصیه می‌شود"
   },
   { 
     minScore: 10, 
     maxScore: 16, 
     severityEn: "Severe / Pathological Parasomnia Profile", 
     severityFa: "پروفایل پاراسومنیای شدید / پاتولوژیک", 
-    actionEn: "Urgent evaluation required by a neurologist or sleep specialist to rule out REM Sleep Behavior Disorder.", 
-    actionFa: "ارزیابی فوری توسط متخصص اعصاب یا فلوشیپ طب خواب جهت رد اختلال رفتاری خواب REM الزامی است." 
+    actionEn: "Urgent evaluation required by a neurologist or sleep specialist to rule out REM Sleep Behavior Disorder",
+    actionFa: "ارزیابی فوری توسط متخصص اعصاب یا فلوشیپ طب خواب جهت رد اختلال رفتاری خواب REM الزامی است"
   }
 ];

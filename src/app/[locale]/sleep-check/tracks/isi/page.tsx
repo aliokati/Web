@@ -40,7 +40,7 @@ export default function IsiTrackPage() {
           {isRtl ? "ارزیابی تفصیلی شاخص شدت بی‌خوابی (ISI)" : "Detailed Insomnia Severity Index (ISI)"}
         </h1>
         <p className="text-xs sm:text-sm text-slate-400">
-          {isRtl ? "پاسخ‌های خود را بر اساس میانگین وضعیت دو هفته اخیر انتخاب کنید." : "Rate current values based on average sleep variables over the past 2 weeks."}
+          {isRtl ? "پاسخ‌های خود را بر اساس میانگین وضعیت دو هفته اخیر انتخاب کنید" : "Rate current values based on average sleep variables over the past 2 weeks"}
         </p>
       </div>
 
@@ -97,7 +97,7 @@ export default function IsiTrackPage() {
 
           <div className="flex gap-3 p-4 rounded-xl border border-amber-500/10 bg-amber-500/5 text-amber-200/80 text-xs mb-8">
             <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-            <p>{isRtl ? "این نتیجه یک غربالگری تشخیصی دیجیتال است و جایگزین معاینه پلی‌سومنوگرافی یا ویزیت بالینی تخصصی نیست." : "This record holds testing metrics for screening triage context only and does not substitute direct objective sleep testing profiles."}</p>
+            <p>{isRtl ? "این نتیجه یک غربالگری تشخیصی دیجیتال است و جایگزین معاینه پلی‌سومنوگرافی یا ویزیت بالینی تخصصی نیست" : "This record holds testing metrics for screening triage context only and does not substitute direct objective sleep testing profiles"}</p>
           </div>
 
           <button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">

@@ -23,9 +23,9 @@ export const MEQ_QUESTIONS:MeqQuestion[]=[
 {id:"q19",textEn:"Which type do you consider yourself?",textFa:"خودتان را متعلق به کدام تیپ می‌دانید؟",options:o([[4,"Definitely morning","قطعاً صبحگاهی"],[3,"More morning than evening","بیشتر صبحگاهی"],[2,"More evening than morning","بیشتر شبانه"],[1,"Definitely evening","قطعاً شبانه"]])},
 ];
 export const MEQ_INTERPRETATION=[
-{minScore:16,maxScore:30,severityEn:"Definitely evening type",severityFa:"تیپ قطعاً شبانه",actionEn:"This describes a chronotype preference, not a disorder. Use it to plan sleep timing and light exposure.",actionFa:"این نتیجه ترجیح زمانی بدن را توصیف می‌کند، نه بیماری را. از آن برای برنامه‌ریزی خواب و نور استفاده کنید."},
-{minScore:31,maxScore:41,severityEn:"Moderately evening type",severityFa:"تیپ نسبتاً شبانه",actionEn:"Consider consistent wake times and morning light if your schedule allows.",actionFa:"در صورت امکان زمان بیداری منظم و نور صبحگاهی را در نظر بگیرید."},
-{minScore:42,maxScore:58,severityEn:"Intermediate type",severityFa:"تیپ میانه",actionEn:"Your preferences do not strongly favor morning or evening timing.",actionFa:"ترجیحات شما به‌طور قوی صبحگاهی یا شبانه نیست."},
-{minScore:59,maxScore:69,severityEn:"Moderately morning type",severityFa:"تیپ نسبتاً صبحگاهی",actionEn:"Your preferences favor earlier timing.",actionFa:"ترجیحات شما بیشتر به زمان‌های زودتر گرایش دارد."},
-{minScore:70,maxScore:86,severityEn:"Definitely morning type",severityFa:"تیپ قطعاً صبحگاهی",actionEn:"Your preferences strongly favor earlier timing.",actionFa:"ترجیحات شما به‌طور واضح به زمان‌های زودتر گرایش دارد."},
+{minScore:16,maxScore:30,severityEn:"Definitely evening type",severityFa:"تیپ قطعاً شبانه",actionEn:"This describes a chronotype preference, not a disorder. Use it to plan sleep timing and light exposure",actionFa:"این نتیجه ترجیح زمانی بدن را توصیف می‌کند، نه بیماری را. از آن برای برنامه‌ریزی خواب و نور استفاده کنید"},
+{minScore:31,maxScore:41,severityEn:"Moderately evening type",severityFa:"تیپ نسبتاً شبانه",actionEn:"Consider consistent wake times and morning light if your schedule allows",actionFa:"در صورت امکان زمان بیداری منظم و نور صبحگاهی را در نظر بگیرید"},
+{minScore:42,maxScore:58,severityEn:"Intermediate type",severityFa:"تیپ میانه",actionEn:"Your preferences do not strongly favor morning or evening timing",actionFa:"ترجیحات شما به‌طور قوی صبحگاهی یا شبانه نیست"},
+{minScore:59,maxScore:69,severityEn:"Moderately morning type",severityFa:"تیپ نسبتاً صبحگاهی",actionEn:"Your preferences favor earlier timing",actionFa:"ترجیحات شما بیشتر به زمان‌های زودتر گرایش دارد"},
+{minScore:70,maxScore:86,severityEn:"Definitely morning type",severityFa:"تیپ قطعاً صبحگاهی",actionEn:"Your preferences strongly favor earlier timing",actionFa:"ترجیحات شما به‌طور واضح به زمان‌های زودتر گرایش دارد"},
 ];

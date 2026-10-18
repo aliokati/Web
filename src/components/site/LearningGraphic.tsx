@@ -25,6 +25,6 @@ export default function LearningGraphic({variant, locale}: {variant?: string; lo
       </svg>
       <div className="learning-legend"><span>{t('Solid: sleep pressure', 'خط پیوسته: فشار خواب')}</span><span>{t('Dashed: circadian timing', 'خط‌چین: زمان‌بندی شبانه‌روزی')}</span></div>
     </>}
-    <figcaption>{t('A conceptual learning visual from KRISM; not a clinical measurement.', 'تصویر مفهومی آموزشی KRISM؛ برای یادگیری و نه اندازه‌گیری بالینی.')}</figcaption>
+    <figcaption>{t('A conceptual learning visual from KRISM; not a clinical measurement', 'تصویر مفهومی آموزشی KRISM؛ برای یادگیری و نه اندازه‌گیری بالینی')}</figcaption>
   </figure>;
 }

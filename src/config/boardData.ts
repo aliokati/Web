@@ -17,8 +17,8 @@ export const OFFICIAL_BOARD_REGISTRY: BoardMember[] = [
     academicTitleFa: "رتبه علمی دانشگاهی",
     institutionEn: "Affiliated Institution",
     institutionFa: "دانشگاه یا مرکز تحقیقاتی وابسته",
-    focusAreaEn: "Clinical/Scientific focus vectors.",
-    focusAreaFa: "حوزه تمرکز تحقیقاتی بالینی.",
+    focusAreaEn: "Clinical/Scientific focus vectors",
+    focusAreaFa: "حوزه تمرکز تحقیقاتی بالینی",
     orcid: "0000-0000-0000-0000"
   }
   */

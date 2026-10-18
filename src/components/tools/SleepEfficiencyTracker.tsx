@@ -96,8 +96,8 @@ export default function SleepEfficiencyTracker({ locale }: TrackerProps) {
           <ShieldAlert className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
           <p>
             {isRtl 
-              ? "بازدهی خواب زیر ۸۵٪ نشان‌دهنده بیداری‌های مکرر یا تأخیر زیاد در شروع خواب است. کاهش زمان غیرمفید در رختخواب (تکنیک محدودیت خواب) توصیه می‌شود."
-              : "Sleep efficiency below 85% points to fragmentation or prolonged onset latency. Consider practicing structural stimulus control strategies."}
+              ? "بازدهی خواب زیر ۸۵٪ نشان‌دهنده بیداری‌های مکرر یا تأخیر زیاد در شروع خواب است. کاهش زمان غیرمفید در رختخواب (تکنیک محدودیت خواب) توصیه می‌شود"
+              : "Sleep efficiency below 85% points to fragmentation or prolonged onset latency. Consider practicing structural stimulus control strategies"}
           </p>
         </motion.div>
       )}

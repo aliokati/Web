@@ -37,6 +37,10 @@
     ".next-deploy/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "data",
+    "vala-*",
+    "vela-*",
+    ".next*"
   ]
 }

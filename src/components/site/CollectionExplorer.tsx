@@ -31,8 +31,8 @@ export default function CollectionExplorer({records, locale, section}: {records:
       {record.specialty && <p>{record.specialty}</p>}{record.institution && <small>{record.institution}</small>}
       <span className="record-action">{profiles ? (fa ? 'مشاهده پروفایل ←' : 'View profile →') : (fa ? 'مطالعه بیشتر ←' : 'Read more →')}</span>
     </Link>)}</div> : <div className="empty-state">
-      <h2>{records.length ? (fa ? 'نتیجه‌ای یافت نشد.' : 'No matching results.') : (fa ? 'هنوز موردی منتشر نشده است.' : 'No records published yet.')}</h2>
-      <p>{records.length ? (fa ? 'عبارت دیگری را امتحان کنید یا فیلترها را پاک کنید.' : 'Try another search or clear the filters.') : (fa ? 'این بخش پس از تکمیل و بازبینی اطلاعات به‌روزرسانی می‌شود.' : 'This section will be updated as reviewed records become available.')}</p>
+      <h2>{records.length ? (fa ? 'نتیجه‌ای یافت نشد' : 'No matching results') : (fa ? 'هنوز موردی منتشر نشده است' : 'No records published yet')}</h2>
+      <p>{records.length ? (fa ? 'عبارت دیگری را امتحان کنید یا فیلترها را پاک کنید' : 'Try another search or clear the filters') : (fa ? 'این بخش پس از تکمیل و بازبینی اطلاعات به‌روزرسانی می‌شود' : 'This section will be updated as reviewed records become available')}</p>
       {(query || category !== 'all') ? <button type="button" onClick={clear}>{fa ? 'پاک کردن جستجو و فیلترها' : 'Clear search and filters'}</button> : <Link href={`/${locale}/resources`}>{fa ? 'مشاهده منابع آموزشی ←' : 'Explore learning resources →'}</Link>}
     </div>}
   </>;

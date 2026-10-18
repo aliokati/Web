@@ -17,8 +17,8 @@ export const IRLS_LABELS = [
   { en: "None", fa: "هیچ" }, { en: "Mild", fa: "خفیف" }, { en: "Moderate", fa: "متوسط" }, { en: "Severe", fa: "شدید" }, { en: "Very severe", fa: "بسیار شدید" },
 ];
 export const IRLS_INTERPRETATION: TrackScoreInterpretation[] = [
-  { minScore: 0, maxScore: 10, severityEn: "Mild severity", severityFa: "شدت خفیف", actionEn: "This score describes symptom severity only. Review persistent or disruptive symptoms with a clinician.", actionFa: "این امتیاز فقط شدت علائم را توصیف می‌کند. علائم پایدار یا مختل‌کننده را با پزشک بررسی کنید." },
-  { minScore: 11, maxScore: 20, severityEn: "Moderate severity", severityFa: "شدت متوسط", actionEn: "Consider a clinical review, especially if sleep or daytime function is affected.", actionFa: "به‌ویژه اگر خواب یا عملکرد روزانه مختل شده است، ارزیابی بالینی را در نظر بگیرید." },
-  { minScore: 21, maxScore: 30, severityEn: "Severe severity", severityFa: "شدت شدید", actionEn: "Arrange a clinical review to discuss symptoms, causes and treatment options.", actionFa: "برای بررسی علائم، علل و گزینه‌های درمانی با پزشک مشورت کنید." },
-  { minScore: 31, maxScore: 40, severityEn: "Very severe", severityFa: "شدت بسیار شدید", actionEn: "Prompt clinical review is recommended; this result is not a diagnosis.", actionFa: "ارزیابی بالینی سریع توصیه می‌شود؛ این نتیجه تشخیص پزشکی نیست." },
+  { minScore: 0, maxScore: 10, severityEn: "Mild severity", severityFa: "شدت خفیف", actionEn: "This score describes symptom severity only. Review persistent or disruptive symptoms with a clinician", actionFa: "این امتیاز فقط شدت علائم را توصیف می‌کند. علائم پایدار یا مختل‌کننده را با پزشک بررسی کنید" },
+  { minScore: 11, maxScore: 20, severityEn: "Moderate severity", severityFa: "شدت متوسط", actionEn: "Consider a clinical review, especially if sleep or daytime function is affected", actionFa: "به‌ویژه اگر خواب یا عملکرد روزانه مختل شده است، ارزیابی بالینی را در نظر بگیرید" },
+  { minScore: 21, maxScore: 30, severityEn: "Severe severity", severityFa: "شدت شدید", actionEn: "Arrange a clinical review to discuss symptoms, causes and treatment options", actionFa: "برای بررسی علائم، علل و گزینه‌های درمانی با پزشک مشورت کنید" },
+  { minScore: 31, maxScore: 40, severityEn: "Very severe", severityFa: "شدت بسیار شدید", actionEn: "Prompt clinical review is recommended; this result is not a diagnosis", actionFa: "ارزیابی بالینی سریع توصیه می‌شود؛ این نتیجه تشخیص پزشکی نیست" },
 ];
