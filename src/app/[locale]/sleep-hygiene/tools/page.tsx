@@ -1,6 +1,15 @@
 import type {Metadata} from 'next';
-import {PageHero} from '@/components/site/Content';
-import SleepTools from '@/components/sleep-hygiene/SleepTools';
+import Link from 'next/link';
 import type {Locale} from '@/i18n/config';
-export async function generateMetadata({params}:{params:Promise<{locale:Locale}>}):Promise<Metadata>{const {locale}=await params;return {title:locale==='fa'?'ابزارهای بهداشت خواب | KRISM':'Sleep Hygiene Tools | KRISM',description:locale==='fa'?'ابزارهای ساده و ذخیره‌شونده برای برنامه خواب، اتاق خواب و زمان‌بندی.':'Offline-friendly tools for sleep schedule, bedroom setup and timing.'};}
-export default async function SleepToolsPage({params}:{params:Promise<{locale:Locale}>}){const {locale}=await params;const fa=locale==='fa';return <main className="legacy-page"><PageHero eyebrow={fa?'ابزارهای آفلاین · بهداشت خواب':'OFFLINE TOOLS · SLEEP HYGIENE'} title={fa?'ابزارهای کوچک، تغییرهای قابل ادامه.':'Small tools for sustainable changes.'} description={fa?'سه ابزار ساده برای برنامه‌ریزی زمان خواب، آماده‌سازی اتاق و مشاهده اثر زمان‌بندی کافئین و نور.':'Three simple tools for planning sleep, preparing the bedroom, and noticing the effects of caffeine and light timing.'}/><section className="section-space surface-mineral"><div className="page-wrap"><SleepTools locale={locale}/><p className="educational-note">{fa?'این ابزارها آموزشی هستند و تشخیص یا درمان پزشکی ارائه نمی‌کنند. برای علائم مداوم یا شدید با متخصص خواب مشورت کنید.':'These tools are educational and do not diagnose or treat medical conditions. Seek professional advice for persistent or severe symptoms.'}</p></div></section></main>}
+import SleepTools from '@/components/sleep-hygiene/SleepTools';
+import styles from '@/components/sleep-hygiene/SleepHygieneExperience.module.css';
+
+export async function generateMetadata({params}:{params:Promise<{locale:Locale}>}):Promise<Metadata>{
+  const {locale}=await params;
+  return {title:locale==='fa'?'ابزارهای بهداشت خواب | KRISM':'Sleep Hygiene Tools | KRISM',description:locale==='fa'?'ابزارهای کاربردی برای زمان‌بندی خواب، محیط اتاق و عادت‌های شبانه':'Practical tools for sleep timing, bedroom preparation and evening habits'};
+}
+
+export default async function SleepToolsPage({params}:{params:Promise<{locale:Locale}>}){
+  const {locale}=await params;const fa=locale==='fa';
+  return <main className={styles.hub} dir={fa?'rtl':'ltr'}><section className={styles.hero}><div className={styles.frame}><p className={styles.eyebrow}><i/>{fa?'ابزارهای کاربردی':'PRACTICAL TOOLS'}</p><h1>{fa?'یک گام روشن برای امشب':'One clear step for tonight'}</h1><p className={styles.heroCopy}>{fa?'زمان‌بندی، اتاق خواب و نور را با ابزارهای کوچک و قابل ذخیره روی دستگاه خود تنظیم کنید':'Use small, device-saved tools to shape sleep timing, the bedroom and evening light'}</p><div className={styles.heroActions}><Link className={styles.secondary} href={`/${locale}/sleep-hygiene`}>{fa?'بازگشت به بهداشت خواب':'Back to Sleep Hygiene'}</Link></div></div></section><section className={styles.section}><div className={styles.frame}><SleepTools locale={locale}/><p className={styles.toolFoot}>{fa?'این ابزارها آموزشی هستند و تشخیص یا درمان پزشکی ارائه نمی‌کنند':'These tools are educational and do not provide medical diagnosis or treatment'}</p></div></section></main>;
+}

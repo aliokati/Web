@@ -32,7 +32,7 @@ export default function EssTrackPage() {
           {isRtl ? "مقیاس خواب‌آلودگی اپورث (ESS)" : "Epworth Sleepiness Scale (ESS)"}
         </h1>
         <p className="text-xs sm:text-sm text-slate-400">
-          {isRtl ? "احتمال چرت زدن خود را در موقعیت‌های معمول زندگی روزمره ارزیابی کنید." : "Rate your recent likelihood of dozing off during standard daily tasks."}
+          {isRtl ? "احتمال چرت زدن خود را در موقعیت‌های معمول زندگی روزمره ارزیابی کنید" : "Rate your recent likelihood of dozing off during standard daily tasks"}
         </p>
       </div>
 
@@ -89,7 +89,7 @@ export default function EssTrackPage() {
             </p>
           </div>
 
-          <p className="text-xs text-slate-400 leading-relaxed mb-5">{isRtl ? "ESS فقط خواب‌آلودگی روزانه را اندازه می‌گیرد و علت آن را تشخیص نمی‌دهد. هنگام خواب‌آلودگی رانندگی نکنید." : "ESS measures daytime sleep propensity; it does not identify the cause. Do not drive when sleepy."}</p><button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
+          <p className="text-xs text-slate-400 leading-relaxed mb-5">{isRtl ? "ESS فقط خواب‌آلودگی روزانه را اندازه می‌گیرد و علت آن را تشخیص نمی‌دهد. هنگام خواب‌آلودگی رانندگی نکنید" : "ESS measures daytime sleep propensity; it does not identify the cause. Do not drive when sleepy"}</p><button onClick={() => { setIsEvaluated(false); setAnswers({}); }} className="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs font-semibold text-slate-300 hover:text-white transition-colors inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> {isRtl ? "تست مجدد" : "Retake Track"}
           </button>
         </motion.div>

@@ -5,6 +5,7 @@ import { Locale } from "@/i18n/config";
 import { Practitioner } from "@/types/professionals";
 import { Search, ShieldCheck, MapPin, Building2, UserPlus, Grid } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface DirectoryProps {
   locale: Locale;
@@ -42,14 +43,13 @@ export default function ProfessionalDirectory({ locale, practitioners, labels }:
         <h3 className="text-lg font-bold text-white mb-2">{labels.joinNetwork}</h3>
         <p className="text-sm text-slate-400 leading-relaxed mb-6">
           {isRtl 
-            ? "پزشکان، روان‌شناسان سلامت و پژوهشگران علوم اعصاب و خواب در خراسان می‌توانند جهت عضویت ثبت‌نام کنند."
-            : "Physicians, health psychologists, and neuroscientists specializing in sleep can apply to join the regional registry."}
+            ? "پزشکان، روان‌شناسان سلامت و پژوهشگران علوم اعصاب و خواب در خراسان می‌توانند جهت عضویت ثبت‌نام کنند"
+            : "Physicians, health psychologists, and neuroscientists specializing in sleep can apply to join the regional registry"}
         </p>
         
-        {/* Onboarding Trigger Button Link placeholder */}
-        <button className="w-full py-2.5 rounded-xl text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-colors shadow-lg shadow-sky-500/5">
+        <Link href={`/${locale}/contact`} className="block w-full py-2.5 rounded-xl text-center text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-colors shadow-lg shadow-sky-500/5">
           {isRtl ? "ثبت درخواست عضویت متخصصین" : "Apply for Member Registry"}
-        </button>
+        </Link>
       </div>
 
       {/* Main Container: Interactive Live Query Directory */}

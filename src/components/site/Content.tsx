@@ -15,5 +15,5 @@ export function RecordCards({records,section,locale}:{records:RecordData[];secti
 }
 export function CollectionPage({section,locale}:{section:string;locale:string}) {
  const fa=locale==='fa'; const records=getRecords(section,locale);
- return <main className="legacy-page"><PageHero title={sectionLabels[section]?.[fa?1:0]||section} description={fa?'دانش، آموزش و ارتباط در شبکه پزشکی خواب خراسان.':'Knowledge, education and connections across the Khorasan sleep-medicine network.'}/><section className="surface-mineral section-space"><div className="page-wrap"><CollectionExplorer records={records} section={section} locale={locale}/></div></section></main>;
+ return <main className="legacy-page"><PageHero title={sectionLabels[section]?.[fa?1:0]||section} description={fa?'دانش، آموزش و ارتباط در شبکه پزشکی خواب خراسان':'Knowledge, education and connections across the Khorasan sleep-medicine network'}/><section className="surface-mineral section-space"><div className="page-wrap"><CollectionExplorer records={records} section={section} locale={locale}/></div></section></main>;
 }

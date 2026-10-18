@@ -89,8 +89,8 @@ export default function ClinicalReferralMatrix({ locale, scores }: ReferralMatri
           <AlertTriangle className="w-5 h-5 text-sky-400 flex-shrink-0" />
           <p>
             {isRtl 
-              ? "سیستم کریسم شناسایی کرده است که یک یا چند شاخص خواب شما بالاتر از آستانه غربالگری اولیه قرار دارد. پیشنهاد می‌شود جهت دسترسی به مسیرهای درمانی معتبر تخصصی، تست‌های تفصیلی مربوطه را تکمیل فرمایید."
-              : "Core indicators have crossed standard clinical screening boundaries. It is highly recommended to attend the designated, detailed modular diagnostic evaluation tracks mapped above."}
+              ? "سیستم کریسم شناسایی کرده است که یک یا چند شاخص خواب شما بالاتر از آستانه غربالگری اولیه قرار دارد. پیشنهاد می‌شود جهت دسترسی به مسیرهای درمانی معتبر تخصصی، تست‌های تفصیلی مربوطه را تکمیل فرمایید"
+              : "Core indicators have crossed standard clinical screening boundaries. It is highly recommended to attend the designated, detailed modular diagnostic evaluation tracks mapped above"}
           </p>
         </motion.div>
       )}

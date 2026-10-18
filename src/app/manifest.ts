@@ -2,20 +2,22 @@ import type {MetadataRoute} from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'VELA Recovery Workspace · KRISM',
-    short_name: 'VELA Recovery',
-    description: 'A private, installable recovery workspace with local-first data controls.',
-    start_url: '/en/sleep-hygiene',
+    id: '/',
+    name: 'KRISM Sleep Medicine',
+    short_name: 'KRISM',
+    description: 'KRISM Society for sleep medicine, learning and practical resources',
+    start_url: '/en',
     scope: '/',
     display: 'standalone',
+    orientation: 'portrait-primary',
     background_color: '#071c27',
     theme_color: '#0a2333',
     icons: [
-      {src: '/images/krism-logo.png', sizes: '512x512', type: 'image/png'},
+      {src: '/images/krism-logo.png', sizes: '1086x1086', type: 'image/png', purpose: 'any'},
     ],
     shortcuts: [
-      {name: 'VELA workspace', short_name: 'VELA', url: '/en/sleep-hygiene'},
-      {name: 'فضای ولا', short_name: 'ولا', url: '/fa/sleep-hygiene'},
+      {name: 'Sleep hygiene', short_name: 'Sleep', url: '/en/sleep-hygiene'},
+      {name: 'بهداشت خواب', short_name: 'خواب', url: '/fa/sleep-hygiene'},
     ],
   };
 }

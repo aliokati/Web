@@ -11,16 +11,16 @@ export default async function Home({params}: {params: Promise<{locale: Locale}>}
   const dict = await getDictionary(locale);
   const t = (en: string, persian: string) => fa ? persian : en;
   const paths = [
-    {route: 'public', title: dict.hero.ctaPublic, icon: Moon, description: t('Understand your sleep. Find useful tools and a clearer next step.', 'خواب خود را بهتر بشناسید و ابزارهای کاربردی و گام بعدی مناسب را پیدا کنید.')},
-    {route: 'professionals', title: dict.hero.ctaProfessional, icon: Stethoscope, description: t('Connect with the community, explore education and share knowledge.', 'با جامعه حرفه‌ای ارتباط بگیرید، منابع آموزشی را بخوانید و دانش را به اشتراک بگذارید.')},
-    {route: 'research', title: dict.hero.ctaResearcher, icon: Microscope, description: t('Explore research, publications and opportunities for collaboration.', 'پژوهش‌ها، انتشارات و فرصت‌های همکاری علمی را جستجو کنید.')},
+    {route: 'public', title: dict.hero.ctaPublic, icon: Moon, description: t('Understand your sleep. Find useful tools and a clearer next step', 'خواب خود را بهتر بشناسید و ابزارهای کاربردی و گام بعدی مناسب را پیدا کنید')},
+    {route: 'professionals', title: dict.hero.ctaProfessional, icon: Stethoscope, description: t('Connect with the community, explore education and share knowledge', 'با جامعه حرفه‌ای ارتباط بگیرید، منابع آموزشی را بخوانید و دانش را به اشتراک بگذارید')},
+    {route: 'research', title: dict.hero.ctaResearcher, icon: Microscope, description: t('Explore research, publications and opportunities for collaboration', 'پژوهش‌ها، انتشارات و فرصت‌های همکاری علمی را جستجو کنید')},
   ];
   return <main className="legacy-page balanced-home">
     <section className="home-hero">
       <div className="page-wrap home-grid">
         <div className="home-intro">
           <p className="hero-badge"><span className="status-beacon"/>{dict.hero.tagline}</p>
-          <h1>{t('Sleep medicine,', 'پزشکی خواب،')}<br/><em>{t('connected.', 'متصل و یکپارچه')}</em></h1>
+          <h1>{t('Sleep medicine,', 'پزشکی خواب،')}<br/><em>{t('connected', 'متصل و یکپارچه')}</em></h1>
           <p className="hero-description">{dict.hero.description}</p>
           <div className="button-row">
             <Link className="primary-button" href={`/${locale}/sleep-check`}>{t('Start my sleep check', 'شروع ارزیابی خواب')}<ArrowUpLeft size={17}/></Link>
@@ -43,7 +43,7 @@ export default async function Home({params}: {params: Promise<{locale: Locale}>}
           <div className="sleep-panel-copy">
             <span className="tech-label">{t('A little clarity, a useful next step', 'شناخت بهتر، گامی آگاهانه‌تر')}</span>
             <h2>{t('How are you sleeping?', 'خوابتان چطور است؟')}</h2>
-            <p>{t('Begin with the general sleep guide, then explore focused questionnaires related to your concerns.', 'از راهنمای عمومی خواب شروع کنید و سپس پرسش‌نامه‌های اختصاصی مرتبط با مشکلات خود را بررسی کنید.')}</p>
+            <p>{t('Begin with the general sleep guide, then explore focused questionnaires related to your concerns', 'از راهنمای عمومی خواب شروع کنید و سپس پرسش‌نامه‌های اختصاصی مرتبط با مشکلات خود را بررسی کنید')}</p>
             <Link className="panel-link" href={`/${locale}/sleep-check`}>{t('General Sleep Check', 'مشاهده ۷ پرسش‌نامه اختصاصی')}<ArrowUpLeft size={17}/></Link>      <Link className="panel-link" href={`/${locale}/sleep-check/tracks`}>{t('Explore the 7 follow-up questionnaires', 'مشاهده ۷ پرسش‌نامه اختصاصی')}<ArrowUpLeft size={17}/></Link>
             <div className="hero-tags"><span>{t('No account needed', 'بدون نیاز به حساب')}</span><span>{t('Educational guidance', 'راهنمای عمومی')}</span></div>
           </div>
@@ -53,7 +53,7 @@ export default async function Home({params}: {params: Promise<{locale: Locale}>}
     <section className="section-space surface-mineral">
       <div className="page-wrap">
         <p className="tech-label">{t('FIND YOUR WAY', 'مسیر خود را پیدا کنید')}</p>
-        <h2 className="section-title">{t('One community. Three ways to connect.', 'یک جامعه، سه مسیر برای ارتباط')}</h2>
+        <h2 className="section-title">{t('One community. Three ways to connect', 'یک جامعه، سه مسیر برای ارتباط')}</h2>
         <div className="record-grid">{paths.map(({route, title, description, icon: Icon}, index) => <Link href={`/${locale}/${route}`} key={route} className={`audience-card audience-link audience-tone-${index}`}>
           <div className="audience-top"><span className="audience-icon"><Icon size={24} strokeWidth={1.5}/></span><ArrowUpRight size={20}/></div><h3>{title}</h3><p>{description}</p><span className="audience-action">{t('Explore', 'مشاهده')} {fa ? '←' : '→'}</span>
         </Link>)}</div>
@@ -61,13 +61,13 @@ export default async function Home({params}: {params: Promise<{locale: Locale}>}
     </section>
     <section className="home-tool-section">
       <div className="page-wrap tool-shortcuts">
-        <div><span className="tech-label">{t('SMALL STEPS, PRACTICAL TOOLS', 'گام‌های کوچک، ابزارهای کاربردی')}</span><h2>{t('Make room for better sleep.', 'جایی برای خواب بهتر باز کنید.')}</h2></div>
-        <Link href={`/${locale}/resources/sleep-diary`}><ClipboardList size={23}/><span><strong>{t('Your sleep diary', 'دفترچه خواب شما')}</strong><small>{t('Track a week. Print your notes.', 'یک هفته را ثبت و یادداشت‌ها را چاپ کنید.')}</small></span><ArrowUpRight size={18}/></Link>
-        <Link href={`/${locale}/public`}><BookOpen size={23}/><span><strong>{t('The sleep library', 'کتابخانه خواب')}</strong><small>{t('Browse topics and everyday tools.', 'موضوعات و ابزارهای روزمره را مرور کنید.')}</small></span><ArrowUpRight size={18}/></Link>
+        <div><span className="tech-label">{t('SMALL STEPS, PRACTICAL TOOLS', 'گام‌های کوچک، ابزارهای کاربردی')}</span><h2>{t('Make room for better sleep', 'جایی برای خواب بهتر باز کنید')}</h2></div>
+        <Link href={`/${locale}/resources/sleep-diary`}><ClipboardList size={23}/><span><strong>{t('Your sleep diary', 'دفترچه خواب شما')}</strong><small>{t('Track a week. Print your notes', 'یک هفته را ثبت و یادداشت‌ها را چاپ کنید')}</small></span><ArrowUpRight size={18}/></Link>
+        <Link href={`/${locale}/public`}><BookOpen size={23}/><span><strong>{t('The sleep library', 'کتابخانه خواب')}</strong><small>{t('Browse topics and everyday tools', 'موضوعات و ابزارهای روزمره را مرور کنید')}</small></span><ArrowUpRight size={18}/></Link>
       </div>
     </section>
     <section className="section-space surface-teal">
-      <div className="page-wrap"><div className="section-heading"><div><p className="tech-label">{t('SCIENCE, MADE USEFUL', 'علم کاربردی')}</p><h2 className="section-title">{t('A clearer understanding of sleep.', 'شناخت روشن‌تر خواب.')}</h2></div><Link href={`/${locale}/public`}>{t('Explore the library →', 'مشاهده کتابخانه ←')}</Link></div><RecordCards records={getRecords('awareness', locale).slice(0, 3)} locale={locale} section="awareness"/></div>
+      <div className="page-wrap"><div className="section-heading"><div><p className="tech-label">{t('SCIENCE, MADE USEFUL', 'علم کاربردی')}</p><h2 className="section-title">{t('A clearer understanding of sleep', 'شناخت روشن‌تر خواب')}</h2></div><Link href={`/${locale}/public`}>{t('Explore the library →', 'مشاهده کتابخانه ←')}</Link></div><RecordCards records={getRecords('awareness', locale).slice(0, 3)} locale={locale} section="awareness"/></div>
     </section>
   </main>;
 }

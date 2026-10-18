@@ -6,7 +6,7 @@ import {getRecords} from '@/lib/content';
 export default async function Page({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
   const fa = locale === 'fa';
-  return <main className="legacy-page"><PageHero title={fa ? 'پژوهش و دانش مشترک' : 'Research & shared knowledge.'} description={fa ? 'پروژه‌ها و انتشارات را جستجو کنید و با جامعه پژوهشی پزشکی خواب آشنا شوید.' : 'Explore projects and publications, and connect with the sleep research community.'}/>
+  return <main className="legacy-page"><PageHero title={fa ? 'پژوهش و دانش مشترک' : 'Research & shared knowledge'} description={fa ? 'پروژه‌ها و انتشارات را جستجو کنید و با جامعه پژوهشی پزشکی خواب آشنا شوید' : 'Explore projects and publications, and connect with the sleep research community'}/>
     <section className="section-space surface-mineral"><div className="page-wrap">
       <ResearchHub projects={getRecords('research', locale)} publications={getRecords('publications', locale)} locale={locale}/>
       <h2 className="subsection-heading">{fa ? 'ادامه مسیر پژوهشی' : 'Continue exploring'}</h2>

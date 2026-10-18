@@ -43,32 +43,32 @@ export async function POST(request: Request) {
   if (process.env.KRISM_SITE_URL) {
     try { allowedOrigins.push(new URL(process.env.KRISM_SITE_URL).origin); } catch { /* An invalid configured origin is never trusted. */ }
   }
-  if (!origin || !allowedOrigins.includes(origin)) return errorResponse(403, 'This request is not allowed.', 'این درخواست مجاز نیست.');
-  if (request.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') return errorResponse(415, 'JSON is required.', 'قالب JSON لازم است.');
+  if (!origin || !allowedOrigins.includes(origin)) return errorResponse(403, 'This request is not allowed', 'این درخواست مجاز نیست');
+  if (request.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') return errorResponse(415, 'JSON is required', 'قالب JSON لازم است');
 
   let payload: Record<string, unknown>;
   try {
-    if (Number(request.headers.get('content-length')) > maxBodyBytes) return errorResponse(413, 'The enquiry is too large.', 'درخواست بیش از حد طولانی است.');
+    if (Number(request.headers.get('content-length')) > maxBodyBytes) return errorResponse(413, 'The enquiry is too large', 'درخواست بیش از حد طولانی است');
     const reader = request.body?.getReader();
-    if (!reader) return errorResponse(400, 'Invalid enquiry.', 'درخواست نامعتبر است.');
+    if (!reader) return errorResponse(400, 'Invalid enquiry', 'درخواست نامعتبر است');
     const chunks: Uint8Array[] = [];
     let length = 0;
     while (true) {
       const {value, done} = await reader.read();
       if (done) break;
       length += value.byteLength;
-      if (length > maxBodyBytes) {await reader.cancel(); return errorResponse(413, 'The enquiry is too large.', 'درخواست بیش از حد طولانی است.');}
+      if (length > maxBodyBytes) {await reader.cancel(); return errorResponse(413, 'The enquiry is too large', 'درخواست بیش از حد طولانی است');}
       chunks.push(value);
     }
     const parsed: unknown = JSON.parse(Buffer.concat(chunks).toString('utf8'));
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('Invalid object');
     payload = parsed as Record<string, unknown>;
   } catch {
-    return errorResponse(400, 'Invalid enquiry.', 'درخواست نامعتبر است.');
+    return errorResponse(400, 'Invalid enquiry', 'درخواست نامعتبر است');
   }
 
   const fa = payload.locale === 'fa';
-  const invalid = () => errorResponse(400, 'Please complete all required fields with valid values.', 'لطفاً همه موارد الزامی را کامل و معتبر وارد کنید.', fa);
+  const invalid = () => errorResponse(400, 'Please complete all required fields with valid values', 'لطفاً همه موارد الزامی را کامل و معتبر وارد کنید', fa);
   if (payload.website !== undefined && payload.website !== '') return invalid();
   const values: Record<string, string> = {};
   for (const [field, [min, max]] of Object.entries(fields)) {
@@ -79,8 +79,8 @@ export async function POST(request: Request) {
   }
   if (!emailPattern.test(values.email) || typeof payload.topic !== 'string' || !Object.hasOwn(topicLabels, payload.topic)) return invalid();
   const config = getMailConfig();
-  if (!config) return errorResponse(503, 'Online enquiries are temporarily unavailable. Please email info@krism-society.com.', 'ارسال آنلاین موقتاً در دسترس نیست. لطفاً به info@krism-society.com ایمیل بزنید.', fa);
-  if (!allowAttempt(values.email)) return errorResponse(429, 'Please wait 15 minutes before sending another enquiry.', 'لطفاً پیش از ارسال درخواست دیگر ۱۵ دقیقه صبر کنید.', fa);
+  if (!config) return errorResponse(503, 'Online enquiries are temporarily unavailable. Please email info@krism-society.com', 'ارسال آنلاین موقتاً در دسترس نیست. لطفاً به info@krism-society.com ایمیل بزنید', fa);
+  if (!allowAttempt(values.email)) return errorResponse(429, 'Please wait 15 minutes before sending another enquiry', 'لطفاً پیش از ارسال درخواست دیگر ۱۵ دقیقه صبر کنید', fa);
 
   const reference = `KRISM-${randomUUID().slice(0, 8).toUpperCase()}`;
   const transporter = nodemailer.createTransport(config.transport);
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
   } catch {
     // Do not log credentials, addresses, or message content.
     console.error('KRISM contact delivery failed; reference:', reference);
-    return errorResponse(502, 'Delivery could not be confirmed. Please email info@krism-society.com rather than resubmitting.', 'تأیید ارسال ممکن نشد. لطفاً به‌جای ارسال مجدد فرم، به info@krism-society.com ایمیل بزنید.', fa);
+    return errorResponse(502, 'Delivery could not be confirmed. Please email info@krism-society.com rather than resubmitting', 'تأیید ارسال ممکن نشد. لطفاً به‌جای ارسال مجدد فرم، به info@krism-society.com ایمیل بزنید', fa);
   } finally {
     transporter.close();
   }

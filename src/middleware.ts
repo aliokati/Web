@@ -14,6 +14,7 @@ function getLocale(request: NextRequest): string {
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const hostname=request.headers.get('host')?.split(':')[0];
 
   // Skip asset paths and system files
   if (
@@ -23,10 +24,17 @@ export function middleware(request: NextRequest) {
       "/sitemap.xml",
       "/manifest.webmanifest",
       "/sw.js",
+      "/pwa-manifest.webmanifest",
+      "/pwa-sw.js",
     ].includes(pathname) ||
-    pathname.startsWith("/images/") || pathname.startsWith("/fonts/")
+    pathname.startsWith("/images/") || pathname.startsWith("/fonts/") || pathname.startsWith("/icons/")
   ) {
     return;
+  }
+
+  if(hostname==='pwa.krism-society.com'){
+    if(pathname==='/'||pathname==='/en')return NextResponse.rewrite(new URL('/en/sleep-hygiene/app',request.url));
+    if(pathname==='/fa')return NextResponse.rewrite(new URL('/fa/sleep-hygiene/app',request.url));
   }
 
   const pathnameIsMissingLocale = i18n.locales.every(

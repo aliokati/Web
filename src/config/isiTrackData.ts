@@ -11,8 +11,8 @@ export const ISI_QUESTIONS: TrackQuestion[] = [
 ];
 
 export const ISI_INTERPRETATION: TrackScoreInterpretation[] = [
-  { minScore: 0, maxScore: 7, severityEn: "No clinically significant insomnia", severityFa: "بدون بی‌خوابی بالینی معنادار", actionEn: "Maintain optimal sleep hygiene.", actionFa: "بهداشت خواب بهینه خود را حفظ کنید." },
-  { minScore: 8, maxScore: 14, severityEn: "Subthreshold insomnia", severityFa: "بی‌خوابی خفیف (زیر آستانه بالینی)", actionEn: "Consider sleep scheduling and minor stress reduction profiles.", actionFa: "تنظیم جدول زمانی خواب و کاهش استرس‌های جزئی پیشنهاد می‌شود." },
-  { minScore: 15, maxScore: 21, severityEn: "Clinical insomnia (Moderate severity)", severityFa: "بی‌خوابی بالینی (شدت متوسط)", actionEn: "Highly recommended to initiate digital CBT-I protocols with a sleep psychologist.", actionFa: "اکیداً پیشنهاد می‌شود پروتکل‌های درمان شناختی رفتاری (CBT-I) را آغاز کنید." },
-  { minScore: 22, maxScore: 28, severityEn: "Clinical insomnia (Severe)", severityFa: "بی‌خوابی بالینی شدید", actionEn: "Urgent consultation required with a sleep specialist or psychiatrist.", actionFa: "نیاز به مراجعه فوری به فلوشیپ طب خواب یا روان‌پزشک جهت ارزیابی‌های پیشرفته وجود دارد." }
+  { minScore: 0, maxScore: 7, severityEn: "No clinically significant insomnia", severityFa: "بدون بی‌خوابی بالینی معنادار", actionEn: "Maintain optimal sleep hygiene", actionFa: "بهداشت خواب بهینه خود را حفظ کنید" },
+  { minScore: 8, maxScore: 14, severityEn: "Subthreshold insomnia", severityFa: "بی‌خوابی خفیف (زیر آستانه بالینی)", actionEn: "Consider sleep scheduling and minor stress reduction profiles", actionFa: "تنظیم جدول زمانی خواب و کاهش استرس‌های جزئی پیشنهاد می‌شود" },
+  { minScore: 15, maxScore: 21, severityEn: "Clinical insomnia (Moderate severity)", severityFa: "بی‌خوابی بالینی (شدت متوسط)", actionEn: "Highly recommended to initiate digital CBT-I protocols with a sleep psychologist", actionFa: "اکیداً پیشنهاد می‌شود پروتکل‌های درمان شناختی رفتاری (CBT-I) را آغاز کنید" },
+  { minScore: 22, maxScore: 28, severityEn: "Clinical insomnia (Severe)", severityFa: "بی‌خوابی بالینی شدید", actionEn: "Urgent consultation required with a sleep specialist or psychiatrist", actionFa: "نیاز به مراجعه فوری به فلوشیپ طب خواب یا روان‌پزشک جهت ارزیابی‌های پیشرفته وجود دارد" }
 ];
